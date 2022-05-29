@@ -1,5 +1,7 @@
 {
   "name": "groupe_5_impaire",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
