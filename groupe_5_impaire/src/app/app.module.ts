@@ -6,12 +6,32 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import {provideAuth,getAuth} from "@angular/fire/auth";
+import {provideFirestore,getFirestore} from "@angular/fire/firestore";
+import {provideStorage,getStorage} from "@angular/fire/storage";
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
+import { provideFirebaseApp } from '@angular/fire/app';
+const firebaseConfig = {
+  apiKey: "AIzaSyCdDp2GVBrhVqzNL9xzWDt0zAf85GBs2IY",
+  authDomain: "cvgeneratorprojectionicangular.firebaseapp.com",
+  projectId: "cvgeneratorprojectionicangular",
+  storageBucket: "cvgeneratorprojectionicangular.appspot.com",
+  messagingSenderId: "303756872232",
+  appId: "1:303756872232:web:7bdd2f58f3125e3b4a831d",
+  measurementId: "G-WQDGVQPS8D"
+};
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    provideFirebaseApp(()=>initializeApp(environment.firebase)),
+    provideAuth(()=>getAuth()),
+    provideFirestore(()=>getFirestore()),
+    provideStorage(() => getStorage())
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}

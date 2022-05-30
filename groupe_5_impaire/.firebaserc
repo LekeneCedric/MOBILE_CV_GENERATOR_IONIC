@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cvgeneratorprojectionicangular": {
+      "hosting": {
+        "app": [
+          "cvgeneratorprojectionicangular"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "cvgeneratorprojectionicangular"
+  }
+}
