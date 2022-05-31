@@ -1,7 +1,8 @@
 {
   "name": "groupe_5_impaire",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

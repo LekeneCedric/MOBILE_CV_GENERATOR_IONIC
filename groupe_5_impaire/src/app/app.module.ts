@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
+// Import IONIC STEPPER MODULE 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {provideAuth,getAuth} from "@angular/fire/auth";
@@ -12,6 +12,7 @@ import {provideStorage,getStorage} from "@angular/fire/storage";
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { provideFirebaseApp } from '@angular/fire/app';
+import { RegisterPipe } from './register.pipe';
 const firebaseConfig = {
   apiKey: "AIzaSyCdDp2GVBrhVqzNL9xzWDt0zAf85GBs2IY",
   authDomain: "cvgeneratorprojectionicangular.firebaseapp.com",
@@ -22,7 +23,7 @@ const firebaseConfig = {
   measurementId: "G-WQDGVQPS8D"
 };
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RegisterPipe],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     provideFirebaseApp(()=>initializeApp(environment.firebase)),
