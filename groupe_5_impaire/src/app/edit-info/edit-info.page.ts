@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { DataService } from '../data.service';
 @Component({
   selector: 'app-edit-info',
   templateUrl: './edit-info.page.html',
@@ -10,13 +11,13 @@ export class EditInfoPage implements OnInit {
 
   items:Observable<any[]>;
   constructor(
-    public db:Firestore
+    private data:DataService
   )
    { 
     
   }
-  hey():void{
-    console.log("Hey")
+  personalInfo(){
+  this.data.get_personalInfo()
   }
 async ngOnInit() {
     // const docRef = doc(this.db, "user","defaultUser","education");
