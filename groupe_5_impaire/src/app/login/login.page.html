@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 <ion-header>
 
 </ion-header>
@@ -8,21 +7,30 @@
     <h4>Login</h4>
     <p>Get started</p>
   </div>
+   <form [formGroup]="credential" (ngSubmit)="login()">
+     <ion-item>
+      <ion-input placeholder="Email" type="email" class="primary-input" formControlName="email"></ion-input>
+      <ion-note slot="error" *ngIf="(email.dirty||email.touched)&& email.errors">Email is invalid</ion-note>
+     </ion-item>
+     <ion-item>
+      <ion-input placeholder="password" type="password" class="primary-input" formControlName="password"></ion-input>
+      <ion-note slot="error" *ngIf="(password.dirty||password.touched)&& password.errors">password need to be 6 characters min</ion-note>
+     </ion-item>
+    
+    <div class="ion-margin-top ion-text-right forget">
+      <a>Forgot Password?</a>
+    </div>
+  
+    <div class="ion-margin-top">
+      <ion-button expand="block" type="submit" [disabled]="!credential.valid" (click)="login()">LOGIN</ion-button>
+    </div>
+  
+    <div class="ion-margin-top ion-text-center">
+      <a routerLink="/register">Create New Accout ? </a>
+    </div> 
+  </form>
+  
 
-  <ion-input placeholder="Email" class="primary-input"></ion-input>
-  <ion-input placeholder="Password" type="password" class="primary-input"></ion-input>
-
-  <div class="ion-margin-top ion-text-right forget">
-    <a>Forgot Password?</a>
-  </div>
-
-  <div class="ion-margin-top">
-    <ion-button expand="block">LOGIN</ion-button>
-  </div>
-
-  <div class="ion-margin-top ion-text-center">
-    <a >Close</a>
-  </div>
+  
 </ion-content>
-=======
->>>>>>> Stashed changes
+

@@ -1,0 +1,32 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="title">
+    <h4>Signup</h4>
+    <p>Register and get started</p>
+  </div>
+  <form [formGroup]="credential" (ngSubmit)="register()">
+  <!-- <ion-input placeholder="Name" class="primary-input"></ion-input>
+  <ion-input placeholder="Surname" class="primary-input"></ion-input>
+  <ion-input placeholder="Sex" class="primary-input"></ion-input>
+  <ion-input placeholder="Age" class="primary-input"></ion-input>
+  <ion-input placeholder="Contact" class="primary-input"></ion-input>
+  <ion-input placeholder="Residence" class="primary-input"></ion-input> -->
+  <ion-item>
+    <ion-input placeholder="Email" type="email" class="primary-input" formControlName="email"></ion-input>
+    <ion-note slot="error" *ngIf="(email.dirty||email.touched)&& email.errors">Email is invalid</ion-note>
+   </ion-item>
+   <ion-item>
+    <ion-input placeholder="password" type="password" class="primary-input" formControlName="password"></ion-input>
+    <ion-note slot="error" *ngIf="(password.dirty||password.touched)&& password.errors">password need to be 6 characters min</ion-note>
+   </ion-item>
+  <div class="ion-margin-top">
+    <ion-button expand="block" (click)="register()">SIGN UP</ion-button>
+  </div>
+</form>
+  <div class="ion-margin-top ion-text-center">
+    <a routerLink="/">Close</a>
+  </div>
+</ion-content>

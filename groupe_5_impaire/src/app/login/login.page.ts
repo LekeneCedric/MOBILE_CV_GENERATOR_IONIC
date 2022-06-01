@@ -34,28 +34,34 @@ export class LoginPage implements OnInit {
     });
   }
   async register(){
-    const loading = await this.loadingController.create();
-    await loading.present();
-    const user = this.authService.register(this.credential.value)
-    await loading.dismiss();
-    if(user){
-    this.router.navigateByUrl('/home',{replaceUrl:true});
-    } 
-    else{
+    try{
+      const loading = await this.loadingController.create();
+      await loading.present();
+      const user = this.authService.register(this.credential.value)
+      await loading.dismiss();
+      if(user){
+      this.router.navigateByUrl('/home',{replaceUrl:true});
+      } 
+    }
+    catch{
       this.showAlert("Registration Failed","Please try Again");
-    }  
+    }
+    
+    
   }
   async login(){
-    const loading = await this.loadingController.create();
-    await loading.present();
-    const user = this.authService.login(this.credential.value)
-    await loading.dismiss();
-    if(user){
-    this.router.navigateByUrl('/home',{replaceUrl:true});
-    } 
-    else{
-      this.showAlert("Connexion Failed","Please try Again");
-    }  
+  
+      const loading = await this.loadingController.create();
+      await loading.present();
+      const user = this.authService.login(this.credential.value)
+      await loading.dismiss();
+      if(user!=null){
+      this.router.navigateByUrl('/home',{replaceUrl:true});
+      } 
+      else{
+        this.showAlert("Connexion Failed","Please try Again");
+      }
+    
   }
   
   async showAlert(header,message){

@@ -9,7 +9,7 @@ import { async } from 'rxjs';
 })
 export class AuthService{
 
-  constructor(private auth:Auth,private db :Firestore) {}
+  constructor(private auth:Auth) {}
   async register ({email,password}){
     try {
       const user = createUserWithEmailAndPassword(this.auth,
