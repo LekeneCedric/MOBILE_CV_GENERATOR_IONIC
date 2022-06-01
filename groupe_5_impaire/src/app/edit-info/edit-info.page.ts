@@ -8,18 +8,25 @@ import { DataService } from '../data.service';
   styleUrls: ['./edit-info.page.scss'],
 })
 export class EditInfoPage implements OnInit {
-
-  items:Observable<any[]>;
+  name :String ; 
+  surname : String ; 
+  about:String ; 
+  profession : String;
   constructor(
     private data:DataService
   )
    { 
     
   }
-  personalInfo(){
-  this.data.get_personalInfo()
-  }
 async ngOnInit() {
+ const data = this.data.get_personalInfo();
+ data.then((dat)=>{
+   this.name = String(dat.name);
+   this.surname = String(dat.surname);
+   this.about = String (dat.about);
+   this.profession = String(dat.profession)
+ })
+ 
     // const docRef = doc(this.db, "user","defaultUser","education");
     // const docSnap =  getDoc(docRef);
     

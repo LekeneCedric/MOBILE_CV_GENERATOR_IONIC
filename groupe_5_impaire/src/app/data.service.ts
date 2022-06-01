@@ -12,9 +12,27 @@ export class DataService {
 
   async get_personalInfo()
   {
-    const docRef = onSnapshot( doc(this.db, "user","defaultUser","personal_info","personal_info_id"),(doc)=>{
-    console.log(doc.data())
-    });
+   
+    const docRef = doc(this.db,"user","defaultUser","personal_info","personal_info_id");
+    const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  return docSnap.data();
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+}
+  }
+  async get_formation(){
+    const docRef = doc(this.db,"user","defaultUser","experience","experience_id");
+    const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  return docSnap.data();
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+}
   }
   
 }

@@ -1,0 +1,99 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Welcome Cedric</ion-title>
+        <ion-buttons slot="start">
+           <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+  
+  <!-- WALLPAPER -->
+  <ion-row class="ion-justify-content-center">
+       
+    <ion-avatar style="margin-top: 25px;" >
+      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+    </ion-avatar>
+    
+ </ion-row>
+ <!-- PERSONAL INFORMATION -->
+ <ion-row class="ion-justify-content-center ion-align-items-center">
+   <h2 style="font-weight: bold;">PERSONAL INFORMATION</h2>
+</ion-row>
+ <ion-row>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Hey I am a {{profession }}</ion-card-subtitle>
+      <ion-card-title>{{name}} {{surname}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{about}}
+    </ion-card-content>
+  </ion-card>
+  
+ </ion-row>
+ <!-- EXPERIENCE  -->
+ <ion-row class="ion-justify-content-center ion-align-items-center">
+  <h2 style="font-weight: bold;">EXPERIENCE</h2>
+</ion-row>
+ <ion-row>
+  <ion-card style="width: 100%;">
+    <ion-card-header>
+      <ion-card-title>{{expIntitule}}</ion-card-title>
+      <ion-card-subtitle> Debut : {{expAnneeDebut}}</ion-card-subtitle>
+      <ion-card-subtitle> Fin   : {{expAnneeFin}}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  
+ </ion-row>
+ 
+<!-- Formation & Diplome -->
+<ion-row class="ion-justify-content-center ion-align-items-center">
+<h2 style="font-weight: bold;">FORMATION</h2>
+</ion-row>
+ <ion-row>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-title>Card Title</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+  
+ </ion-row>
+ <!-- PROJETS -->
+ <ion-row class="ion-justify-content-center ion-align-items-center">
+  <h2 style="font-weight: bold;">PROJETS</h2>
+  
+</ion-row>
+ <ion-row>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-title>Card Title</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+  
+ </ion-row>
+ <!-- LANGUE -->
+ <ion-row class="ion-justify-content-center ion-align-items-center">
+  <h2 style="font-weight: bold;">LANGUE(S)</h2>
+</ion-row>
+ <!-- CENTRE D'INTERET -->
+ <ion-row class="ion-justify-content-center ion-align-items-center">
+  <h2 style="font-weight: bold;">INTERET</h2>
+  
+</ion-row>
+</ion-grid>
+</ion-content>
