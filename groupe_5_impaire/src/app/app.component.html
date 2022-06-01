@@ -1,3 +1,53 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- Side Menu -->
+  <ion-menu menuId="main-menu" contentId="menu">
+    <!-- Header of my Side Menu  -->
+   <ion-header>
+     <ion-toolbar>
+       <ion-item>
+        <ion-title>
+          Settings
+        </ion-title>
+        <ion-icon name="settings"></ion-icon>
+       </ion-item>
+      
+    </ion-toolbar>
+   </ion-header>
+   <!-- Content of my side Menu -->
+   <ion-content>
+     <!-- List of Items of my Side Menu -->
+     <ion-row class="ion-justify-content-center">
+       
+        <ion-avatar style="margin-top: 25px;" >
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+        
+     </ion-row>
+     <ion-row class="ion-justify-content-center" style="margin-top:20px;font-weight: bold;">
+      Cedric
+     </ion-row>
+     
+     <ion-list style="margin-top: 20px;">
+      <ion-menu-toggle>
+        <ion-item routerLink="/home">
+          <ion-icon name="home-outline"></ion-icon>
+           <ion-label style="margin-left:15px ;">
+              Home
+           </ion-label>
+         </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle style="margin-top: 20px;">
+        <ion-item routerLink="/edit-info">
+          <ion-icon name="logo-steam"></ion-icon>
+           <ion-label style="margin-left:15px ;">
+              Edit Informations
+           </ion-label>
+         </ion-item>
+      </ion-menu-toggle>
+       
+     </ion-list>
+   </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="menu"></ion-router-outlet>
 </ion-app>
+
