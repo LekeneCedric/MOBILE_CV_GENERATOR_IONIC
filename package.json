@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@angular/animation": "^4.0.0-beta.8",
+    "ionic-angular": "^3.9.10",
+    "ionic-stepper": "^1.1.0"
+  }
+}

@@ -8,11 +8,39 @@
     <p>Register and get started</p>
   </div>
   <form [formGroup]="credential" (ngSubmit)="register()">
-  <ion-item>
+    <ion-item>
+      <ion-input placeholder="Name" type="text" class="primary-input" formControlName="name"></ion-input>
+      <ion-note slot="error" *ngIf="(name.dirty)&& name.errors">Enter your Full name > 6 characters </ion-note>
+     </ion-item>
+     <ion-item class="ion-margin-top">
+      <ion-input placeholder="Surname" type="text" class="primary-input" formControlName="surname"></ion-input>
+      <ion-note slot="error" *ngIf="(surname.dirty || surname.touched)&& surname.errors">Enter your surname > 3 characters</ion-note>
+     </ion-item>
+     <ion-item class="ion-margin-top">
+      <ion-input placeholder="Sex" type="text" class="primary-input" formControlName="sex"></ion-input>
+      <ion-note slot="error" *ngIf="(sex.dirty)&& sex.errors">M(Masculin) / F(Feminin))</ion-note>
+     </ion-item>
+     <ion-item class="ion-margin-top">
+      <ion-input placeholder="Age" type="number" class="primary-input" formControlName="age"></ion-input>
+      <ion-note slot="error" *ngIf="(age.dirty)&& age.errors">age is invalid</ion-note>
+     </ion-item>
+     <ion-item class="ion-margin-top">
+      <ion-input placeholder="Contact" type="number" class="primary-input" formControlName="contact"></ion-input>
+      <ion-note slot="error" *ngIf="(contact.dirty)&& contact.errors">contact is invalid</ion-note>
+     </ion-item>
+     <ion-item class="ion-margin-top">
+      <ion-input placeholder="Profession" type="text" class="primary-input" formControlName="profession"></ion-input>
+      <ion-note slot="error" *ngIf="(profession.dirty)&& profession.errors">Enter correct profession</ion-note>
+     </ion-item>
+     <ion-item class="ion-margin-top">
+      <ion-textarea placeholder="about description" type="text" class="primary-input" formControlName="about"></ion-textarea>
+      <ion-note slot="error" *ngIf="(about.dirty)&& about.errors">Minimum 50 total characters </ion-note>
+     </ion-item>
+    <ion-item class="ion-margin-top">
     <ion-input placeholder="Email" type="email" class="primary-input" formControlName="email"></ion-input>
     <ion-note slot="error" *ngIf="(email.dirty||email.touched)&& email.errors">Email is invalid</ion-note>
    </ion-item>
-   <ion-item>
+   <ion-item class="ion-margin-top">
     <ion-input placeholder="password" type="password" class="primary-input" formControlName="password"></ion-input>
     <ion-note slot="error" *ngIf="(password.dirty||password.touched)&& password.errors">password need to be 6 characters min</ion-note>
    </ion-item>

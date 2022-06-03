@@ -27,6 +27,12 @@ export class LoginPage implements OnInit {
     return this.credential.get('password');
   }
 
+  async showAlert(header: string,message: string){
+    const alert = await this.alertController.create({
+      header,message,buttons:['OK']
+    });
+    await alert.present()
+  } 
   ngOnInit() {
     this.credential = this.fb.group({
       email:['',[Validators.required,Validators.email]],
@@ -34,40 +40,33 @@ export class LoginPage implements OnInit {
     });
   }
   async register(){
-    try{
+    
       const loading = await this.loadingController.create();
       await loading.present();
-      const user = this.authService.register(this.credential.value)
+      this.authService.register(this.credential.value).then(
+        ()=>{
+          this.router.navigateByUrl('/home',{replaceUrl:true});
+        }
+      ).catch(()=>{
+        this.showAlert("Registration Failed","Please try Again");
+      })
       await loading.dismiss();
-      if(user){
-      this.router.navigateByUrl('/home',{replaceUrl:true});
-      } 
-    }
-    catch{
-      this.showAlert("Registration Failed","Please try Again");
-    }
-    
-    
   }
   async login(){
-  
+    
       const loading = await this.loadingController.create();
       await loading.present();
-      const user = this.authService.login(this.credential.value)
-      await loading.dismiss();
-      if(user!=null){
-      this.router.navigateByUrl('/home',{replaceUrl:true});
-      } 
-      else{
+      this.authService.login(this.credential.value).then(
+       ()=>{
+          console.log("User different de null"); 
+         this.router.navigateByUrl('/home',{replaceUrl:true});
+       }  
+      ).catch(()=>{
         this.showAlert("Connexion Failed","Please try Again");
-      }
-    
+      })
+
+      await loading.dismiss();
+      
   }
   
-  async showAlert(header,message){
-    const alert = await this.alertController.create({
-      header,message,buttons:['OK']
-    });
-    await alert.present()
-  } 
 }

@@ -8,12 +8,12 @@ import { onSnapshot } from 'firebase/firestore';
 })
 export class DataService {
 
-  constructor(private db:Firestore) { }
+  constructor(private db:Firestore,private auth:Auth) { }
 
   async get_personalInfo()
   {
-   
-    const docRef = doc(this.db,"user","defaultUser","personal_info","personal_info_id");
+    const currentId = this.auth.currentUser.uid;
+    const docRef = doc(this.db,"users",`${currentId}`);
     const docSnap = await getDoc(docRef);
 
 if (docSnap.exists()) {
