@@ -41,14 +41,10 @@ export class HomePage {
     
   }
 async ngOnInit() {
-  await setDoc(doc(this.db,"test","testId"),{
-    testArray2:["hey", "css"]
-  })
-  const test = await getDoc(doc(this.db,"test","testId"))
   
-  console.log(`First Element is : ${test.data().testArray2[0]}`)
+  // console.log(`First Element is : ${test.data().testArray2[0]}`)
   
-  console.log(`Current User ID : ${this.auth.currentUser.uid}=== current User Email : ${this.auth.currentUser.email}`)
+  // console.log(`Current User ID : ${this.auth.currentUser.uid}=== current User Email : ${this.auth.currentUser.email}`)
  const dataPersonnel = this.data.get_personalInfo();
  dataPersonnel.then((dat)=>{
    this.name = String(dat.name);
@@ -59,6 +55,5 @@ async ngOnInit() {
    this.contact = String(dat.contact);
    this.profession = String(dat.profession);
  });
- const dataFormation = this.data.get_formation();
  
 }}

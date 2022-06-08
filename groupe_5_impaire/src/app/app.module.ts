@@ -13,6 +13,7 @@ import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { RegisterPipe } from './register.pipe';
+import { FormsModule } from '@angular/forms';
 const firebaseConfig = {
   apiKey: "AIzaSyCdDp2GVBrhVqzNL9xzWDt0zAf85GBs2IY",
   authDomain: "cvgeneratorprojectionicangular.firebaseapp.com",
@@ -28,7 +29,7 @@ const firebaseConfig = {
   ],  
   declarations: [AppComponent, RegisterPipe],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,
     provideFirebaseApp(()=>initializeApp(environment.firebase)),
     provideAuth(()=>getAuth()),
     provideFirestore(()=>getFirestore()),

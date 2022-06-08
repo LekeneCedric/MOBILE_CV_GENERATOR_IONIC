@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } 
+from '@angular/fire/auth';
 import { collection ,doc, getDoc,setDoc} from '@angular/fire/firestore';
 import { Firestore, getFirestore} from 'firebase/firestore';
 import { async } from 'rxjs';

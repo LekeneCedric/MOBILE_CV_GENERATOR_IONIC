@@ -18,46 +18,109 @@
     
  </ion-row>
  <!-- PERSONAL INFORMATION -->
+ <!-- {{"2022-06-22T09:47:00-04:00" | date:'dd/MM/yyyy'}} -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-   <ion-col size="6"><h2>PERSONAL</h2></ion-col>
+   <ion-col size="6"><h2>INFORMATIONS</h2></ion-col>
    <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
     <ion-icon name="add" ></ion-icon>
   </ion-fab-button></ion-col>
-  
-    
-  
 </ion-row>
  <ion-row>
-  <ion-card>
+  <ion-card style="width: 100%;">
     <ion-card-header>
-      <ion-card-subtitle>Hey I am a {{profession }}</ion-card-subtitle>
-      <ion-card-title>{{name}} {{surname}}</ion-card-title>
+      <ion-card-subtitle>Profession : </ion-card-subtitle><ion-card-title>{{profession }}</ion-card-title>
+      <ion-card-subtitle>Name : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
+      <ion-card-subtitle>Surname : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
-      {{about}}
+      <ion-card-subtitle>About : </ion-card-subtitle><ion-card-title>{{about}}</ion-card-title>
     </ion-card-content>
   </ion-card>
-  
  </ion-row>
+ <!-- ACCOUNTS -->
+ <ion-row class="ion-justify-content-center ion-align-items-center">
+  <ion-col size="6"><h2>ACCOUNTS</h2></ion-col>
+  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddAccount()">
+   <ion-icon name="add"></ion-icon>
+ </ion-fab-button></ion-col>
+</ion-row>
+<form  *ngIf="formAccount"  [formGroup]="accountCredential" class="ion-padding-top">
+  <ion-item lines="full">
+    <ion-label position="floating">Account Name</ion-label>
+    <ion-input type="text" formControlName="accountName" required></ion-input>
+    <ion-note slot="error" *ngIf="(accountName.dirty||accountName.touched)&& accountName.errors">Maximum 15 characters</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Account Link</ion-label>
+    <ion-input type="text" formControlName="accountLink" required></ion-input>
+    <ion-note slot="error" *ngIf="(accountLink.dirty||accountLink.touched)&& accountLink.errors">Maximum 35 characters</ion-note>
+  </ion-item>
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="danger" expand="block" [disabled]="!accountCredential.valid" (click)="addAccount()">
+        Add new Account</ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
+  <ion-card style="width: 100%;" class="ion-margin-top" *ngFor="let account of accountGet">
+    <ion-card-header>
+      <ion-card-subtitle>Name : </ion-card-subtitle><ion-card-title>{{account.accountName}}</ion-card-title>
+      <ion-card-subtitle>Link</ion-card-subtitle><ion-card-title>{{account.accountLink}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
  <!-- EXPERIENCE  -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
   <ion-col size="6" ><h2>EXPERIENCE</h2></ion-col>
-  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
+  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddExperience()">
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
   
 </ion-row>
+<form *ngIf="formExperience"[formGroup]="experienceCredential" class="ion-padding-top">
+  <ion-item lines="full">
+    <ion-label position="floating">Title</ion-label>
+    <ion-input type="text" formControlName="titleExperience" required></ion-input>
+    <ion-note slot="error" *ngIf="(titleExperience.dirty||titleExperience.touched)&& titleExperience.errors">Min 8 and Max 35 characters</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">School</ion-label>
+    <ion-input type="email"  formControlName="schoolExperience" required></ion-input>
+    <ion-note slot="error" *ngIf="(schoolExperience.dirty||schoolExperience.touched)&& schoolExperience.errors">Min 2 characters</ion-note>
+
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">StartDay</ion-label>
+    <ion-datetime hour-cycle="h12" formControlName="startDayExperience" locale="en-GB"></ion-datetime>
+    <!-- <ion-input type="text" required></ion-input> -->
+    
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">EndDay</ion-label>
+    <ion-datetime hour-cycle="h12" formControlName="endDayExperience" locale="en-GB"></ion-datetime>
+    <!-- <ion-input type="text" required></ion-input> -->
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">details</ion-label>
+    <ion-textarea type="text" formControlName="detailExperience" required></ion-textarea>
+    <ion-note slot="error" *ngIf="(detailExperience.dirty||detailExperience.touched)&& detailExperience.errors">Min 25 characters</ion-note>
+  </ion-item>
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="danger" expand="block" (click)="addExperience()">
+        Add new Experience</ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
  <ion-row>
-  <ion-card>
+  <ion-card style="width: 100%;"  *ngFor="let experience of experienceGet">
     <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+      <ion-card-title>{{experience.titleExperience}}</ion-card-title>
+      <ion-card-subtitle>{{experience.schoolExperience}}</ion-card-subtitle>
+      <ion-card-subtitle>{{experience.startDayExperience  | date:'dd/MM/yyyy'}} - {{experience.endDayExperience  | date:'dd/MM/yyyy'}}</ion-card-subtitle>
     </ion-card-header>
-  
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      {{experience.detailExperience}}
     </ion-card-content>
   </ion-card>
   
@@ -65,63 +128,218 @@
  
 <!-- Formation & Diplome -->
 <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6" ><h2>FORMATION</h2></ion-col>
-  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
+  <ion-col size="6" ><h2>FORMATIONS</h2></ion-col>
+  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddFormation()" >
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
-  
 </ion-row>
+<form [formGroup]="formationCredential" *ngIf="formFormation" class="ion-padding-top">
+  <ion-item lines="full">
+    <ion-label position="floating">Title</ion-label>
+    <ion-input type="text" formControlName="titleFormation" required></ion-input>
+    <ion-note slot="error" *ngIf="(titleFormation.dirty||titleFormation.touched)&& titleFormation.errors">Min 8 and Max 35 characters</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">School</ion-label>
+    <ion-input type="email"  formControlName="schoolFormation" required></ion-input>
+    <ion-note slot="error" *ngIf="(schoolFormation.dirty||schoolFormation.touched)&& schoolFormation.errors">Min 2 characters</ion-note>
+
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">StartDay</ion-label>
+    <ion-datetime hour-cycle="h12" formControlName="startDayFormation" locale="en-GB"></ion-datetime>
+    <!-- <ion-input type="text" required></ion-input> -->
+    
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">EndDay</ion-label>
+    <ion-datetime hour-cycle="h12" formControlName="endDayFormation" locale="en-GB"></ion-datetime>
+    <!-- <ion-input type="text" required></ion-input> -->
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">details</ion-label>
+    <ion-textarea type="text" formControlName="detailFormation" required></ion-textarea>
+    <ion-note slot="error" *ngIf="(detailFormation.dirty||detailFormation.touched)&& detailFormation.errors">Min 25 characters</ion-note>
+
+  </ion-item>
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit"  color="success" expand="block" [disabled]="!formationCredential.valid" (click)="addFormation()">
+        Add new Formation</ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
  <ion-row>
-  <ion-card>
+  <ion-card style="width: 100%;"  *ngFor="let formation of formationGet">
     <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+      <ion-card-title>{{formation.titleFormation}}</ion-card-title>
+      <ion-card-subtitle>{{formation.schoolFormation}}</ion-card-subtitle>
+      <ion-card-subtitle>{{formation.startDayFormation  | date:'dd/MM/yyyy'}} - {{formation.endDayFormation  | date:'dd/MM/yyyy'}}</ion-card-subtitle>
     </ion-card-header>
-  
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      {{formation.detailFormation}}
     </ion-card-content>
   </ion-card>
   
  </ion-row>
  <!-- PROJETS -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6" ><h2>PROJETS</h2></ion-col>
-  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
+  <ion-col size="6" ><h2>COMPETENCES</h2></ion-col>
+  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddCompetence()" >
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
   
 </ion-row>
+<form *ngIf="formCompetence" class="ion-padding-top">
+  <ion-item lines="full">
+    <ion-label position="floating">Name</ion-label>
+    <ion-input type="text" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Level</ion-label>
+    <ion-input type="number" required></ion-input>
+  </ion-item>
+  
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="danger" expand="block" (click)="addCompetence()">
+        Add new Competence</ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
  <ion-row>
-  <ion-card>
+  <ion-card style="width: 100%;">
     <ion-card-header>
       <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+      <ion-progress-bar value="0.1" class="ion-margin-top"></ion-progress-bar>
+
     </ion-card-header>
-  
-    <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-    </ion-card-content>
   </ion-card>
   
  </ion-row>
  <!-- LANGUE -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
   <ion-col size="6" ><h2>LANGUE(S)</h2></ion-col>
-  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
+  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddLanguage()" >
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
-  
 </ion-row>
+<form *ngIf="formLanguage" class="ion-padding-top">
+  <ion-item lines="full">
+    <ion-label position="floating">Name</ion-label>
+    <ion-input type="text" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Level</ion-label>
+    <ion-select multiple="false" cancelText="No" okText="Valid">
+      <ion-select-option value="bacon">Debutant</ion-select-option>
+      <ion-select-option value="olives">Elementaire</ion-select-option>
+      <ion-select-option value="xcheese">Pre-Intermediaire</ion-select-option>
+      <ion-select-option value="peppers">Intermediaire</ion-select-option>
+      <ion-select-option value="mushrooms">Intermediaire Superieur</ion-select-option>
+      <ion-select-option value="onions">Avance</ion-select-option>
+      <ion-select-option value="pepperoni">Courant</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="danger" expand="block" (click)="addLanguage()">
+        Add new Language</ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
+  <ion-row>
+    <ion-card style="width: 100%;">
+      <ion-card-header>
+        <ion-card-title>Name</ion-card-title>
+        <ion-card-subtitle>Level</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    
+   </ion-row>
  <!-- CENTRE D'INTERET -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6" ><h2>INTERET</h2></ion-col>
-  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
+  <ion-col size="6"><h2>HOOBIES</h2></ion-col>
+  <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddHobbie()">
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
-  
 </ion-row>
+<form *ngIf="formHobbie" class="ion-padding-top">
+  <ion-item lines="full">
+    <ion-label position="floating">Hobbie Name</ion-label>
+    <ion-input type="text" required></ion-input>
+  </ion-item>
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="danger" expand="block" (click)="addHobbie()">
+        Add new Hobbie</ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
+  <ion-card style="width: 100%;">
+    <ion-card-header>
+      <ion-card-title>Name</ion-card-title>
+      <ion-card-subtitle>Level</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
 </ion-grid>
 </ion-content>
+<!-- <form>
+  <ion-item lines="full">
+    <ion-label position="floating">Name</ion-label>
+    <ion-input type="text" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="email" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">DOB</ion-label>
+    <ion-input type="text" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Mobile</ion-label>
+    <ion-input type="text" required></ion-input>
+  </ion-item>
+  <ion-radio-group lines="full">
+    <ion-list-header>
+      <ion-label>Gender</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Male</ion-label>
+      <ion-radio slot="start" value="male" checked></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Female</ion-label>
+      <ion-radio slot="start" value="female"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <ion-list lines="full">
+    <ion-list-header>
+      <ion-label>Subjects</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>English</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Maths</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Science</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>History</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
+    </ion-col>
+  </ion-row>
+</form> -->
+
