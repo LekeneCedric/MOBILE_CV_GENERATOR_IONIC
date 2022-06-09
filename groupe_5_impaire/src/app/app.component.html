@@ -1,13 +1,10 @@
-<ion-app style="background-color:black">
+<ion-app >
   <!-- Side Menu -->
   <ion-menu menuId="main-menu" contentId="menu">
     <!-- Header of my Side Menu  -->
    <ion-header>
      <ion-toolbar>
        <ion-item>
-        <ion-title>
-          Settings
-        </ion-title>
         <ion-icon name="settings"></ion-icon>
        </ion-item>
       
@@ -24,22 +21,22 @@
         
      </ion-row>
      <ion-row class="ion-justify-content-center" style="margin-top:20px;font-weight: bold;">
-      Cedric
+      S e t t i n g s 
      </ion-row>
      
      <ion-list style="margin-top: 20px;">
       <ion-menu-toggle>
         <ion-item routerLink="/home">
-          <ion-icon name="home-outline"></ion-icon>
-           <ion-label style="margin-left:15px ;">
+          <ion-icon name="home-outline"  style="color:rgb(80, 155, 236);"></ion-icon>
+           <ion-label style="margin-left:15px ;color:rgb(134, 182, 234)">
               Home
            </ion-label>
          </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle style="margin-top: 20px;">
         <ion-item routerLink="/edit-info">
-          <ion-icon name="hammer"></ion-icon>
-           <ion-label style="margin-left:15px ;">
+          <ion-icon name="hammer"  style="color:rgb(236, 134, 0);"></ion-icon>
+           <ion-label style="margin-left:15px ;color:rgb(227, 148, 44);">
               Edit Informations
            </ion-label>
          </ion-item>
@@ -47,8 +44,8 @@
       
       <ion-menu-toggle style="margin-top: 20px;">
         <ion-item routerLink="/template">
-          <ion-icon name="logo-steam"></ion-icon>
-           <ion-label style="margin-left:15px ;">
+          <ion-icon name="logo-steam" style="color:rgb(30, 71, 30)"></ion-icon>
+           <ion-label style="margin-left:15px ;color:rgb(63, 114, 63) ">
               Templates
            </ion-label>
          </ion-item>
@@ -56,7 +53,7 @@
       <ion-menu-toggle style="margin-top: 50px;">
         <ion-item (click)="logout()">
           <ion-icon name="exit-outline" style="color:red ;"></ion-icon>
-           <ion-label style="margin-left:15px ;color: red;">
+           <ion-label style="margin-left:15px ;color: rgb(244, 103, 103);">
               Logout
            </ion-label>
          </ion-item>

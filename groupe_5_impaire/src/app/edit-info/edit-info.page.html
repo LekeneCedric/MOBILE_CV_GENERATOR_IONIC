@@ -288,10 +288,13 @@
     </ion-col>
   </ion-row>
   </form>
-  <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet">
-    <ion-card-header>
-      <ion-card-title>{{hobbie.nameHobbie}}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
+  <ion-row>
+    <ion-card style="width:100%;" *ngFor="let hobbie of hobbieGet">
+      <ion-card-header>
+        <ion-card-title>{{hobbie.nameHobbie}}</ion-card-title>
+      </ion-card-header>
+    </ion-card> 
+  </ion-row>
+  
 </ion-grid>
 </ion-content>

@@ -7,12 +7,12 @@
     <h4>Login</h4>
     <p>Get started</p>
   </div>
-   <form [formGroup]="credential" (ngSubmit)="login()">
+   <form [formGroup]="credential" (ngSubmit)="login()" >
      <ion-item>
-      <ion-input placeholder="Email" type="email" class="primary-input" formControlName="email"></ion-input>
+      <ion-input placeholder="Email" type="email" class="primary-input" formControlName="email" ></ion-input>
       <ion-note slot="error" *ngIf="(email.dirty||email.touched)&& email.errors">Email is invalid</ion-note>
      </ion-item>
-     <ion-item>
+     <ion-item class="ion-margin-top">
       <ion-input placeholder="password" type="password" class="primary-input" formControlName="password"></ion-input>
       <ion-note slot="error" *ngIf="(password.dirty||password.touched)&& password.errors">password need to be 6 characters min</ion-note>
      </ion-item>
