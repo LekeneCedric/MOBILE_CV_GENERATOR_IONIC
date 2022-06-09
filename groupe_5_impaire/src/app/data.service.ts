@@ -29,11 +29,13 @@ if (docSnap.exists()) {
   }
   async get_Formation(){
     let formations :any []=[];
-    const querySnapshot = await getDocs(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'formations'));
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    formations.push(doc.data())
-  });
+    await onSnapshot(collection(this.db, 'usersCV', `${this.auth.currentUser.uid}`, 'formations'),(querySnapshot)=>{
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        formations.push(doc.data())
+      });
+    });
+  
   // console.log(`Formations : ${formations}`)
   return formations
   console.log("Formation Added Successfully")
@@ -41,52 +43,61 @@ if (docSnap.exists()) {
   // Get User account information
 async get_Accounts(){
   let accounts :any []=[];
-  const querySnapshot = await getDocs(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'accounts'));
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  accounts.push(doc.data())
-});
+  await onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'accounts'),(querySnapshot)=>{
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      accounts.push(doc.data())
+    });
+  });
+
 return accounts;
 }
 // Get User Experience
 async get_Experience(){
   let experiences :any []=[];
-  const querySnapshot = await getDocs(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'experiences'));
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  experiences.push(doc.data())
-});
+  await onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'experiences'),(querySnapshot)=>{
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      experiences.push(doc.data())
+    });})
 return experiences;
 }
 // Get User Competences 
 async get_Competences(){
   let comptences :any []=[];
-  const querySnapshot = await getDocs(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'competences'));
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  comptences.push(doc.data())
-});
-console.log(`comptences : ${comptences}`)
+  onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'competences'),(querySnapshot)=>{
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      comptences.push(doc.data())
+    });
+  });
+
+ return comptences;
 }
 // Get User Language(s)
 async get_Languages(){
   let languages :any []=[];
-  const querySnapshot = await getDocs(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'languages'));
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  languages.push(doc.data())
-});
-console.log(`languages : ${languages}`)
+  onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'languages'),(querySnapshot)=>{
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      languages.push(doc.data())
+    });
+  });
+
+return languages;
 }
 // Get User Hobbies
 async get_Hobbies(){
   let hobbies :any []=[];
-  const querySnapshot = await getDocs(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'hobbies'));
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  hobbies.push(doc.data())
-});
-console.log(`hobbies : ${hobbies}`)
+  onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'hobbies'),(querySnapshot)=>{
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      hobbies.push(doc.data())
+    });
+  });
+  
+
+return hobbies;
 }
 // Set user formation
 async set_Formation({titleFormation, schoolFormation, startDayFormation,endDayFormation,detailFormation}){
@@ -110,20 +121,20 @@ async set_Experience({titleExperience, structureExperience, startDayExperience,e
 }
 
 // Set user competence
-async set_Competence(name:string,level:number){
-const newCompetence = {name:name,level:level};
+async set_Competence({nameCompetence,levelCompetence}){
+const newCompetence = {nameCompetence:nameCompetence,levelCompetence:levelCompetence};
 await addDoc(collection(this.db,'usersCV',`${this.auth.currentUser.uid}`,'competences'),newCompetence);
 }
 
 // Set user Language 
-async set_Language(name:string,level:string){
-const newLanguage = {name:name , level:level};
+async set_Language({nameLanguage,levelLanguage}){
+const newLanguage = {nameLanguage:nameLanguage , levelLanguage:levelLanguage};
 await addDoc(collection(this.db,'usersCV',`${this.auth.currentUser.uid}`,'languages'),newLanguage);
 }
 
 // Set Hobbies
-async set_Hobbies(name:String){
-  const newHobbies = {name:name};
+async set_Hobbies({nameHobbie}){
+  const newHobbies = {nameHobbie:nameHobbie};
   await addDoc(collection(this.db,'usersCV',`${this.auth.currentUser.uid}`,'hobbies'),newHobbies);
 }
 }

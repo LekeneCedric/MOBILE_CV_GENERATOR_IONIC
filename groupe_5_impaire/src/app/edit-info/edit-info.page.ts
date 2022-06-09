@@ -27,26 +27,16 @@ export class EditInfoPage implements OnInit {
   showAddCompetence(){
     this.formCompetence = !this.formCompetence
   } 
-  async addCompetence(){
-    this.formCompetence = !this.formCompetence
-  }
 
   formLanguage:boolean=false;
   showAddLanguage(){
     this.formLanguage = !this.formLanguage
   } 
-  async addLanguage(){
-    this.formLanguage = !this.formLanguage
-  }
 
   formHobbie:boolean=false;
   showAddHobbie(){
     this.formHobbie = !this.formHobbie
   } 
-  async addHobbie(){
-    this.formHobbie = !this.formHobbie
-  }
-
   formAccount:boolean=false;
   showAddAccount(){
     this.formAccount = !this.formAccount
@@ -83,6 +73,23 @@ export class EditInfoPage implements OnInit {
   const experiences = await this.data.get_Experience();
   this.experienceGet = experiences
   console.log(`Experiences : ${this.experienceGet}`)
+  
+  /*Get Competences From databases */
+  const competences = await this.data.get_Competences();
+  this.competenceGet = competences;
+  console.log(`Comptences : ${this.competenceGet}`)
+
+  /*Get Language From databases */
+  const languages = await this.data.get_Languages();
+  this.languageGet = languages;
+  console.log(`Languages : ${this.languageGet}`)
+
+  /*Get Hobbie From databases */
+  const hobbies = await this.data.get_Hobbies();
+  this.hobbieGet = hobbies;
+  console.log(`Hobbies : ${this.hobbieGet}`)
+
+
 
 
   // accountCredentialValidator
@@ -106,6 +113,20 @@ export class EditInfoPage implements OnInit {
     endDayExperience:['',[Validators.required]],
     detailExperience:['',[Validators.required]]
   })
+  // CompetenceCredentialValidator
+  this.competenceCredential = this.fb.group({
+    nameCompetence:['',[Validators.required,Validators.minLength(1)]],
+    levelCompetence:['',[Validators.required]]
+  })
+  // LanguageCredentialValidator
+  this.languageCredential = this.fb.group({
+    nameLanguage:['',[Validators.required,Validators.minLength(1)]],
+    levelLanguage:['',[Validators.required]]
+  })
+  // HobbieCredentialValidator
+  this.hobbieCredential = this.fb.group({
+    nameHobbie:['',[Validators.required]]
+  })
   }
  // Formation Getter Value / Add Function
   accountGet : any[];
@@ -126,6 +147,7 @@ export class EditInfoPage implements OnInit {
   
   formationGet : any[]
   formationCredential:FormGroup;
+
   get titleFormation(){
     return this.formationCredential.get("titleFormation");
   }
@@ -145,12 +167,14 @@ export class EditInfoPage implements OnInit {
     // console.log(this.formationCredential.value)
     this.data.set_Formation(this.formationCredential.value)
     
-    this.formFormation = !this.formFormation
+    this.formFormation = !this.formFormation;
+    this.ngOnInit()
   }
 
   // Experience Getter Value / Add Function
   experienceGet : any[]
   experienceCredential:FormGroup;
+
   get titleExperience(){
     return this.experienceCredential.get("titleExperience");
   }
@@ -168,9 +192,58 @@ export class EditInfoPage implements OnInit {
   }
   async addExperience(){
     // console.log(this.ExperienceCredential.value)
-    // this.data.set_Experience(this.experienceCredential.value)
-    console.log(this.experienceCredential.value)
-    this.formFormation = !this.formFormation
+    this.data.set_Experience(this.experienceCredential.value)
+    // console.log(this.experienceCredential.value)
+    this.formExperience = !this.formExperience;
+    this.ngOnInit()
+  }
+// Competence Getter Value / Add Function 
+  competenceGet:any[];
+  competenceCredential:FormGroup;
+
+  get nameCompetence(){
+    return this.competenceCredential.get("nameCompetence");
   }
 
+  get levelCompetence(){
+    return this.competenceCredential.get("levelCompetence");
+  }
+  async addCompetence(){
+    this.data.set_Competence(this.competenceCredential.value);
+    console.log("Competence hass been added ");
+    this.formCompetence = !this.formCompetence;
+    this.ngOnInit()
+  }
+
+  // Language Getter Value  / Add Function 
+  languageGet:any[];
+  languageCredential:FormGroup;
+
+  get nameLanguage(){
+    return this.languageCredential.get("nameLanguage");
+  }
+  get levelLanguage(){
+    return this.languageCredential.get("levelLanguage");
+  }
+  async addLanguage()
+  {
+    this.data.set_Language(this.languageCredential.value);
+    console.log(this.languageCredential.value);
+    this.formLanguage = !this.formLanguage;
+    this.ngOnInit()
+  }
+
+  // Hobbie Getter Value / Add Function
+  
+  hobbieGet:any[];
+  hobbieCredential:FormGroup;
+
+  get nameHobbie(){
+    return this.hobbieCredential.get("nameHobbie")
+  }
+  async addHobbie(){
+    this.data.set_Hobbies(this.hobbieCredential.value);
+    this.formHobbie = !this.formHobbie;
+    console.log("Hobbie added successfully");
+  }
 }

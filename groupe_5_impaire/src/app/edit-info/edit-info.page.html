@@ -85,8 +85,8 @@
   </ion-item>
   <ion-item lines="full">
     <ion-label position="floating">School</ion-label>
-    <ion-input type="email"  formControlName="schoolExperience" required></ion-input>
-    <ion-note slot="error" *ngIf="(schoolExperience.dirty||schoolExperience.touched)&& schoolExperience.errors">Min 2 characters</ion-note>
+    <ion-input type="email"  formControlName="structureExperience" required></ion-input>
+    <ion-note slot="error" *ngIf="(structureExperience.dirty||structureExperience.touched)&& structureExperience.errors">Min 2 characters</ion-note>
 
   </ion-item>
   <ion-item lines="full">
@@ -107,7 +107,7 @@
   </ion-item>
   <ion-row>
     <ion-col>
-      <ion-button type="submit" color="danger" expand="block" (click)="addExperience()">
+      <ion-button type="submit" color="danger" [disabled]="!experienceCredential.valid" expand="block" (click)="addExperience()">
         Add new Experience</ion-button>
     </ion-col>
   </ion-row>
@@ -120,7 +120,7 @@
       <ion-card-subtitle>{{experience.startDayExperience  | date:'dd/MM/yyyy'}} - {{experience.endDayExperience  | date:'dd/MM/yyyy'}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      {{experience.detailExperience}}
+      {{experience.detailsExperience}}
     </ion-card-content>
   </ion-card>
   
@@ -190,28 +190,28 @@
  </ion-fab-button></ion-col>
   
 </ion-row>
-<form *ngIf="formCompetence" class="ion-padding-top">
+<form *ngIf="formCompetence" [formGroup]="competenceCredential" class="ion-padding-top">
   <ion-item lines="full">
-    <ion-label position="floating">Name</ion-label>
-    <ion-input type="text" required></ion-input>
+    <ion-label position="floating" >Name</ion-label>
+    <ion-input type="text" required formControlName="nameCompetence"></ion-input>
   </ion-item>
   <ion-item lines="full">
     <ion-label position="floating">Level</ion-label>
-    <ion-input type="number" required></ion-input>
+    <ion-input type="number" formControlName="levelCompetence" required></ion-input>
   </ion-item>
   
   <ion-row>
     <ion-col>
-      <ion-button type="submit" color="danger" expand="block" (click)="addCompetence()">
+      <ion-button type="submit" color="danger" [disabled]="!competenceCredential.value" expand="block"  (click)="addCompetence()">
         Add new Competence</ion-button>
     </ion-col>
   </ion-row>
   </form>
  <ion-row>
-  <ion-card style="width: 100%;">
+  <ion-card style="width: 100%;" *ngFor="let competence of competenceGet">
     <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-progress-bar value="0.1" class="ion-margin-top"></ion-progress-bar>
+      <ion-card-subtitle>{{competence.nameCompetence}}</ion-card-subtitle>
+      <ion-progress-bar value="{{(competence.levelCompetence)/100 | number}}" class="ion-margin-top"></ion-progress-bar>
 
     </ion-card-header>
   </ion-card>
@@ -224,36 +224,36 @@
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
 </ion-row>
-<form *ngIf="formLanguage" class="ion-padding-top">
+<form *ngIf="formLanguage" [formGroup]="languageCredential" class="ion-padding-top">
   <ion-item lines="full">
     <ion-label position="floating">Name</ion-label>
-    <ion-input type="text" required></ion-input>
+    <ion-input type="text" formControlName="nameLanguage" required></ion-input>
   </ion-item>
   <ion-item lines="full">
     <ion-label position="floating">Level</ion-label>
-    <ion-select multiple="false" cancelText="No" okText="Valid">
-      <ion-select-option value="bacon">Debutant</ion-select-option>
-      <ion-select-option value="olives">Elementaire</ion-select-option>
-      <ion-select-option value="xcheese">Pre-Intermediaire</ion-select-option>
-      <ion-select-option value="peppers">Intermediaire</ion-select-option>
-      <ion-select-option value="mushrooms">Intermediaire Superieur</ion-select-option>
-      <ion-select-option value="onions">Avance</ion-select-option>
-      <ion-select-option value="pepperoni">Courant</ion-select-option>
+    <ion-select multiple="false" formControlName="levelLanguage" cancelText="No" okText="Valid">
+      <ion-select-option value="Debutant">Debutant</ion-select-option>
+      <ion-select-option value="Elementaire">Elementaire</ion-select-option>
+      <ion-select-option value="Pre-Intermediaire">Pre-Intermediaire</ion-select-option>
+      <ion-select-option value="Intermediaire">Intermediaire</ion-select-option>
+      <ion-select-option value="Intermediaire Superieur">Intermediaire Superieur</ion-select-option>
+      <ion-select-option value="Avance">Avance</ion-select-option>
+      <ion-select-option value="Courant">Courant</ion-select-option>
     </ion-select>
   </ion-item>
   
   <ion-row>
     <ion-col>
-      <ion-button type="submit" color="danger" expand="block" (click)="addLanguage()">
+      <ion-button type="submit" color="danger" expand="block" [disabled]="!languageCredential.valid" (click)="addLanguage()">
         Add new Language</ion-button>
     </ion-col>
   </ion-row>
   </form>
   <ion-row>
-    <ion-card style="width: 100%;">
+    <ion-card style="width: 100%;" *ngFor="let language of languageGet">
       <ion-card-header>
-        <ion-card-title>Name</ion-card-title>
-        <ion-card-subtitle>Level</ion-card-subtitle>
+        <ion-card-title color="success">{{language.nameLanguage}}</ion-card-title>
+        <ion-card-subtitle>{{language.levelLanguage}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
     
@@ -265,81 +265,33 @@
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
 </ion-row>
-<form *ngIf="formHobbie" class="ion-padding-top">
+<form *ngIf="formHobbie" [formGroup]="hobbieCredential" class="ion-padding-top">
   <ion-item lines="full">
     <ion-label position="floating">Hobbie Name</ion-label>
-    <ion-input type="text" required></ion-input>
+    <ion-select multiple="false" formControlName="nameHobbie" cancelText="No" okText="Valid">
+      <ion-select-option value="Cinema/théâtre">Cinema/théâtre</ion-select-option>
+      <ion-select-option value="Decoration">Decoration</ion-select-option>
+      <ion-select-option value="Dessin">Dessin</ion-select-option>
+      <ion-select-option value="Sport">Sport</ion-select-option>
+      <ion-select-option value="jeux Strategies">jeux Strategies</ion-select-option>
+      <ion-select-option value="Danser">Danser</ion-select-option>
+      <ion-select-option value="Jardiner">Jardiner</ion-select-option>
+      <ion-select-option value="Jeux Videos">Jeux Videos</ion-select-option>
+      <ion-select-option value="Lecture">Lecture</ion-select-option>
+      <ion-select-option value="Redaction/Poeme">Redaction/Poeme</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-row>
     <ion-col>
-      <ion-button type="submit" color="danger" expand="block" (click)="addHobbie()">
+      <ion-button type="submit" color="danger" [disabled]="!hobbieCredential.valid" expand="block" (click)="addHobbie()">
         Add new Hobbie</ion-button>
     </ion-col>
   </ion-row>
   </form>
-  <ion-card style="width: 100%;">
+  <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet">
     <ion-card-header>
-      <ion-card-title>Name</ion-card-title>
-      <ion-card-subtitle>Level</ion-card-subtitle>
+      <ion-card-title>{{hobbie.nameHobbie}}</ion-card-title>
     </ion-card-header>
   </ion-card>
 </ion-grid>
 </ion-content>
-<!-- <form>
-  <ion-item lines="full">
-    <ion-label position="floating">Name</ion-label>
-    <ion-input type="text" required></ion-input>
-  </ion-item>
-  <ion-item lines="full">
-    <ion-label position="floating">Email</ion-label>
-    <ion-input type="email" required></ion-input>
-  </ion-item>
-  <ion-item lines="full">
-    <ion-label position="floating">DOB</ion-label>
-    <ion-input type="text" required></ion-input>
-  </ion-item>
-  <ion-item lines="full">
-    <ion-label position="floating">Mobile</ion-label>
-    <ion-input type="text" required></ion-input>
-  </ion-item>
-  <ion-radio-group lines="full">
-    <ion-list-header>
-      <ion-label>Gender</ion-label>
-    </ion-list-header>
-    <ion-item>
-      <ion-label>Male</ion-label>
-      <ion-radio slot="start" value="male" checked></ion-radio>
-    </ion-item>
-    <ion-item>
-      <ion-label>Female</ion-label>
-      <ion-radio slot="start" value="female"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-  <ion-list lines="full">
-    <ion-list-header>
-      <ion-label>Subjects</ion-label>
-    </ion-list-header>
-    <ion-item>
-      <ion-label>English</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-label>Maths</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-label>Science</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-label>History</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-  </ion-list>
-  <ion-row>
-    <ion-col>
-      <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
-    </ion-col>
-  </ion-row>
-</form> -->
-

@@ -24,6 +24,10 @@ const routes: Routes = [
     path: 'edit-info',
     loadChildren: () => import('./edit-info/edit-info.module').then( m => m.EditInfoPageModule)
   },
+  {
+    path: 'template',
+    loadChildren: () => import('./template/template.module').then( m => m.TemplatePageModule)
+  },
 ];
 
 @NgModule({

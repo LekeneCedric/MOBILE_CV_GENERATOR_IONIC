@@ -6,6 +6,7 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-grid>
   
@@ -18,120 +19,105 @@
     
  </ion-row>
  <!-- PERSONAL INFORMATION -->
+ <!-- {{"2022-06-22T09:47:00-04:00" | date:'dd/MM/yyyy'}} -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-   <h2 style="font-weight: bold;">PERSONAL INFORMATION</h2>
-</ion-row>
- <ion-row>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Hey I am a {{profession }}</ion-card-subtitle>
-      <ion-card-title>{{name}} {{surname}}</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      {{about}}
-    </ion-card-content>
-  </ion-card>
-</ion-row>
- <!-- <ion-list>
-  <ion-item>
-    <ion-label>Nom : </ion-label><label> {{nom}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Surname : </ion-label><label> {{surname}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>day of birth : </ion-label><label> {{birthDay}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>place of birth : </ion-label><label> {{birthPlace}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Adress : </ion-label><label> {{adress}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Contact 1 : </ion-label><label> {{contact}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Contact 2 : </ion-label><label> {{contact2}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Profession : </ion-label><label> {{profession}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Email-1 : </ion-label><label> {{email}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Email-2 : /ion-label><label> {{email2}}</label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Nom</ion-label><label></label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Nom</ion-label><label></label>
-  </ion-item>
-  
-</ion-list> -->
- <!-- EXPERIENCE  -->
- <!-- <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2 style="font-weight: bold;">EXPERIENCE</h2>
+   <h2>INFORMATIONS</h2>
 </ion-row>
  <ion-row>
   <ion-card style="width: 100%;">
     <ion-card-header>
-      <ion-card-title>{{expIntitule}}</ion-card-title>
-      <ion-card-subtitle> Debut : {{expAnneeDebut}}</ion-card-subtitle>
-      <ion-card-subtitle> Fin   : {{expAnneeFin}}</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
-  
- </ion-row> -->
- 
-<!-- Formation & Diplome -->
-<ion-row class="ion-justify-content-center ion-align-items-center">
-<h2 style="font-weight: bold;">FORMATION</h2>
-</ion-row>
- <ion-row>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+      <ion-card-subtitle>Profession : </ion-card-subtitle><ion-card-title>{{profession }}</ion-card-title>
+      <ion-card-subtitle>Name : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
+      <ion-card-subtitle>Surname : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      <ion-card-subtitle>About : </ion-card-subtitle><ion-card-title>{{about}}</ion-card-title>
+    </ion-card-content>
+  </ion-card>
+ </ion-row>
+ <!-- ACCOUNTS -->
+ <ion-row class="ion-justify-content-center ion-align-items-center">
+  <h2>ACCOUNTS</h2>
+</ion-row>
+<ion-row>
+<ion-card style="width: 100%;" class="ion-margin-top" *ngFor="let account of accountGet">
+  <ion-card-header>
+    <ion-card-subtitle>Name : </ion-card-subtitle><ion-card-title>{{account.accountName}}</ion-card-title>
+    <ion-card-subtitle>Link</ion-card-subtitle><ion-card-title>{{account.accountLink}}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+</ion-row>
+ <!-- EXPERIENCE  -->
+ <ion-row class="ion-justify-content-center ion-align-items-center">
+  <h2>EXPERIENCE</h2>
+ </ion-row>
+ <ion-row>
+  <ion-card style="width: 100%;"  *ngFor="let experience of experienceGet">
+    <ion-card-header>
+      <ion-card-title>{{experience.titleExperience}}</ion-card-title>
+      <ion-card-subtitle>{{experience.schoolExperience}}</ion-card-subtitle>
+      <ion-card-subtitle>{{experience.startDayExperience  | date:'dd/MM/yyyy'}} - {{experience.endDayExperience  | date:'dd/MM/yyyy'}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{experience.detailsExperience}}
+    </ion-card-content>
+  </ion-card>
+  
+ </ion-row>
+ 
+<!-- Formation & Diplome -->
+<ion-row class="ion-justify-content-center ion-align-items-center">
+  <h2>FORMATIONS</h2>
+</ion-row>
+ <ion-row>
+  <ion-card style="width: 100%;"  *ngFor="let formation of formationGet">
+    <ion-card-header>
+      <ion-card-title>{{formation.titleFormation}}</ion-card-title>
+      <ion-card-subtitle>{{formation.schoolFormation}}</ion-card-subtitle>
+      <ion-card-subtitle>{{formation.startDayFormation  | date:'dd/MM/yyyy'}} - {{formation.endDayFormation  | date:'dd/MM/yyyy'}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{formation.detailFormation}}
     </ion-card-content>
   </ion-card>
   
  </ion-row>
  <!-- PROJETS -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2 style="font-weight: bold;">PROJETS</h2>
-  
+  <h2>COMPETENCES</h2>
 </ion-row>
  <ion-row>
-  <ion-card>
+  <ion-card style="width: 100%;" *ngFor="let competence of competenceGet">
     <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+      <ion-card-subtitle>{{competence.nameCompetence}}</ion-card-subtitle>
+      <ion-progress-bar value="{{(competence.levelCompetence)/100 | number}}" class="ion-margin-top"></ion-progress-bar>
+
     </ion-card-header>
-  
-    <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-    </ion-card-content>
   </ion-card>
-  
  </ion-row>
  <!-- LANGUE -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2 style="font-weight: bold;">LANGUE(S)</h2>
+  <h2>LANGUE(S)</h2>
 </ion-row>
+  <ion-row>
+    <ion-card style="width: 100%;" *ngFor="let language of languageGet">
+      <ion-card-header>
+        <ion-card-title color="success">{{language.nameLanguage}}</ion-card-title>
+        <ion-card-subtitle>{{language.levelLanguage}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    
+   </ion-row>
  <!-- CENTRE D'INTERET -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2 style="font-weight: bold;">INTERET</h2>
-  
+  <h2>HOOBIES</h2>
 </ion-row>
+
+  <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet">
+    <ion-card-header>
+      <ion-card-title>{{hobbie.nameHobbie}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-grid>
 </ion-content>
