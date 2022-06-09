@@ -44,8 +44,17 @@ experienceGet:any[];
 competenceGet:any[];
 languageGet:any[];
 hobbieGet:any[];
-   
+
+doRefresh(event) {
+  console.log('Begin async operation');
+
+  setTimeout(() => {
+    this.ngOnInit();
+    event.target.complete();
+  }, 1000);
+}
 async ngOnInit() {
+  // console.log(`User connecte id , ${this.auth.currentUser.email} ${this.auth.currentUser.uid}`)
   /*Get Formations From databases */
   const formations = await this.data.get_Formation();
   this.formationGet = formations
@@ -72,7 +81,7 @@ async ngOnInit() {
   console.log(`Hobbies : ${this.hobbieGet}`)
 /*Get Accounts from databases */
 const account = await this.data.get_Accounts();
-this.accountGet = account
+this.accountGet = account.data
   // console.log(`First Element is : ${test.data().testArray2[0]}`)
   
   // console.log(`Current User ID : ${this.auth.currentUser.uid}=== current User Email : ${this.auth.currentUser.email}`)

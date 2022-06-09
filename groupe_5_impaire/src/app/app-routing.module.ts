@@ -28,6 +28,18 @@ const routes: Routes = [
     path: 'template',
     loadChildren: () => import('./template/template.module').then( m => m.TemplatePageModule)
   },
+  {
+    path: 'template1',
+    loadChildren: () => import('./template1/template1.module').then( m => m.Template1PageModule)
+  },
+  {
+    path: 'template2',
+    loadChildren: () => import('./template2/template2.module').then( m => m.Template2PageModule)
+  },
+  {
+    path: 'template3',
+    loadChildren: () => import('./template3/template3.module').then( m => m.Template3PageModule)
+  },
 ];
 
 @NgModule({

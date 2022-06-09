@@ -7,6 +7,9 @@
 </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid>
   
   <!-- WALLPAPER -->
@@ -63,13 +66,22 @@
     </ion-col>
   </ion-row>
   </form>
-  <ion-card style="width: 100%;" class="ion-margin-top" *ngFor="let account of accountGet">
-    <ion-card-header>
-      <ion-card-subtitle>Name : </ion-card-subtitle><ion-card-title>{{account.accountName}}</ion-card-title>
-      <ion-card-subtitle>Link</ion-card-subtitle><ion-card-title>{{account.accountLink}}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
- <!-- EXPERIENCE  -->
+  <ion-row>
+    <ion-card style="width: 100%;"  *ngFor="let account of accountGet;let i = index">
+      <ion-card-header>
+        <ion-row style="width: 100%;" class="ion-justify-content-around">
+    <ion-col size="6"> <ion-card-title class="ion-float-left">{{account.accountName}}</ion-card-title>  </ion-col> 
+    <ion-col size="1"> <ion-icon  class="ion-float-end" name="cut"  style="color:rgb(191, 23, 4);" size="large" (click)="deleteAccount(accountId[i])"></ion-icon> </ion-col> 
+        </ion-row>
+        
+      </ion-card-header>
+      <ion-card-content>
+       <a [href]="account.accountLink">{{account.accountLink}}</a> 
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+  
+  <!-- EXPERIENCE  -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
   <ion-col size="6" ><h2>EXPERIENCE</h2></ion-col>
   <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddExperience()">
@@ -252,7 +264,7 @@
   <ion-row>
     <ion-card style="width: 100%;" *ngFor="let language of languageGet">
       <ion-card-header>
-        <ion-card-title color="success">{{language.nameLanguage}}</ion-card-title>
+        <ion-card-title color="primary">{{language.nameLanguage}}</ion-card-title>
         <ion-card-subtitle>{{language.levelLanguage}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
@@ -289,12 +301,13 @@
   </ion-row>
   </form>
   <ion-row>
-    <ion-card style="width:100%;" *ngFor="let hobbie of hobbieGet">
+    <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet">
       <ion-card-header>
-        <ion-card-title>{{hobbie.nameHobbie}}</ion-card-title>
+        <ion-card-subtitle color="primary">{{hobbie.nameHobbie}}</ion-card-subtitle>
       </ion-card-header>
-    </ion-card> 
-  </ion-row>
+    </ion-card>
+    
+   </ion-row>
   
 </ion-grid>
 </ion-content>

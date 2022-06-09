@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 // Import IONIC STEPPER MODULE 
+import { PDFGenerator } from '@ionic-native/pdf-generator/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {provideAuth,getAuth} from "@angular/fire/auth";
@@ -35,7 +36,7 @@ const firebaseConfig = {
     provideFirestore(()=>getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [{ provide: RouteReuseStrategy,useClass: IonicRouteStrategy }],
+  providers: [PDFGenerator,{ provide: RouteReuseStrategy,useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
   
 })

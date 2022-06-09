@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { addDoc, collection, doc, Firestore, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
-import { onSnapshot } from 'firebase/firestore';
+import { deleteDoc, onSnapshot } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -42,15 +42,27 @@ if (docSnap.exists()) {
   }
   // Get User account information
 async get_Accounts(){
-  let accounts :any []=[];
+  let data :any []=[];
+  let ids : any []=[];
+  
   await onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'accounts'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      accounts.push(doc.data())
+      ids.push(doc.id)
+      data.push(doc.data())
     });
   });
-
-return accounts;
+const Accounts = {
+  id:ids,
+  data:data
+}
+return Accounts;
+}
+// Delete user Account information 
+async del_Account(id:string)
+{
+  await deleteDoc(doc(this.db,'usersCV',`${this.auth.currentUser.uid}`,'accounts',`${id}`));
+  console.log("Account remove succesfully");
 }
 // Get User Experience
 async get_Experience(){
@@ -71,7 +83,6 @@ async get_Competences(){
       comptences.push(doc.data())
     });
   });
-
  return comptences;
 }
 // Get User Language(s)

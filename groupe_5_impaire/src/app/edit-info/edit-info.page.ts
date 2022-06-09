@@ -49,6 +49,14 @@ export class EditInfoPage implements OnInit {
     private fb:FormBuilder
   )
    {}
+   doRefresh(event) {
+    console.log('Begin async operation');
+  
+    setTimeout(() => {
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
   async ngOnInit() { 
   // console.log(`Current User ID : ${this.auth.currentUser.uid}=== current User Email : ${this.auth.currentUser.email}`)
   /* Get Personnal Information from databases */
@@ -56,8 +64,10 @@ export class EditInfoPage implements OnInit {
 
   /*Get Accounts from databases */
   const account = await this.data.get_Accounts();
-  this.accountGet = account
+  this.accountGet = account.data
+  this.accountId = account.id;
   dataPersonnel.then((dat)=>{
+    console.log(dat.id);
     this.name = String(dat.name);
     this.surname = String(dat.surname);
     this.about = String (dat.about);
@@ -128,8 +138,9 @@ export class EditInfoPage implements OnInit {
     nameHobbie:['',[Validators.required]]
   })
   }
- // Formation Getter Value / Add Function
+ // Formation Getter Value / Add Function / Remove Function
   accountGet : any[];
+  accountId : any[];
   accountCredential : FormGroup;
   get accountName (){
     return this.accountCredential.get('accountName');
@@ -142,6 +153,11 @@ export class EditInfoPage implements OnInit {
     this.data.set_Account(this.accountCredential.value)
     this.formAccount = !this.formAccount;
     this.data.get_Accounts()
+  }
+
+  async deleteAccount(id:string){
+    await this.data.del_Account(id);
+    this.ngOnInit()
   }
   // Formation Getter Value / Add Function
   
