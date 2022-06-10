@@ -101,12 +101,12 @@
  </ion-row>
  <!-- LANGUE -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>LANGUE(S)</h2>
+  <h2  style="font-weight: bold;">LANGUE(S)</h2>
 </ion-row>
   <ion-row>
     <ion-card style="width: 100%;" *ngFor="let language of languageGet">
       <ion-card-header>
-        <ion-card-title color="success">{{language.nameLanguage}}</ion-card-title>
+        <ion-card-title color="success" style="font-weight: bold;">{{language.nameLanguage}}</ion-card-title>
         <ion-card-subtitle>{{language.levelLanguage}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
@@ -116,11 +116,13 @@
  <ion-row class="ion-justify-content-center ion-align-items-center">
   <h2>HOOBIES</h2>
 </ion-row>
-
+<ion-row>
   <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet">
     <ion-card-header>
       <ion-card-title>{{hobbie.nameHobbie}}</ion-card-title>
     </ion-card-header>
   </ion-card>
+</ion-row>
+  
 </ion-grid>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 import { DataService } from '../data.service';
 @Component({
   selector: 'app-edit-info',
@@ -45,8 +46,8 @@ export class EditInfoPage implements OnInit {
   
   constructor(
     private data:DataService,
-    private auth:Auth,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    public alertController :AlertController
   )
    {}
    doRefresh(event) {
@@ -76,27 +77,33 @@ export class EditInfoPage implements OnInit {
 
   /*Get Formations From databases */
   const formations = await this.data.get_Formation();
-  this.formationGet = formations
+  this.formationGet = formations.data;
+  this.formationId = formations.id;
   console.log(`Formations : ${this.formationGet}`)
   
   /*Get Experiences From databases */
   const experiences = await this.data.get_Experience();
-  this.experienceGet = experiences
+  this.experienceGet = experiences.data;
+  this.experienceId = experiences.id;
   console.log(`Experiences : ${this.experienceGet}`)
   
   /*Get Competences From databases */
   const competences = await this.data.get_Competences();
-  this.competenceGet = competences;
+  this.competenceGet = competences.data;
+  this.competenceId = competences.id;
   console.log(`Comptences : ${this.competenceGet}`)
 
   /*Get Language From databases */
   const languages = await this.data.get_Languages();
-  this.languageGet = languages;
+  this.languageGet = languages.data;
+  this.languageId = languages.id
+
   console.log(`Languages : ${this.languageGet}`)
 
   /*Get Hobbie From databases */
   const hobbies = await this.data.get_Hobbies();
-  this.hobbieGet = hobbies;
+  this.hobbieGet = hobbies.data;
+  this.hobbieId  = hobbies.id
   console.log(`Hobbies : ${this.hobbieGet}`)
 
 
@@ -156,12 +163,36 @@ export class EditInfoPage implements OnInit {
   }
 
   async deleteAccount(id:string){
-    await this.data.del_Account(id);
-    this.ngOnInit()
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete Account !',
+      message: 'would you want to delete <strong>Account</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Delete',
+          id: 'confirm-button',
+          handler: async () =>  {
+         await this.data.del_Account(id);    
+          this.ngOnInit()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
   // Formation Getter Value / Add Function
   
-  formationGet : any[]
+  formationGet : any[];
+  formationId : any [];
   formationCredential:FormGroup;
 
   get titleFormation(){
@@ -186,9 +217,37 @@ export class EditInfoPage implements OnInit {
     this.formFormation = !this.formFormation;
     this.ngOnInit()
   }
+  async deleteFormation(id:string){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete Formation !',
+      message: 'would you want to delete <strong>Formation</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Delete',
+          id: 'confirm-button',
+          handler: async () =>  {
+         await this.data.del_Formation(id);    
+          this.ngOnInit()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
   // Experience Getter Value / Add Function
-  experienceGet : any[]
+  experienceGet : any[];
+  experienceId : any [];
   experienceCredential:FormGroup;
 
   get titleExperience(){
@@ -213,8 +272,36 @@ export class EditInfoPage implements OnInit {
     this.formExperience = !this.formExperience;
     this.ngOnInit()
   }
+  async deleteExperience(id:string){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete Experience !',
+      message: 'would you want to delete <strong>Experience</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Delete',
+          id: 'confirm-button',
+          handler: async () =>  {
+         await this.data.del_Experience(id);    
+          this.ngOnInit()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 // Competence Getter Value / Add Function 
-  competenceGet:any[];
+  competenceGet: any[];
+  competenceId : any []
   competenceCredential:FormGroup;
 
   get nameCompetence(){
@@ -230,9 +317,37 @@ export class EditInfoPage implements OnInit {
     this.formCompetence = !this.formCompetence;
     this.ngOnInit()
   }
+  async deleteCompetence(id:string){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete Competence !',
+      message: 'would you want to delete <strong>Competence</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Delete',
+          id: 'confirm-button',
+          handler: async () =>  {
+         await this.data.del_Competence(id);    
+          this.ngOnInit()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
   // Language Getter Value  / Add Function 
   languageGet:any[];
+  languageId :any[];
   languageCredential:FormGroup;
 
   get nameLanguage(){
@@ -248,10 +363,38 @@ export class EditInfoPage implements OnInit {
     this.formLanguage = !this.formLanguage;
     this.ngOnInit()
   }
+  async deleteLanguage(id:string){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete Language !',
+      message: 'would you want to delete <strong>Language</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Delete',
+          id: 'confirm-button',
+          handler: async () =>  {
+         await this.data.del_Language(id);    
+          this.ngOnInit()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
   // Hobbie Getter Value / Add Function
   
   hobbieGet:any[];
+  hobbieId:any[]
   hobbieCredential:FormGroup;
 
   get nameHobbie(){
@@ -261,5 +404,33 @@ export class EditInfoPage implements OnInit {
     this.data.set_Hobbies(this.hobbieCredential.value);
     this.formHobbie = !this.formHobbie;
     console.log("Hobbie added successfully");
+  };
+  async deleteHobbie(id:string){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete Hobbie !',
+      message: 'would you want to delete <strong>Hobbie</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Delete',
+          id: 'confirm-button',
+          handler: async () =>  {
+         await this.data.del_Hobbies(id);    
+          this.ngOnInit()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
+
 }

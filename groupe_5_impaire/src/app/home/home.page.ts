@@ -33,9 +33,7 @@ export class HomePage {
   comptes: compte [];
   loisirs : loisir [];
   constructor(
-    private data:DataService,
-    private auth:Auth,
-    private db : Firestore
+    private data:DataService
   )
    {}
 accountGet : any[];
@@ -57,27 +55,27 @@ async ngOnInit() {
   // console.log(`User connecte id , ${this.auth.currentUser.email} ${this.auth.currentUser.uid}`)
   /*Get Formations From databases */
   const formations = await this.data.get_Formation();
-  this.formationGet = formations
+  this.formationGet = formations.data
   console.log(`Formations : ${this.formationGet}`)
   
   /*Get Experiences From databases */
   const experiences = await this.data.get_Experience();
-  this.experienceGet = experiences
+  this.experienceGet = experiences.data
   console.log(`Experiences : ${this.experienceGet}`)
   
   /*Get Competences From databases */
   const competences = await this.data.get_Competences();
-  this.competenceGet = competences;
+  this.competenceGet = competences.data;
   console.log(`Comptences : ${this.competenceGet}`)
 
   /*Get Language From databases */
   const languages = await this.data.get_Languages();
-  this.languageGet = languages;
+  this.languageGet = languages.data;
   console.log(`Languages : ${this.languageGet}`)
 
   /*Get Hobbie From databases */
   const hobbies = await this.data.get_Hobbies();
-  this.hobbieGet = hobbies;
+  this.hobbieGet = hobbies.data;
   console.log(`Hobbies : ${this.hobbieGet}`)
 /*Get Accounts from databases */
 const account = await this.data.get_Accounts();

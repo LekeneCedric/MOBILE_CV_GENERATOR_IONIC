@@ -1,160 +1,132 @@
 <ion-header [translucent]="true">
-  <ion-toolbar >
+  <ion-toolbar>
       <ion-title>First Template</ion-title>
       <ion-buttons slot="start">
          <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-buttons>
+      <ion-icon slot="end" (click)="Template1_PDF()" name="download" size="large"  style="color:rgb(80, 155, 236);margin-right:5%"></ion-icon>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content scrollX="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="wrapper mt-lg-5" id="template1">
+    <div class="sidebar-wrapper">
+        <div class="profile-container">
+            <img class="profile" src="assets/images/profile.png" alt="" />
+            <h1 class="name">{{name}} {{surname}}</h1>
+            <h3 class="tagline">{{profession}}</h3>
+        </div><!--//profile-container-->
+        
+        <div class="contact-container container-block">
+            <ul class="list-unstyled contact-list">
+                <li class="email"><i class="fas fa-envelope"></i><a href="mailto: yourname@email.com">{{email}}</a></li>
+                <li class="phone"><i class="fas fa-phone"></i><a href="tel:0123 456 789">{{contact}}</a></li>
+                <div *ngFor="let account of accountGet">
+                  <li class="website"><i class="fas fa-globe"></i><a href="https://themes.3rdwavemedia.com/boo" target="_blank">{{account.accountLink}}</a></li>
+                </div>
+                
+            </ul>
+        </div><!--//contact-container-->
+        <div class="education-container container-block">
+            <h2 class="container-block-title">Education</h2>
+            <div class="item" *ngFor="let formation of formationGet">
+                <h4 class="degree">{{formation.titleFormation}}</h4>
+                <h5 class="meta">{{formation.schoolFormation}}</h5>
+                  <div class="time">{{formation.startDayFormation | date:'dd/MM/yyyy'}} - {{formation.endDayFormation | date:'dd/MM/yyyy'}}</div>
+            </div><!--//item-->
+        </div><!--//education-container-->
+        
+        <div class="languages-container container-block">
+            <h2 class="container-block-title">Languages</h2>
+            <ul class="list-unstyled interests-list" *ngFor="let language of languageGet">
+                <li style="margin-top: 15px;">{{language.nameLanguage}}<span class="lang-desc">({{language.levelLanguage}})</span></li>
+            </ul>
+        </div><!--//interests-->
+        
+        <div class="interests-container container-block">
+            <h2 class="container-block-title">Interests</h2>
+            <ul class="list-unstyled interests-list" *ngFor="let hobbie of hobbieGet">
+                <li style="margin-top: 15px;">{{hobbie.nameHobbie}}</li>
+            </ul>
+        </div><!--//interests-->
+        
+    </div><!--//sidebar-wrapper-->
+    
+    <div class="main-wrapper">
+        
+        <section class="section summary-section">
+            <h2 class="section-title"><span class="icon-holder"><i class="fas fa-user"></i></span>Career Profile</h2>
+            <div class="summary">
+                <p>{{about}}</p>
+            </div><!--//summary-->
+        </section><!--//section-->
+        
+        <section class="section experiences-section">
+            <h2 class="section-title"><span class="icon-holder"><i class="fas fa-briefcase"></i></span>Experiences</h2>
+            
+            <div class="item" *ngFor="let experience of experienceGet">
+                <div class="meta">
+                    <div class="upper-row">
+                        <h3 class="job-title">{{experience.titleExperience}}</h3>
+                        <div class="time">{{experience.startDayExperience  | date:'dd/MM/yyyy'}} - {{experience.endDayExperience  | date:'dd/MM/yyyy'}}</div>
+                    </div><!--//upper-row-->
+                    <div class="company">{{experience.structureExperience}}</div>
+                </div><!--//meta-->
+                <div class="details">
+                    <p>{{experience.detailsExperience}}</p>  
+                </div><!--//details-->
+            </div><!--//item-->
+            
+            
+            
+        </section><!--//section-->
+        
+        <section class="section projects-section">
+            <h2 class="section-title"><span class="icon-holder"><i class="fas fa-archive"></i></span>Projects</h2>
+            <div class="intro">
+                <p>You can list your side projects or open source libraries in this section. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ligula in nunc bibendum fringilla a eu lectus.</p>
+            </div><!--//intro-->
+            <div class="item">
+                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderpro-bootstrap-5-startup-template-for-software-projects/" target="_blank">CoderPro</a></span> - <span class="project-tagline">A responsive website template designed to help developers launch their software projects. </span>
+                
+            </div><!--//item-->
+            <div class="item">
+                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/launch-bootstrap-5-template-for-saas-businesses/" target="_blank">Launch</a></span> - <span class="project-tagline">A responsive website template designed to help startups promote their products or services.</span>
+            </div><!--//item-->
+            <div class="item">
+                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/resume/devcard-bootstrap-5-vcard-portfolio-template-for-software-developers/" target="_blank">DevCard</a></span> - <span class="project-tagline">A portfolio website template designed for software developers.</span>
+            </div><!--//item-->
+            <div class="item">
+                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/bootstrap-template-for-mobile-apps-nova-pro/" target="_blank">Nova Pro</a></span> - <span class="project-tagline">A responsive Bootstrap theme designed to help app developers promote their mobile apps</span>
+            </div><!--//item-->
+            <div class="item">
+                <span class="project-title"><a href="http://themes.3rdwavemedia.com/website-templates/responsive-bootstrap-theme-web-development-agencies-devstudio/" target="_blank">DevStudio</a></span> - 
+                <span class="project-tagline">A responsive website template designed to help web developers/designers market their services. </span>
+            </div><!--//item-->
+        </section><!--//section-->
+        
+        <section class="skills-section section">
+            <h2 class="section-title"><span class="icon-holder"><i class="fas fa-rocket"></i></span>Skills &amp; Proficiency</h2>
+            <div class="skillset">        
+                <div class="item" *ngFor="let competence of competenceGet">
+                    <h3 class="level-title">{{competence.nameCompetence}}</h3>
+                    <div class="progress level-bar">
+            <div class="progress-bar theme-progress-bar" role="progressbar" style="width: {{competence.levelCompetence | number}}%"  aria-valuemin="0" aria-valuemax="100"></div>
+        </div>                               
+                </div><!--//item-->
+                
+            </div>  
+        </section><!--//skills-section-->
+        
+    </div><!--//main-body-->
+</div>
 
-  <div id="doc2" class="yui-t7">
-    <div id="inner">
-    
-      <div id="hd">
-        <div class="yui-gc">
-          <div class="yui-u first">
-            <h1>Jonathan Doe</h1>
-            <h2>Web Designer, Director</h2>
-          </div>
-  
-          <div class="yui-u">
-            <div class="contact-info">
-              <h3><a id="pdf" href="#">Download PDF</a></h3>
-              <h3><a href="mailto:name@yourdomain.com">name@yourdomain.com</a></h3>
-              <h3>(313) - 867-5309</h3>
-            </div><!--// .contact-info -->
-          </div>
-        </div><!--// .yui-gc -->
-      </div><!--// hd -->
-  
-      <div id="bd">
-        <div id="yui-main">
-          <div class="yui-b">
-  
-            <div class="yui-gf">
-              <div class="yui-u first">
-                <h2>Profile</h2>
-              </div>
-              <div class="yui-u">
-                <p class="enlarge">
-                  Progressively evolve cross-platform ideas before impactful infomediaries. Energistically visualize tactical initiatives before cross-media catalysts for change. 
-                </p>
-              </div>
-            </div><!--// .yui-gf -->
-  
-            <div class="yui-gf">
-              <div class="yui-u first">
-                <h2>Skills</h2>
-              </div>
-              <div class="yui-u">
-  
-                  <div class="talent">
-                    <h2>Web Design</h2>
-                    <p>Assertively exploit wireless initiatives rather than synergistic core competencies.	</p>
-                  </div>
-  
-                  <div class="talent">
-                    <h2>Interface Design</h2>
-                    <p>Credibly streamline mission-critical value with multifunctional functionalities.	 </p>
-                  </div>
-  
-                  <div class="talent">
-                    <h2>Project Direction</h2>
-                    <p>Proven ability to lead and manage a wide variety of design and development projects in team and independent situations.</p>
-                  </div>
-              </div>
-            </div><!--// .yui-gf -->
-  
-            <div class="yui-gf">
-              <div class="yui-u first">
-                <h2>Technical</h2>
-              </div>
-              <div class="yui-u">
-                <ul class="talent">
-                  <li>XHTML</li>
-                  <li>CSS</li>
-                  <li class="last">Javascript</li>
-                </ul>
-  
-                <ul class="talent">
-                  <li>Jquery</li>
-                  <li>PHP</li>
-                  <li class="last">CVS / Subversion</li>
-                </ul>
-  
-                <ul class="talent">
-                  <li>OS X</li>
-                  <li>Windows XP/Vista</li>
-                  <li class="last">Linux</li>
-                </ul>
-              </div>
-            </div><!--// .yui-gf-->
-  
-            <div class="yui-gf">
-    
-              <div class="yui-u first">
-                <h2>Experience</h2>
-              </div><!--// .yui-u -->
-  
-              <div class="yui-u">
-  
-                <div class="job">
-                  <h2>Facebook</h2>
-                  <h3>Senior Interface Designer</h3>
-                  <h4>2005-2007</h4>
-                  <p>Intrinsicly enable optimal core competencies through corporate relationships. Phosfluorescently implement worldwide vortals and client-focused imperatives. Conveniently initiate virtual paradigms and top-line convergence. </p>
-                </div>
-  
-                <div class="job">
-                  <h2>Apple Inc.</h2>
-                  <h3>Senior Interface Designer</h3>
-                  <h4>2005-2007</h4>
-                  <p>Progressively reconceptualize multifunctional "outside the box" thinking through inexpensive methods of empowerment. Compellingly morph extensive niche markets with mission-critical ideas. Phosfluorescently deliver bricks-and-clicks strategic theme areas rather than scalable benefits. </p>
-                </div>
-  
-                <div class="job">
-                  <h2>Microsoft</h2>
-                  <h3>Principal and Creative Lead</h3>
-                  <h4>2004-2005</h4>
-                  <p>Intrinsicly transform flexible manufactured products without excellent intellectual capital. Energistically evisculate orthogonal architectures through covalent action items. Assertively incentivize sticky platforms without synergistic materials. </p>
-                </div>
-  
-  
-                <div class="job last">
-                  <h2>International Business Machines (IBM)</h2>
-                  <h3>Lead Web Designer</h3>
-                  <h4>2001-2004</h4>
-                  <p>Globally re-engineer cross-media schemas through viral methods of empowerment. Proactively grow long-term high-impact human capital and highly efficient innovation. Intrinsicly iterate excellent e-tailers with timely e-markets.</p>
-                </div>
-  
-              </div><!--// .yui-u -->
-            </div><!--// .yui-gf -->
-  
-  
-            <div class="yui-gf last">
-              <div class="yui-u first">
-                <h2>Education</h2>
-              </div>
-              <div class="yui-u">
-                <h2>Indiana University - Bloomington, Indiana</h2>
-                <h3>Dual Major, Economics and English &mdash; <strong>4.0 GPA</strong> </h3>
-              </div>
-            </div><!--// .yui-gf -->
-  
-  
-          </div><!--// .yui-b -->
-        </div><!--// yui-main -->
-      </div><!--// bd -->
-  
-      <div id="ft">
-        <p>Jonathan Doe &mdash; <a href="mailto:name@yourdomain.com">name@yourdomain.com</a> &mdash; (313) - 867-5309</p>
-      </div><!--// footer -->
-  
-    </div><!-- // inner -->
-  
-  
-  </div><!--// doc -->
-  
-  
+<footer class="footer">
+    <div class="text-center">
+        <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+        <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+    </div><!--//container-->
+</footer><!--//footer-->
 </ion-content>

@@ -28,17 +28,25 @@ if (docSnap.exists()) {
 // Get User Formation 
   }
   async get_Formation(){
-    let formations :any []=[];
+    let data :any []=[];
+    let ids : any []= [];
     await onSnapshot(collection(this.db, 'usersCV', `${this.auth.currentUser.uid}`, 'formations'),(querySnapshot)=>{
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        formations.push(doc.data())
+        data.push(doc.data());
+        ids.push(doc.id);
       });
     });
-  
+  const Formations = {
+   id:ids,
+   data:data
+  }
   // console.log(`Formations : ${formations}`)
-  return formations
-  console.log("Formation Added Successfully")
+  return Formations
+  }
+  async del_Formation(id:string){
+    await deleteDoc(doc(this.db,'usersCV',`${this.auth.currentUser.uid}`,'formations',`${id}`));
+  console.log("Formation remove succesfully");
   }
   // Get User account information
 async get_Accounts(){
@@ -66,49 +74,89 @@ async del_Account(id:string)
 }
 // Get User Experience
 async get_Experience(){
-  let experiences :any []=[];
+  let data :any []=[];
+  let ids : any []=[];
   await onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'experiences'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      experiences.push(doc.data())
+      data.push(doc.data());
+      ids.push(doc.id);
     });})
-return experiences;
+    const Experiences = {
+      id : ids ,
+      data : data
+    }
+return Experiences;
+}
+async del_Experience(id:string){
+  await deleteDoc(doc(this.db,'usersCV',`${this.auth.currentUser.uid}`,'experiences',`${id}`));
+  console.log("Experience remove succesfully");
 }
 // Get User Competences 
 async get_Competences(){
-  let comptences :any []=[];
+  let data :any []=[];
+  let ids : any [] =[];
   onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'competences'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      comptences.push(doc.data())
+      data.push(doc.data());
+      ids.push(doc.id);
     });
   });
- return comptences;
+ const Competences = {
+  id : ids, 
+  data : data
+ };
+ return Competences;
+}
+async del_Competence(id:string){
+  await deleteDoc(doc(this.db,'usersCV',`${this.auth.currentUser.uid}`,'competences',`${id}`));
+  console.log("Competence remove succesfully");
 }
 // Get User Language(s)
 async get_Languages(){
-  let languages :any []=[];
+  let data :any []=[];
+  let ids : any [] =[];
   onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'languages'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      languages.push(doc.data())
+      ids.push(doc.id);
+      data.push(doc.data())
     });
   });
+const Languages = {
+  id : ids , 
+  data : data
+}
 
-return languages;
+return Languages;
+}
+
+async del_Language(id:string)
+{
+  await deleteDoc(doc(this.db,'usersCV',`${this.auth.currentUser.uid}`,'languages',`${id}`));
+  console.log("Language remove succesfully");
 }
 // Get User Hobbies
-async get_Hobbies(){
-  let hobbies :any []=[];
+async get_Hobbies(){ 
+  let data :any []=[];
+  let ids : any [] =[];
   onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'hobbies'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      hobbies.push(doc.data())
+      data.push(doc.data());
+      ids.push(doc.id)
     });
   });
-  
-
-return hobbies;
+  const Hobbies = {
+    data : data,
+    id : ids
+  }
+return Hobbies;
+}
+async del_Hobbies(id:string){
+  await deleteDoc(doc(this.db,'usersCV',`${this.auth.currentUser.uid}`,'hobbies',`${id}`));
+  console.log("Experience remove succesfully");
 }
 // Set user formation
 async set_Formation({titleFormation, schoolFormation, startDayFormation,endDayFormation,detailFormation}){
