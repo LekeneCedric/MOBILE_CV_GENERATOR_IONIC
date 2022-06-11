@@ -1,5 +1,7 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
+@import "./white-theme";
+@import "./dark-theme";
 @font-face {
   font-family: AppFont;
   src: url("../assets/Indie_Flower/IndieFlower-Regular.ttf"); //change url accordingly
@@ -9,6 +11,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 /** Ionic CSS Variables **/
 :root {
+  --themeColor : white;
   /** primary **/
   // --ion-font-family: 'Indie Flower', cursive;
   // --ion-font-family: 'Montserrat Alternates', sans-serif;
@@ -85,7 +88,7 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
-@media (prefers-color-scheme: white) {
+@media (prefers-color-scheme: var(--themeColor)) {
   /*
    * Dark Colors
    * -------------------------------------------
