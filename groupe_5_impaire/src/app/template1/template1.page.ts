@@ -34,7 +34,7 @@ hobbieGet:any[];
 
   constructor(private pdfGenerator: PDFGenerator,private data:DataService) { }
 
-  @ViewChild('content1',{static:false}) element1!: ElementRef;
+  @ViewChild('template1',{static:false}) template1!: ElementRef;
 
    Template1_PDF(){
      const getDisplay : any = document.querySelector('#template1');
@@ -43,14 +43,12 @@ hobbieGet:any[];
      {
      getDisplay.style.display = "block";
 
-     let pdf = new jsPDF('p','pt','a4');
+     let pdf = new jsPDF('l','pt','a3');
 
-     pdf.html(this.element1.nativeElement,{
+     pdf.html(this.template1.nativeElement,{
        callback: (pdf)=>{
          
          pdf.save("Template1.pdf");
-
-         getDisplay.style.display = "none";
        }
      });}
    }

@@ -11,7 +11,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 /** Ionic CSS Variables **/
 :root {
-  --themeColor : white;
+  --themeColor : #000000;
   /** primary **/
   // --ion-font-family: 'Indie Flower', cursive;
   // --ion-font-family: 'Montserrat Alternates', sans-serif;
@@ -88,7 +88,7 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
-@media (prefers-color-scheme: var(--themeColor)) {
+@media (prefers-color-scheme:dark) {
   /*
    * Dark Colors
    * -------------------------------------------
