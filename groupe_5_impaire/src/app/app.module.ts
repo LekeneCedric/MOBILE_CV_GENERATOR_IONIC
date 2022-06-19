@@ -15,6 +15,14 @@ import { environment } from 'src/environments/environment';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { RegisterPipe } from './register.pipe';
 import { FormsModule } from '@angular/forms';
+
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateConfigService } from './translate-config.service';
+
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyCdDp2GVBrhVqzNL9xzWDt0zAf85GBs2IY",
   authDomain: "cvgeneratorprojectionicangular.firebaseapp.com",
@@ -24,19 +32,29 @@ const firebaseConfig = {
   appId: "1:303756872232:web:7bdd2f58f3125e3b4a831d",
   measurementId: "G-WQDGVQPS8D"
 };
+export function LanguageLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
 @NgModule({
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],  
   declarations: [AppComponent, RegisterPipe],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,HttpClientModule,FormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (LanguageLoader),
+        deps: [HttpClient]
+      }
+    }),
     provideFirebaseApp(()=>initializeApp(environment.firebase)),
     provideAuth(()=>getAuth()),
     provideFirestore(()=>getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [PDFGenerator,{ provide: RouteReuseStrategy,useClass: IonicRouteStrategy }],
+  providers: [PDFGenerator,{ provide: RouteReuseStrategy,useClass: IonicRouteStrategy },TranslateConfigService],
   bootstrap: [AppComponent],
   
 })

@@ -21,7 +21,7 @@
         
      </ion-row>
      <ion-row class="ion-justify-content-center" style="margin-top:20px;font-weight: bold;">
-      S e t t i n g s 
+      {{ 'SETTING' | translate:params | uppercase}}
      </ion-row>
      
      <ion-list style="margin-top: 20px;">
@@ -29,7 +29,7 @@
         <ion-item routerLink="/home">
           <ion-icon name="home-outline"  style="color:rgb(3, 26, 52);"></ion-icon>
            <ion-label style="margin-left:15px ;font-weight:bold;color:rgb(23, 84, 150)">
-              Home
+              {{"HOME" | translate:params}}
            </ion-label>
          </ion-item>
       </ion-menu-toggle>
@@ -60,6 +60,15 @@
       </ion-menu-toggle>
        
      </ion-list>
+     <ion-list>
+      <ion-item>
+        <ion-label>Select Language</ion-label>
+        <ion-select placeholder="Select Language" [(ngModel)]="selectedLanguage" (ionChange)="languageChanged()">
+          <ion-select-option value="en">English</ion-select-option>
+          <ion-select-option value="fr">French</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
    </ion-content>
   </ion-menu>
   <ion-router-outlet id="menu"></ion-router-outlet>

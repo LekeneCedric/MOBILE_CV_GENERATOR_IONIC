@@ -66,6 +66,7 @@ const Accounts = {
 }
 return Accounts;
 }
+
 // Delete user Account information 
 async del_Account(id:string)
 {
@@ -88,6 +89,7 @@ async get_Experience(){
     }
 return Experiences;
 }
+
 async del_Experience(id:string){
   await deleteDoc(doc(this.db,'usersCV',`${this.auth.currentUser.uid}`,'experiences',`${id}`));
   console.log("Experience remove succesfully");
