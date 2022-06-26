@@ -40,6 +40,14 @@ const routes: Routes = [
     path: 'template3',
     loadChildren: () => import('./template3/template3.module').then( m => m.Template3PageModule)
   },
+  {
+    path: 'template4',
+    loadChildren: () => import('./template4/template4.module').then( m => m.Template4PageModule)
+  },
+  {
+    path: 'template5',
+    loadChildren: () => import('./template5/template5.module').then( m => m.Template5PageModule)
+  },
 ];
 
 @NgModule({
