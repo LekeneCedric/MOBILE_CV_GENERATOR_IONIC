@@ -37,7 +37,7 @@
         <ion-item routerLink="/edit-info">
           <ion-icon name="hammer"  style="color:rgb(236, 134, 0);"></ion-icon>
            <ion-label style="margin-left:15px ;font-weight:bold; color:rgb(227, 148, 44);">
-              Edit  
+            {{"EDIT" | translate:params}}  
            </ion-label>
          </ion-item>
       </ion-menu-toggle>
@@ -54,7 +54,7 @@
         <ion-item (click)="logout()">
           <ion-icon name="exit-outline" style="color:red ;"></ion-icon>
            <ion-label style="margin-left:15px ; font-weight:bold; color: rgb(244, 103, 103);">
-              Logout
+            {{"LOGOUT" | translate:params}}
            </ion-label>
          </ion-item>
       </ion-menu-toggle>

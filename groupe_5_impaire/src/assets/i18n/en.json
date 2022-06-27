@@ -2,5 +2,7 @@
     "SETTING":"Settings",
     "INFORMATION":"Information",
     "NAME":"Name",
-    "HOME":"Home"
+    "HOME":"Home",
+    "LOGOUT":"Logout",
+    "EDIT":"Edit"
 }

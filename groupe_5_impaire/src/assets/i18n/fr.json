@@ -2,5 +2,7 @@
     "SETTING":"parametres",
     "INFORMATIONS":"informations",
     "NAME":"nom",
-    "HOME":"Accueil"
+    "HOME":"Accueil",
+    "LOGOUT":"Deconnexion",
+    "EDIT":"Modifier"
 }
