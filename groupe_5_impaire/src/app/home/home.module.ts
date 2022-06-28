@@ -6,6 +6,10 @@ import { HomePage } from './home.page';
 
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { TranslateConfigService } from '../translate-config.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { LanguageLoader } from '../app.module';
+import { HttpClient } from '@angular/common/http';
 
 
 @NgModule({
@@ -13,9 +17,16 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (LanguageLoader),
+        deps: [HttpClient]
+      }
+    }),
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],providers:[TranslateConfigService]
 })
 export class HomePageModule {}
 

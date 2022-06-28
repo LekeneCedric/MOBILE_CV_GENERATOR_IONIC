@@ -4,5 +4,12 @@
     "NAME":"nom",
     "HOME":"Accueil",
     "LOGOUT":"Deconnexion",
-    "EDIT":"Modifier"
+    "EDIT":"Modifier",
+    "ACCOUNTS":"COMPTES",
+    "EXPERIENCE":"EXPERIENCES",
+    "COMPETENCE":"COMPETENCE",
+    "LANGUE":"LANGUE",
+    "DIVERTISSEMENT":"HOBBIE",
+    "MODIFIER_INFO":"modifier vos informations",
+    "BIENVENUE":"bienvenue"
 }

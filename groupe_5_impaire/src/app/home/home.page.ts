@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { AppComponent } from '../app.component';
 import { DataService } from '../data.service';
+import { TranslateConfigService } from '../translate-config.service';
 import { competence, compte, experience, formation, langue, loisir } from './home.module';
 
 @Component({
@@ -32,10 +35,8 @@ export class HomePage {
   langues : langue[];
   comptes: compte [];
   loisirs : loisir [];
-  constructor(
-    private data:DataService
-  )
-   {}
+  selectedLanguage:string = this.translate.getBrowserLang();
+ 
 accountGet : any[];
 formationGet:any[];
 experienceGet:any[];
@@ -51,7 +52,17 @@ doRefresh(event) {
     event.target.complete();
   }, 1000);
 }
+constructor(
+  private data:DataService,private app:AppComponent,private TranslateService:TranslateConfigService,private translate:TranslateService
+)
+ {
+  
+  this.translate.setDefaultLang(this.app.getLang());
+    
+ }
 async ngOnInit() {
+  
+  
   // console.log(`User connecte id , ${this.auth.currentUser.email} ${this.auth.currentUser.uid}`)
   /*Get Formations From databases */
   const formations = await this.data.get_Formation();

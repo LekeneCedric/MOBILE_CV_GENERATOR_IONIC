@@ -21,7 +21,7 @@
         
      </ion-row>
      <ion-row class="ion-justify-content-center" style="margin-top:20px;font-weight: bold;">
-      {{ 'SETTING' | translate:params | uppercase}}
+      {{ 'SETTING' | translate| uppercase}}
      </ion-row>
      
      <ion-list style="margin-top: 20px;">
@@ -29,7 +29,7 @@
         <ion-item routerLink="/home">
           <ion-icon name="home-outline"  style="color:rgb(3, 26, 52);"></ion-icon>
            <ion-label style="margin-left:15px ;font-weight:bold;color:rgb(23, 84, 150)">
-              {{"HOME" | translate:params}}
+              {{"HOME" | translate}}
            </ion-label>
          </ion-item>
       </ion-menu-toggle>
@@ -37,7 +37,7 @@
         <ion-item routerLink="/edit-info">
           <ion-icon name="hammer"  style="color:rgb(236, 134, 0);"></ion-icon>
            <ion-label style="margin-left:15px ;font-weight:bold; color:rgb(227, 148, 44);">
-            {{"EDIT" | translate:params}}  
+            {{"EDIT" | translate}}  
            </ion-label>
          </ion-item>
       </ion-menu-toggle>
@@ -54,7 +54,7 @@
         <ion-item (click)="logout()">
           <ion-icon name="exit-outline" style="color:red ;"></ion-icon>
            <ion-label style="margin-left:15px ; font-weight:bold; color: rgb(244, 103, 103);">
-            {{"LOGOUT" | translate:params}}
+            {{"LOGOUT" | translate}}
            </ion-label>
          </ion-item>
       </ion-menu-toggle>

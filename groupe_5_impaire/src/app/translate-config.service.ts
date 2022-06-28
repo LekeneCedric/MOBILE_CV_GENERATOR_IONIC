@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,11 @@ export class TranslateConfigService {
   constructor(
     private translate : TranslateService
   ) { }
-
-  getDefaultLanguage(){
-    let language = this.translate.getBrowserLang();
-    this.translate.setDefaultLang(language);
-    return language;
-  }
+  streamLang:BehaviorSubject<string>=new BehaviorSubject<string>(this.translate.getDefaultLang());
+  lang:string;
   setLanguage(setLang){
-    this.translate.use(setLang);
+    this.lang = setLang;
+    this.streamLang.next(this.lang);  
     
   }
 }
