@@ -5,11 +5,11 @@
     "HOME":"Accueil",
     "LOGOUT":"Deconnexion",
     "EDIT":"Modifier",
-    "ACCOUNTS":"COMPTES",
-    "EXPERIENCE":"EXPERIENCES",
-    "COMPETENCE":"COMPETENCE",
-    "LANGUE":"LANGUE",
-    "DIVERTISSEMENT":"HOBBIE",
+    "ACCOUNTS":"Comptes",
+    "EXPERIENCE":"Experiences",
+    "COMPETENCE":"Competences",
+    "LANGUE":"Langue",
+    "DIVERTISSEMENT":"Divertissement",
     "MODIFIER_INFO":"modifier vos informations",
     "BIENVENUE":"bienvenue"
 }

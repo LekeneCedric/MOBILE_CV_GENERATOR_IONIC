@@ -15,9 +15,14 @@
      <!-- List of Items of my Side Menu -->
      <ion-row class="ion-justify-content-center">
        
-        <ion-avatar style="margin-top: 25px;" >
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-avatar>
+      <div class="avatar" style="margin-top: 25px;">
+        <!-- Avatar image -->
+        <img class="avatar__image"  src="https://cdn-icons-png.flaticon.com/512/3953/3953226.png" />
+        <!-- <ng-template class="avatar" #placeholder_avatar>
+            <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+        </ng-template> -->
+       
+      </div> 
         
      </ion-row>
      <ion-row class="ion-justify-content-center" style="margin-top:20px;font-weight: bold;">
@@ -71,6 +76,6 @@
     </ion-list>
    </ion-content>
   </ion-menu>
-  <ion-router-outlet id="menu"></ion-router-outlet>
+  <ion-router-outlet id="menu" [lang]="selectedLanguage"></ion-router-outlet>
 </ion-app>
 

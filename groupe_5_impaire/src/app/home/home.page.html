@@ -16,15 +16,19 @@
   <!-- WALLPAPER -->
   <ion-row class="ion-justify-content-center">
        
-    <ion-avatar style="margin-top: 25px;" >
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-    </ion-avatar>
-    
+    <div class="avatar" style="margin-top: 25px;">
+      <!-- Avatar image -->
+      <img class="avatar__image" *ngIf="profile?.imageUrl ; else placeholder_avatar;" [src]="profile.imageUrl" />
+      <ng-template class="avatar" #placeholder_avatar>
+          <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+      </ng-template>
+     
+    </div> 
  </ion-row>
  <!-- PERSONAL INFORMATION -->
  <!-- {{"2022-06-22T09:47:00-04:00" | date:'dd/MM/yyyy'}} -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-   <h2>INFORMATIONS</h2>
+   <h2>{{"INFORMATIONS" | translate}}</h2>
 </ion-row>
  <ion-row>
   <ion-card style="width: 100%;">
@@ -41,7 +45,7 @@
  </ion-row>
  <!-- ACCOUNTS -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>ACCOUNTS</h2>
+  <h2>{{"ACCOUNTS" | translate}}</h2>
 </ion-row>
 <ion-row>
 <ion-card style="width: 100%;" class="ion-margin-top" *ngFor="let account of accountGet">
@@ -53,7 +57,7 @@
 </ion-row>
  <!-- EXPERIENCE  -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>EXPERIENCE</h2>
+  <h2>{{"EXPERIENCE" | translate}}</h2>
  </ion-row>
  <ion-row>
   <ion-card style="width: 100%;"  *ngFor="let experience of experienceGet">
@@ -71,7 +75,7 @@
  
 <!-- Formation & Diplome -->
 <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>FORMATIONS</h2>
+  <h2>Formations</h2>
 </ion-row>
  <ion-row>
   <ion-card style="width: 100%;"  *ngFor="let formation of formationGet">
@@ -88,7 +92,7 @@
  </ion-row>
  <!-- PROJETS -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>COMPETENCES</h2>
+  <h2>{{"COMPETENCE" | translate}}</h2>
 </ion-row>
  <ion-row>
   <ion-card style="width: 100%;" *ngFor="let competence of competenceGet">
@@ -101,7 +105,7 @@
  </ion-row>
  <!-- LANGUE -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2  style="font-weight: bold;">LANGUE(S)</h2>
+  <h2  style="font-weight: bold;">{{"LANGUE" | translate}}</h2>
 </ion-row>
   <ion-row>
     <ion-card style="width: 100%;" *ngFor="let language of languageGet">
@@ -114,7 +118,7 @@
    </ion-row>
  <!-- CENTRE D'INTERET -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>HOOBIES</h2>
+  <h2>{{"DIVERTISSEMENT" | translate}}</h2>
 </ion-row>
 <ion-row>
   <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet">

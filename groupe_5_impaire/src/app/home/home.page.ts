@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { AppComponent } from '../app.component';
+import { AvatarService } from '../avatar.service';
 import { DataService } from '../data.service';
 import { TranslateConfigService } from '../translate-config.service';
 import { competence, compte, experience, formation, langue, loisir } from './home.module';
@@ -35,7 +36,7 @@ export class HomePage {
   langues : langue[];
   comptes: compte [];
   loisirs : loisir [];
-  selectedLanguage:string = this.translate.getBrowserLang();
+
  
 accountGet : any[];
 formationGet:any[];
@@ -43,6 +44,7 @@ experienceGet:any[];
 competenceGet:any[];
 languageGet:any[];
 hobbieGet:any[];
+profile=null;
 
 doRefresh(event) {
   console.log('Begin async operation');
@@ -53,15 +55,20 @@ doRefresh(event) {
   }, 1000);
 }
 constructor(
-  private data:DataService,private app:AppComponent,private TranslateService:TranslateConfigService,private translate:TranslateService
+  private translate:TranslateService,
+  private auth:Auth, private avatarService : AvatarService, private data:DataService,private app:AppComponent
 )
  {
-  
-  this.translate.setDefaultLang(this.app.getLang());
-    
+  this.translate.onLangChange.subscribe((dat)=>{
+    console.log(dat)
+  })
+    this.avatarService.getUserProfile().subscribe((data)=>{
+    this.profile = data;
+   })
  }
-async ngOnInit() {
+async ngOnInit(){
   
+  // this.translate.setDefaultLang (this.TranslateService.getLang());
   
   // console.log(`User connecte id , ${this.auth.currentUser.email} ${this.auth.currentUser.uid}`)
   /*Get Formations From databases */

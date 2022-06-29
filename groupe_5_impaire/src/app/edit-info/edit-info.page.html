@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit your Information</ion-title>
+    <ion-title>{{"MODIFIER_INFO" | translate}}</ion-title>
     <ion-buttons slot="start">
        <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
@@ -14,16 +14,22 @@
   
   <!-- WALLPAPER -->
   <ion-row class="ion-justify-content-center">
-       
-    <ion-avatar style="margin-top: 25px;" >
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-    </ion-avatar>
+    <!-- AVATAR ITEM  -->
+    <div class="avatar" style="margin-top: 25px;" (click)="changeImage()">
+      <!-- Avatar image -->
+      <img class="avatar__image" *ngIf="profile?.imageUrl ; else placeholder_avatar;" [src]="profile.imageUrl" />
+      <ng-template class="avatar" #placeholder_avatar>
+          <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+      </ng-template>
+     
+    </div> 
+    
     
  </ion-row>
  <!-- PERSONAL INFORMATION -->
  <!-- {{"2022-06-22T09:47:00-04:00" | date:'dd/MM/yyyy'}} -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-   <ion-col size="6"><h2>INFORMATIONS</h2></ion-col>
+   <ion-col size="6"><h2>{{"INFORMATIONS" | translate}}</h2></ion-col>
    <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
     <ion-icon name="add" ></ion-icon>
   </ion-fab-button></ion-col>
@@ -43,7 +49,7 @@
  </ion-row>
  <!-- ACCOUNTS -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6"><h2>ACCOUNTS</h2></ion-col>
+  <ion-col size="6"><h2>{{"ACCOUNTS" | translate}}</h2></ion-col>
   <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddAccount()">
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
@@ -83,7 +89,7 @@
   
   <!-- EXPERIENCE  -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6" ><h2>EXPERIENCE</h2></ion-col>
+  <ion-col size="6" ><h2>{{"EXPERIENCE" | translate}}</h2></ion-col>
   <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddExperience()">
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
@@ -143,7 +149,7 @@
  
 <!-- Formation & Diplome -->
 <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6" ><h2>FORMATIONS</h2></ion-col>
+  <ion-col size="6" ><h2>Formations</h2></ion-col>
   <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddFormation()" >
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
@@ -203,7 +209,7 @@
  </ion-row>
  <!-- PROJETS -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6"><h2>COMPETENCES</h2></ion-col>
+  <ion-col size="6"><h2>{{"COMPETENCE" | translate}}</h2></ion-col>
   <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddCompetence()" >
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
@@ -242,7 +248,7 @@
  </ion-row>
  <!-- LANGUE -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6" ><h2>LANGUE(S)</h2></ion-col>
+  <ion-col size="6" ><h2>{{"LANGUE" | translate}}</h2></ion-col>
   <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddLanguage()" >
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
@@ -287,7 +293,7 @@
    </ion-row>
  <!-- CENTRE D'INTERET -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6"><h2>HOOBIES</h2></ion-col>
+  <ion-col size="6"><h2>{{"DIVERTISSEMENT" | translate}}</h2></ion-col>
   <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddHobbie()">
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>

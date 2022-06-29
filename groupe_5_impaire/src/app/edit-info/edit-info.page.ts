@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { AvatarService } from '../avatar.service';
 import { DataService } from '../data.service';
+import { TranslateConfigService } from '../translate-config.service';
 @Component({
   selector: 'app-edit-info',
   templateUrl: './edit-info.page.html',
@@ -14,6 +18,7 @@ export class EditInfoPage implements OnInit {
   surname : String ; 
   about:String ; 
   profession : String;
+  profile = null ;
 
   formExperience:boolean=false;
   showAddExperience(){
@@ -45,11 +50,44 @@ export class EditInfoPage implements OnInit {
 
   
   constructor(
+    private TranslateService:TranslateConfigService,
+    private translate:TranslateService,
+    private loadingController:LoadingController,
+    private avatarService : AvatarService,
     private data:DataService,
     private fb:FormBuilder,
     public alertController :AlertController
-  )
-   {}
+  ){
+    
+   this.avatarService.getUserProfile().subscribe((data)=>{
+    this.profile = data;
+   })
+  }
+  async changeImage(){
+    const image = await Camera.getPhoto({
+      quality:90,
+      allowEditing:true,
+      resultType:CameraResultType.Base64,
+      source:CameraSource.Photos,
+    });
+    console.log(image);
+    if(image){
+      const loading = await this.loadingController.create();
+      await loading.present();
+      const result = await this.avatarService.uploadImage(image);
+      loading.dismiss();
+    if(!result){
+      const alert = await this.alertController.create({
+        header:"Upload failed",
+        message: "A problem occur while loading the avatar",
+        buttons:['ok'],
+      });
+      await alert.present();
+    }
+    }
+  }
+
+
    doRefresh(event) {
     console.log('Begin async operation');
   
@@ -59,6 +97,7 @@ export class EditInfoPage implements OnInit {
     }, 1000);
   }
   async ngOnInit() { 
+    this.translate.setDefaultLang (this.TranslateService.getLang());
   // console.log(`Current User ID : ${this.auth.currentUser.uid}=== current User Email : ${this.auth.currentUser.email}`)
   /* Get Personnal Information from databases */
   const dataPersonnel = this.data.get_personalInfo();
