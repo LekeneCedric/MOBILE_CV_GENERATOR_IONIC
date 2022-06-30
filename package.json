@@ -2,6 +2,7 @@
   "dependencies": {
     "@angular/animation": "^4.0.0-beta.8",
     "@angular/http": "^7.2.16",
+    "@awesome-cordova-plugins/toast": "^5.44.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "ionic-angular": "^3.9.10",

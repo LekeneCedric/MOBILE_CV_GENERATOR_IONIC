@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   imports: [
+    
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

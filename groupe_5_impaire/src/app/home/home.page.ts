@@ -7,6 +7,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { AppComponent } from '../app.component';
 import { AvatarService } from '../avatar.service';
 import { DataService } from '../data.service';
+import { EventsService } from '../events.service';
 import { TranslateConfigService } from '../translate-config.service';
 import { competence, compte, experience, formation, langue, loisir } from './home.module';
 
@@ -55,16 +56,14 @@ doRefresh(event) {
   }, 1000);
 }
 constructor(
+  private Events:EventsService,
   private translate:TranslateService,
   private auth:Auth, private avatarService : AvatarService, private data:DataService,private app:AppComponent
 )
  {
-  this.translate.onLangChange.subscribe((dat)=>{
-    console.log(dat)
+  this.Events.subscribe('lang',(data:string)=>{
+    this.translate.setDefaultLang(data)
   })
-    this.avatarService.getUserProfile().subscribe((data)=>{
-    this.profile = data;
-   })
  }
 async ngOnInit(){
   

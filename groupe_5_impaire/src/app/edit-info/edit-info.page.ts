@@ -3,7 +3,7 @@ import { Auth } from '@angular/fire/auth';
 import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { AvatarService } from '../avatar.service';
 import { DataService } from '../data.service';
@@ -50,13 +50,14 @@ export class EditInfoPage implements OnInit {
   showAddAccount(){
     this.formAccount = !this.formAccount;
   } 
-  formPersonaleInfo:boolean=false;
+  formPersonalInfo:boolean=false;
   showEditPersonalInfo(){
-    this.formPersonaleInfo = !this.formPersonaleInfo;
+    this.formPersonalInfo = !this.formPersonalInfo;
   }
 
   
   constructor(
+    private toast:ToastController,
     private TranslateService:TranslateConfigService,
     private translate:TranslateService,
     private loadingController:LoadingController,
@@ -104,6 +105,7 @@ export class EditInfoPage implements OnInit {
     }, 1000);
   }
   async ngOnInit() { 
+   
     this.translate.setDefaultLang (this.TranslateService.getLang());
   // console.log(`Current User ID : ${this.auth.currentUser.uid}=== current User Email : ${this.auth.currentUser.email}`)
   /* Get Personnal Information from databases */
@@ -113,8 +115,7 @@ export class EditInfoPage implements OnInit {
   const account = await this.data.get_Accounts();
   this.accountGet = account.data
   this.accountId = account.id;
-  dataPersonnel.then((dat)=>{
-    console.log(dat.id);
+  await dataPersonnel.then((dat)=>{
     this.about = String (dat.about);
     this.age = dat.age;
     this.contact = dat.contact;
@@ -216,9 +217,14 @@ export class EditInfoPage implements OnInit {
 
 
  async updateAccount(){
+  this.formPersonalInfo = !this.formPersonalInfo;
   this.data.update_personalInfo(this.personalCredential.value);
-  this.formPersonaleInfo = !this.formPersonaleInfo;
-  console.log(this.personalCredential.value);
+  const toast = this.toast.create({
+    message:"Change Successful",
+    duration:3000,
+    color:"success"
+  });
+  (await toast).present();
   this.ngOnInit();
  }
  // Formation Getter Value / Add Function / Remove Function
@@ -235,7 +241,13 @@ export class EditInfoPage implements OnInit {
   async addAccount(){
     this.data.set_Account(this.accountCredential.value)
     this.formAccount = !this.formAccount;
-    this.data.get_Accounts()
+    const toast = this.toast.create({
+      message:"Change Successful",
+      duration:3000,
+      color:"success"
+    });
+    (await toast).present();
+    this.ngOnInit();
   }
 
   async deleteAccount(id:string){
@@ -291,6 +303,12 @@ export class EditInfoPage implements OnInit {
     this.data.set_Formation(this.formationCredential.value)
     
     this.formFormation = !this.formFormation;
+    const toast = this.toast.create({
+      message:"Change Successful",
+      duration:3000,
+      color:"success"
+    });
+    (await toast).present();
     this.ngOnInit()
   }
   async deleteFormation(id:string){
@@ -346,6 +364,12 @@ export class EditInfoPage implements OnInit {
     this.data.set_Experience(this.experienceCredential.value)
     // console.log(this.experienceCredential.value)
     this.formExperience = !this.formExperience;
+    const toast = this.toast.create({
+      message:"Change Successful",
+      duration:3000,
+      color:"success"
+    });
+    (await toast).present();
     this.ngOnInit()
   }
   async deleteExperience(id:string){
@@ -391,6 +415,12 @@ export class EditInfoPage implements OnInit {
     this.data.set_Competence(this.competenceCredential.value);
     console.log("Competence hass been added ");
     this.formCompetence = !this.formCompetence;
+    const toast = this.toast.create({
+      message:"Change Successful",
+      duration:3000,
+      color:"success"
+    });
+    (await toast).present();
     this.ngOnInit()
   }
   async deleteCompetence(id:string){
@@ -437,6 +467,12 @@ export class EditInfoPage implements OnInit {
     this.data.set_Language(this.languageCredential.value);
     console.log(this.languageCredential.value);
     this.formLanguage = !this.formLanguage;
+    const toast = this.toast.create({
+      message:"Change Successful",
+      duration:3000,
+      color:"success"
+    });
+    (await toast).present();
     this.ngOnInit()
   }
   async deleteLanguage(id:string){
@@ -479,6 +515,13 @@ export class EditInfoPage implements OnInit {
   async addHobbie(){
     this.data.set_Hobbies(this.hobbieCredential.value);
     this.formHobbie = !this.formHobbie;
+    const toast = this.toast.create({
+      message:"Change Successful",
+      duration:3000,
+      color:"success"
+    });
+    (await toast).present();
+    this.ngOnInit();
     console.log("Hobbie added successfully");
   };
   async deleteHobbie(id:string){

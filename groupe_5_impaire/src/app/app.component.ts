@@ -4,7 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './auth.service';
 import { AvatarService } from './avatar.service';
 import { DataService } from './data.service';
+import { EventsService } from './events.service';
 import { TranslateConfigService } from './translate-config.service';
+
 @Component({
   
   selector: 'app-root',
@@ -14,17 +16,19 @@ import { TranslateConfigService } from './translate-config.service';
 export class AppComponent implements OnInit{
   profile=null;
   selectedLanguage :string ="fr";
-  constructor( private avatarService : AvatarService,private router:Router,private auth:AuthService,private data:DataService,private TranslateService:TranslateConfigService,private translate :TranslateService) {
+  constructor( private Events:EventsService, private avatarService : AvatarService,private router:Router,private auth:AuthService,private data:DataService,private TranslateService:TranslateConfigService,private translate :TranslateService) {
     // this.avatarService.getUserProfile().subscribe((data)=>{
     //   this.profile = data;
     //  })
   }
   public languageChanged(){
     this.translate.use(this.selectedLanguage);
+    this.Events.publish('lang',`${this.selectedLanguage}`);
     // this.TranslateService.setLang(this.selectedLanguage);
     this.ngOnInit()
   }
   async ngOnInit(){
+    
     this.translate.setDefaultLang (this.TranslateService.getLang());
   }
   async logout(){
