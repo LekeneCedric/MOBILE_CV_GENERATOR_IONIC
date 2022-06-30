@@ -31,15 +31,63 @@
  <ion-row class="ion-justify-content-center ion-align-items-center">
    <ion-col size="6"><h2>{{"INFORMATIONS" | translate}}</h2></ion-col>
    <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
-    <ion-icon name="add" ></ion-icon>
+    <ion-icon name="create" (click)="showEditPersonalInfo()"></ion-icon>
   </ion-fab-button></ion-col>
 </ion-row>
+<!-- FORM FOR PERSONAL INFORMATION  -->
+<form  *ngIf="formPersonaleInfo"  [formGroup]="personalCredential" class="ion-padding-top">
+  <ion-item lines="full">
+    <ion-label position="floating">Name</ion-label>
+    <ion-input type="text" formControlName="name" required></ion-input>
+    <ion-note slot="error" *ngIf="(nameC.dirty||nameC.touched)&& nameC.errors">Maximum 25 characters</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Surname</ion-label>
+    <ion-input type="text" formControlName="surname" required></ion-input>
+    <ion-note slot="error" *ngIf="(surnameC.dirty||surnameC.touched)&& surnameC.errors">Maximum 25 characters</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Age</ion-label>
+    <ion-input type="text" formControlName="age" required></ion-input>
+    <ion-note slot="error" *ngIf="(ageC.dirty||ageC.touched)&& ageC.errors">Maximum 25 characters</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="text" formControlName="email" required></ion-input>
+    <ion-note slot="error" *ngIf="(emailC.dirty||emailC.touched)&& emailC.errors">exemple@gmail.com</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Contact</ion-label>
+    <ion-input type="text" formControlName="contact" required></ion-input>
+    <ion-note slot="error" *ngIf="(contactC.dirty||contactC.touched)&& contactC.errors">not empty</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Profession</ion-label>
+    <ion-input type="text" formControlName="profession" required></ion-input>
+    <ion-note slot="error" *ngIf="(professionC.dirty||professionC.touched)&& professionC.errors">not empty</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">About</ion-label>
+    <ion-input type="text" formControlName="about" required></ion-input>
+    <ion-note slot="error" *ngIf="(aboutC.dirty||aboutC.touched)&& aboutC.errors">Minimum 15 characters</ion-note>
+  </ion-item>
+
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="success" expand="block" [disabled]="!personalCredential.valid" (click)="updateAccount()">
+        Edit Informations </ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
  <ion-row>
   <ion-card style="width: 100%;">
     <ion-card-header>
-      <ion-card-subtitle>Profession : </ion-card-subtitle><ion-card-title>{{profession }}</ion-card-title>
       <ion-card-subtitle>Name : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
       <ion-card-subtitle>Surname : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
+      <ion-card-subtitle>Age : </ion-card-subtitle><ion-card-title>{{age}}</ion-card-title>
+      <ion-card-subtitle>Contact : </ion-card-subtitle><ion-card-title>{{contact}}</ion-card-title>
+      <ion-card-subtitle>Email : </ion-card-subtitle><ion-card-title>{{email}}</ion-card-title>
+      <ion-card-subtitle>Profession : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
@@ -67,7 +115,7 @@
   </ion-item>
   <ion-row>
     <ion-col>
-      <ion-button type="submit" color="danger" expand="block" [disabled]="!accountCredential.valid" (click)="addAccount()">
+      <ion-button type="submit" color="success" expand="block" [disabled]="!accountCredential.valid" (click)="addAccount()">
         Add new Account</ion-button>
     </ion-col>
   </ion-row>
@@ -77,7 +125,7 @@
       <ion-card-header>
         <ion-row style="width: 100%;" class="ion-justify-content-around">
     <ion-col size="10"> <ion-card-title class="ion-float-left">{{account.accountName}}</ion-card-title>  </ion-col> 
-    <ion-col size="1"> <ion-icon  class="ion-float-end" name="cut"  style="color:rgb(191, 23, 4);" size="large" (click)="deleteAccount(accountId[i])"></ion-icon> </ion-col> 
+    <ion-col size="1"> <ion-icon  class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium" (click)="deleteAccount(accountId[i])"></ion-icon> </ion-col> 
         </ion-row>
         
       </ion-card-header>
@@ -125,7 +173,7 @@
   </ion-item>
   <ion-row>
     <ion-col>
-      <ion-button type="submit" color="danger" [disabled]="!experienceCredential.valid" expand="block" (click)="addExperience()">
+      <ion-button type="submit" color="success" [disabled]="!experienceCredential.valid" expand="block" (click)="addExperience()">
         Add new Experience</ion-button>
     </ion-col>
   </ion-row>
@@ -135,7 +183,7 @@
     <ion-card-header>
       <ion-row style="width: 100%;" class="ion-justify-content-around">
         <ion-col size="10"> <ion-card-title class="ion-float-left">{{experience.titleExperience}}</ion-card-title>  </ion-col> 
-        <ion-col size="1"> <ion-icon (click)="deleteExperience(experienceId[i])" class="ion-float-end" name="cut"  style="color:rgb(191, 23, 4);" size="large"></ion-icon> </ion-col> 
+        <ion-col size="1"> <ion-icon (click)="deleteExperience(experienceId[i])" class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium"></ion-icon> </ion-col> 
             </ion-row>
       <ion-card-subtitle>{{experience.schoolExperience}}</ion-card-subtitle>
       <ion-card-subtitle>{{experience.startDayExperience  | date:'dd/MM/yyyy'}} - {{experience.endDayExperience  | date:'dd/MM/yyyy'}}</ion-card-subtitle>
@@ -195,7 +243,7 @@
     <ion-card-header>
       <ion-row style="width: 100%;" class="ion-justify-content-around">
         <ion-col size="10"> <ion-card-title class="ion-float-left">{{formation.titleFormation}}</ion-card-title></ion-col> 
-        <ion-col size="1"> <ion-icon (click)="deleteFormation(formationId[i])" class="ion-float-end" name="cut"  style="color:rgb(191, 23, 4);" size="large"></ion-icon> </ion-col> 
+        <ion-col size="1"> <ion-icon (click)="deleteFormation(formationId[i])" class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium"></ion-icon> </ion-col> 
             </ion-row>
       
       <ion-card-subtitle>{{formation.schoolFormation}}</ion-card-subtitle>
@@ -227,7 +275,7 @@
   
   <ion-row>
     <ion-col>
-      <ion-button type="submit" color="danger" [disabled]="!competenceCredential.value" expand="block"  (click)="addCompetence()">
+      <ion-button type="submit" color="success" [disabled]="!competenceCredential.value" expand="block"  (click)="addCompetence()">
         Add new Competence</ion-button>
     </ion-col>
   </ion-row>
@@ -237,7 +285,7 @@
     <ion-card-header>
       <ion-row style="width: 100%;" class="ion-justify-content-around">
         <ion-col size="10"> <ion-card-subtitle>{{competence.nameCompetence}}</ion-card-subtitle></ion-col> 
-        <ion-col size="1"> <ion-icon (click)="deleteCompetence(competenceId[i])" class="ion-float-end" name="cut"  style="color:rgb(191, 23, 4);" size="large"></ion-icon> </ion-col> 
+        <ion-col size="1"> <ion-icon (click)="deleteCompetence(competenceId[i])" class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium"></ion-icon> </ion-col> 
             </ion-row>
       
       <ion-progress-bar value="{{(competence.levelCompetence)/100 | number}}" class="ion-margin-top"></ion-progress-bar>
@@ -273,7 +321,7 @@
   
   <ion-row>
     <ion-col>
-      <ion-button type="submit" color="danger" expand="block" [disabled]="!languageCredential.valid" (click)="addLanguage()">
+      <ion-button type="submit" color="success" expand="block" [disabled]="!languageCredential.valid" (click)="addLanguage()">
         Add new Language</ion-button>
     </ion-col>
   </ion-row>
@@ -283,7 +331,7 @@
       <ion-card-header>
         <ion-row style="width: 100%;" class="ion-justify-content-around">
           <ion-col size="10"> <ion-card-title color="primary">{{language.nameLanguage}}</ion-card-title></ion-col> 
-          <ion-col size="1"> <ion-icon (click)="deleteLanguage(languageId[i])"  class="ion-float-end" name="cut"  style="color:rgb(191, 23, 4);" size="large"></ion-icon> </ion-col> 
+          <ion-col size="1"> <ion-icon (click)="deleteLanguage(languageId[i])"  class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium"></ion-icon> </ion-col> 
               </ion-row>
         
         <ion-card-subtitle>{{language.levelLanguage}}</ion-card-subtitle>
@@ -316,7 +364,7 @@
   </ion-item>
   <ion-row>
     <ion-col>
-      <ion-button type="submit" color="danger" [disabled]="!hobbieCredential.valid" expand="block" (click)="addHobbie()">
+      <ion-button type="submit" color="success" [disabled]="!hobbieCredential.valid" expand="block" (click)="addHobbie()">
         Add new Hobbie</ion-button>
     </ion-col>
   </ion-row>
@@ -326,7 +374,7 @@
       <ion-card-header>
         <ion-row style="width: 100%;" class="ion-justify-content-around">
           <ion-col size="10"> <ion-card-title color="primary">{{hobbie.nameHobbie}}</ion-card-title></ion-col> 
-          <ion-col size="1"> <ion-icon  (click)="deleteHobbie(hobbieId[i])" class="ion-float-end" name="cut"  style="color:rgb(191, 23, 4);" size="large"></ion-icon> </ion-col> 
+          <ion-col size="1"> <ion-icon  (click)="deleteHobbie(hobbieId[i])" class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium"></ion-icon> </ion-col> 
               </ion-row>
       </ion-card-header>
     </ion-card>

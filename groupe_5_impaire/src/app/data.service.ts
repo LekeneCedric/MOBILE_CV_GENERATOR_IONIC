@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { addDoc, collection, doc, Firestore, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
-import { deleteDoc, onSnapshot } from 'firebase/firestore';
+import { deleteDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,20 @@ if (docSnap.exists()) {
 }
 // Get User Formation 
   }
+
+  async update_personalInfo({about,age,contact,email,name,profession,surname})
+  {
+    const docRef = doc(this.db,"users",`${this.auth.currentUser.uid}`);
+    await updateDoc(docRef,{
+      "about":about,
+      "age":age,
+      "contact":contact,
+      "email":email,
+      "name":name,
+      "profession": profession,
+      "surname": surname
+    })
+  }
   async get_Formation(){
     let data :any []=[];
     let ids : any []= [];
@@ -42,7 +56,7 @@ if (docSnap.exists()) {
    data:data
   }
   // console.log(`Formations : ${formations}`)
-  return Formations
+  return Formations;
   }
   async del_Formation(id:string){
     await deleteDoc(doc(this.db,'usersCV',`${this.auth.currentUser.uid}`,'formations',`${id}`));

@@ -14,39 +14,46 @@ import { TranslateConfigService } from '../translate-config.service';
   styleUrls: ['./edit-info.page.scss'],
 })
 export class EditInfoPage implements OnInit {
-  name :String ; 
-  surname : String ; 
-  about:String ; 
-  profession : String;
+  name :string ; 
+  age:number;
+  contact:number;
+  email:string;
+  surname : string ; 
+  about:string ; 
+  profession : string;
   profile = null ;
 
   formExperience:boolean=false;
   showAddExperience(){
-    this.formExperience = !this.formExperience
+    this.formExperience = !this.formExperience;
   } 
 
   formFormation:boolean=false;
   showAddFormation(){
-    this.formFormation = !this.formFormation
+    this.formFormation = !this.formFormation;
   }
   formCompetence:boolean=false;
   showAddCompetence(){
-    this.formCompetence = !this.formCompetence
+    this.formCompetence = !this.formCompetence;
   } 
 
   formLanguage:boolean=false;
   showAddLanguage(){
-    this.formLanguage = !this.formLanguage
+    this.formLanguage = !this.formLanguage;
   } 
 
   formHobbie:boolean=false;
   showAddHobbie(){
-    this.formHobbie = !this.formHobbie
+    this.formHobbie = !this.formHobbie;
   } 
   formAccount:boolean=false;
   showAddAccount(){
-    this.formAccount = !this.formAccount
+    this.formAccount = !this.formAccount;
   } 
+  formPersonaleInfo:boolean=false;
+  showEditPersonalInfo(){
+    this.formPersonaleInfo = !this.formPersonaleInfo;
+  }
 
   
   constructor(
@@ -108,9 +115,12 @@ export class EditInfoPage implements OnInit {
   this.accountId = account.id;
   dataPersonnel.then((dat)=>{
     console.log(dat.id);
+    this.about = String (dat.about);
+    this.age = dat.age;
+    this.contact = dat.contact;
+    this.email = dat.email;
     this.name = String(dat.name);
     this.surname = String(dat.surname);
-    this.about = String (dat.about);
     this.profession = String(dat.profession);
   });
 
@@ -147,7 +157,16 @@ export class EditInfoPage implements OnInit {
 
 
 
-
+  // personalInfoCredentialValidator
+  this.personalCredential = this.fb.group({
+   about:[`${this.about}`,[Validators.required,Validators.minLength(15)]],
+   age:[`${this.age}`,[Validators.required]],
+   contact:[`${this.contact}`,[Validators.required]],
+   email:[`${this.email}`,[Validators.required,Validators.email]],
+   name:[`${this.name}`,[Validators.required,Validators.maxLength(25)]],
+   profession:[`${this.profession}`,[Validators.required]],
+   surname:[`${this.surname}`,[Validators.required,Validators.maxLength(25)]] 
+  })
   // accountCredentialValidator
   this.accountCredential = this.fb.group({
     accountName:['',[Validators.required,Validators.maxLength(15)]],
@@ -184,6 +203,24 @@ export class EditInfoPage implements OnInit {
     nameHobbie:['',[Validators.required]]
   })
   }
+
+ // PersonalInfo Getter Value / Add Function / Remove Function
+ personalCredential:FormGroup;
+ get nameC(){return this.personalCredential.get("name");}
+ get ageC(){return this.personalCredential.get("age");}
+ get contactC(){return this.personalCredential.get("contact");}
+ get aboutC(){return this.personalCredential.get("about");}
+ get emailC(){return this.personalCredential.get("email");}
+ get professionC(){return this.personalCredential.get("profession");}
+ get surnameC(){return this.personalCredential.get("surname");}
+
+
+ async updateAccount(){
+  this.data.update_personalInfo(this.personalCredential.value);
+  this.formPersonaleInfo = !this.formPersonaleInfo;
+  console.log(this.personalCredential.value);
+  this.ngOnInit();
+ }
  // Formation Getter Value / Add Function / Remove Function
   accountGet : any[];
   accountId : any[];
