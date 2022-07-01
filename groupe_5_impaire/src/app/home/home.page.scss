@@ -40,3 +40,73 @@
   height: 100%;
   width: 100%;
 }
+$bgColor: #FFFFFF;
+$borderColor: #00BCD4;
+
+// sizes
+$avatarSize: 200px;
+$borderWidth: 5px;
+$paddingSize: 20px;
+
+// some calculations
+$translateValue: -$paddingSize - $borderWidth;
+
+
+/* 
+ * BASICS
+ */
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	align-items: center;
+	background-color: $bgColor;
+	display: flex;
+	justify-content: center;
+}
+
+
+/*
+ * MAIN CONTENT
+ */
+
+.avatar {
+	border: $borderWidth solid $bgColor;
+	box-sizing: border-box;
+	height: $avatarSize;
+	border-radius: 50%;
+	position: relative;
+	width: $avatarSize;
+	
+	&__image {
+		width: 100%;
+		border-radius: 50%;
+	}
+	
+	&::before,
+	&::after {
+		border: $borderWidth solid transparent;
+		border-radius: 50%;
+		border-top: $borderWidth solid $borderColor;
+		content:"";
+		display: block;
+		height: calc(100% + 10px);
+		left: 50%;
+		width: calc(100% + 10px);
+		position: absolute;
+	}
+	
+	&::before {
+		top: -2 * $borderWidth;
+		transform: translateX(-50%);
+	}
+	
+	&::after {
+		bottom: -2 * $borderWidth;
+		transform: translateX(-50%) rotate(180deg);
+	}
+}

@@ -15,21 +15,24 @@
   <!-- WALLPAPER -->
   <ion-row class="ion-justify-content-center">
     <!-- AVATAR ITEM  -->
-    <div class="avatar" style="margin-top: 25px;" (click)="changeImage()">
+    <div style="width:30%;" class="avatar bg-info rounded-circle" (click)="changeImage()" style="margin-top: 25px;">
       <!-- Avatar image -->
-      <img class="avatar__image" *ngIf="profile?.imageUrl ; else placeholder_avatar;" [src]="profile.imageUrl" />
+      <img [src]="profile.imageUrl" class="avatar__image"  *ngIf="profile?.imageUrl ; else placeholder_avatar;" alt="Resume_image">
       <ng-template class="avatar" #placeholder_avatar>
+        <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+    </ng-template>
+      <!-- <ng-template class="avatar" #placeholder_avatar>
           <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
-      </ng-template>
+      </ng-template> -->
      
-    </div> 
+    </div>
     
     
  </ion-row>
  <!-- PERSONAL INFORMATION -->
  <!-- {{"2022-06-22T09:47:00-04:00" | date:'dd/MM/yyyy'}} -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-   <ion-col size="6"><h2>{{"INFORMATIONS" | translate}}</h2></ion-col>
+   <ion-col size="6"><h2>{{"INFORMATION" | translate}}</h2></ion-col>
    <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
     <ion-icon name="create" (click)="showEditPersonalInfo()"></ion-icon>
   </ion-fab-button></ion-col>
@@ -75,23 +78,23 @@
   <ion-row>
     <ion-col>
       <ion-button type="submit" color="success" expand="block" [disabled]="!personalCredential.valid" (click)="updateAccount()">
-        Edit Informations </ion-button>
+        {{'modifier' | translate}} {{'INFORMATION' | translate}} </ion-button>
     </ion-col>
   </ion-row>
   </form>
  <ion-row>
   <ion-card style="width: 100%;">
     <ion-card-header>
-      <ion-card-subtitle>Name : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
-      <ion-card-subtitle>Surname : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
+      <ion-card-subtitle>{{'name' | translate}} : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
+      <ion-card-subtitle>{{'surname' | translate}} : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
       <ion-card-subtitle>Age : </ion-card-subtitle><ion-card-title>{{age}}</ion-card-title>
-      <ion-card-subtitle>Contact : </ion-card-subtitle><ion-card-title>{{contact}}</ion-card-title>
-      <ion-card-subtitle>Email : </ion-card-subtitle><ion-card-title>{{email}}</ion-card-title>
-      <ion-card-subtitle>Profession : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
+      <ion-card-subtitle>{{'contact' | translate}} : </ion-card-subtitle><ion-card-title>{{contact}}</ion-card-title>
+      <ion-card-subtitle>{{'email' | translate}} : </ion-card-subtitle><ion-card-title>{{email}}</ion-card-title>
+      <ion-card-subtitle>{{'profession' | translate}} : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
-      <ion-card-subtitle>About : </ion-card-subtitle><ion-card-title>{{about}}</ion-card-title>
+      <ion-card-subtitle>{{'about' | translate}} : </ion-card-subtitle><ion-card-title>{{about}}</ion-card-title>
     </ion-card-content>
   </ion-card>
  </ion-row>
@@ -116,7 +119,7 @@
   <ion-row>
     <ion-col>
       <ion-button type="submit" color="success" expand="block" [disabled]="!accountCredential.valid" (click)="addAccount()">
-        Add new Account</ion-button>
+        {{'addnew' | translate}} {{'ACCOUNTS' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   </form>
@@ -145,36 +148,36 @@
 </ion-row>
 <form *ngIf="formExperience"[formGroup]="experienceCredential" class="ion-padding-top">
   <ion-item lines="full">
-    <ion-label position="floating">Title</ion-label>
+    <ion-label position="floating">{{"title" | translate}}</ion-label>
     <ion-input type="text" formControlName="titleExperience" required></ion-input>
     <ion-note slot="error" *ngIf="(titleExperience.dirty||titleExperience.touched)&& titleExperience.errors">Min 8 and Max 35 characters</ion-note>
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">School</ion-label>
+    <ion-label position="floating">{{"school" | translate}}</ion-label>
     <ion-input type="email"  formControlName="structureExperience" required></ion-input>
     <ion-note slot="error" *ngIf="(structureExperience.dirty||structureExperience.touched)&& structureExperience.errors">Min 2 characters</ion-note>
 
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">StartDay</ion-label>
+    <ion-label position="floating">{{"startDate" | translate}}</ion-label>
     <ion-datetime hour-cycle="h12" formControlName="startDayExperience" locale="en-GB"></ion-datetime>
     <!-- <ion-input type="text" required></ion-input> -->
     
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">EndDay</ion-label>
+    <ion-label position="floating">{{"endDate" | translate}}</ion-label>
     <ion-datetime hour-cycle="h12" formControlName="endDayExperience" locale="en-GB"></ion-datetime>
     <!-- <ion-input type="text" required></ion-input> -->
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">details</ion-label>
+    <ion-label position="floating">{{"details" | translate}}</ion-label>
     <ion-textarea type="text" formControlName="detailExperience" required></ion-textarea>
     <ion-note slot="error" *ngIf="(detailExperience.dirty||detailExperience.touched)&& detailExperience.errors">Min 25 characters</ion-note>
   </ion-item>
   <ion-row>
     <ion-col>
       <ion-button type="submit" color="success" [disabled]="!experienceCredential.valid" expand="block" (click)="addExperience()">
-        Add new Experience</ion-button>
+        {{'addnew' | translate}} {{'EXPERIENCE' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   </form>
@@ -204,29 +207,29 @@
 </ion-row>
 <form [formGroup]="formationCredential" *ngIf="formFormation" class="ion-padding-top">
   <ion-item lines="full">
-    <ion-label position="floating">Title</ion-label>
+    <ion-label position="floating">{{"title" | translate}}</ion-label>
     <ion-input type="text" formControlName="titleFormation" required></ion-input>
     <ion-note slot="error" *ngIf="(titleFormation.dirty||titleFormation.touched)&& titleFormation.errors">Min 8 and Max 35 characters</ion-note>
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">School</ion-label>
+    <ion-label position="floating">{{"school" | translate}}</ion-label>
     <ion-input type="email"  formControlName="schoolFormation" required></ion-input>
     <ion-note slot="error" *ngIf="(schoolFormation.dirty||schoolFormation.touched)&& schoolFormation.errors">Min 2 characters</ion-note>
 
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">StartDay</ion-label>
+    <ion-label position="floating">{{"startDate" | translate}}</ion-label>
     <ion-datetime hour-cycle="h12" formControlName="startDayFormation" locale="en-GB"></ion-datetime>
     <!-- <ion-input type="text" required></ion-input> -->
     
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">EndDay</ion-label>
+    <ion-label position="floating">{{"endDate" | translate}}</ion-label>
     <ion-datetime hour-cycle="h12" formControlName="endDayFormation" locale="en-GB"></ion-datetime>
     <!-- <ion-input type="text" required></ion-input> -->
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">details</ion-label>
+    <ion-label position="floating">{{"details" | translate}}</ion-label>
     <ion-textarea type="text" formControlName="detailFormation" required></ion-textarea>
     <ion-note slot="error" *ngIf="(detailFormation.dirty||detailFormation.touched)&& detailFormation.errors">Min 25 characters</ion-note>
 
@@ -234,7 +237,7 @@
   <ion-row>
     <ion-col>
       <ion-button type="submit"  color="success" expand="block" [disabled]="!formationCredential.valid" (click)="addFormation()">
-        Add new Formation</ion-button>
+        {{'addnew' | translate}} Formation</ion-button>
     </ion-col>
   </ion-row>
   </form>
@@ -257,7 +260,7 @@
  </ion-row>
  <!-- PROJETS -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <ion-col size="6"><h2>{{"COMPETENCE" | translate}}</h2></ion-col>
+  <ion-col size="6"><h2>{{"COMPETENCE" | translate}}s</h2></ion-col>
   <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddCompetence()" >
    <ion-icon name="add"></ion-icon>
  </ion-fab-button></ion-col>
@@ -265,18 +268,18 @@
 </ion-row>
 <form *ngIf="formCompetence" [formGroup]="competenceCredential" class="ion-padding-top">
   <ion-item lines="full">
-    <ion-label position="floating">Name</ion-label>
+    <ion-label position="floating">{{"name" | translate}}</ion-label>
     <ion-input type="text" required formControlName="nameCompetence"></ion-input>
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">Level</ion-label>
+    <ion-label position="floating">{{"level" | translate}}</ion-label>
     <ion-input type="number" formControlName="levelCompetence" required></ion-input>
   </ion-item>
   
   <ion-row>
     <ion-col>
       <ion-button type="submit" color="success" [disabled]="!competenceCredential.value" expand="block"  (click)="addCompetence()">
-        Add new Competence</ion-button>
+        {{'addnew' | translate}} {{'COMPETENCE' | translate}} </ion-button>
     </ion-col>
   </ion-row>
   </form>
@@ -303,7 +306,7 @@
 </ion-row>
 <form *ngIf="formLanguage" [formGroup]="languageCredential" class="ion-padding-top">
   <ion-item lines="full">
-    <ion-label position="floating">Name</ion-label>
+    <ion-label position="floating">{{'name' | translate}} </ion-label>
     <ion-input type="text" formControlName="nameLanguage" required></ion-input>
   </ion-item>
   <ion-item lines="full">
@@ -322,7 +325,7 @@
   <ion-row>
     <ion-col>
       <ion-button type="submit" color="success" expand="block" [disabled]="!languageCredential.valid" (click)="addLanguage()">
-        Add new Language</ion-button>
+        {{'addnew' | translate}} {{'LANGUE' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   </form>
@@ -348,24 +351,24 @@
 </ion-row>
 <form *ngIf="formHobbie" [formGroup]="hobbieCredential" class="ion-padding-top">
   <ion-item lines="full">
-    <ion-label position="floating">Hobbie Name</ion-label>
+    <ion-label position="floating">{{"hobbie" | translate}} {{"list" | translate}}</ion-label>
     <ion-select multiple="false" formControlName="nameHobbie" cancelText="No" okText="Valid">
-      <ion-select-option value="Cinema/théâtre">Cinema/théâtre</ion-select-option>
-      <ion-select-option value="Decoration">Decoration</ion-select-option>
-      <ion-select-option value="Dessin">Dessin</ion-select-option>
-      <ion-select-option value="Sport">Sport</ion-select-option>
-      <ion-select-option value="jeux Strategies">jeux Strategies</ion-select-option>
-      <ion-select-option value="Danser">Danser</ion-select-option>
-      <ion-select-option value="Jardiner">Jardiner</ion-select-option>
-      <ion-select-option value="Jeux Videos">Jeux Videos</ion-select-option>
-      <ion-select-option value="Lecture">Lecture</ion-select-option>
-      <ion-select-option value="Redaction/Poeme">Redaction/Poeme</ion-select-option>
+      <ion-select-option value="cinema">{{"cinema" | translate}}</ion-select-option>
+      <ion-select-option value="decoration">{{"decoration" | translate}}</ion-select-option>
+      <ion-select-option value="dessin">{{"dessin" | translate}}</ion-select-option>
+      <ion-select-option value="sport">{{"sport" | translate}}</ion-select-option>
+      <ion-select-option value="jeux_strategie">{{"jeux_strategie" | translate}}</ion-select-option>
+      <ion-select-option value="danse">{{"danse" | translate}}</ion-select-option>
+      <ion-select-option value="Jardiner">{{"jardiner" | translate}}</ion-select-option>
+      <ion-select-option value="Jeux_Video">{{"jeux_video" | translate}}</ion-select-option>
+      <ion-select-option value="lecture">{{"lecture" | translate}}</ion-select-option>
+      <ion-select-option value="redaction">{{"redaction" | translate}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-row>
     <ion-col>
       <ion-button type="submit" color="success" [disabled]="!hobbieCredential.valid" expand="block" (click)="addHobbie()">
-        Add new Hobbie</ion-button>
+        {{'addnew' | translate}} {{'hobbie' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   </form>
@@ -373,7 +376,7 @@
     <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet;let i = index">
       <ion-card-header>
         <ion-row style="width: 100%;" class="ion-justify-content-around">
-          <ion-col size="10"> <ion-card-title color="primary">{{hobbie.nameHobbie}}</ion-card-title></ion-col> 
+          <ion-col size="10"> <ion-card-title color="primary"> {{ hobbie.nameHobbie | translate}}</ion-card-title></ion-col> 
           <ion-col size="1"> <ion-icon  (click)="deleteHobbie(hobbieId[i])" class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium"></ion-icon> </ion-col> 
               </ion-row>
       </ion-card-header>

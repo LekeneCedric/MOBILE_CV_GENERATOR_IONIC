@@ -5,17 +5,19 @@
 	padding: 0;
 	list-style: none;
 	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
 }
 
 body{
-	background: #fff;
+	background: #c4c4c4;
 	font-size: 14px;
 	line-height: 20px;
 }
 
 .resume_wrapper{
 	display: flex;
-	width: 100%;
+	width: 800px;
+	margin: 50px auto;
 	background: #fff;
 	padding: 10px;
 }

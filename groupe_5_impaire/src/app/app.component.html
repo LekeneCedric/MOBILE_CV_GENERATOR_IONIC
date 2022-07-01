@@ -15,18 +15,22 @@
      <!-- List of Items of my Side Menu -->
      <ion-row class="ion-justify-content-center">
        
-      <div class="avatar" style="margin-top: 25px;">
+     
+        <div style="width:30%;" class="avatar bg-info rounded-circle"  style="margin-top: 25px;">
         <!-- Avatar image -->
-        <img class="avatar__image"  src="https://cdn-icons-png.flaticon.com/512/3953/3953226.png" />
+        <img [src]="profile.imageUrl" class="avatar__image"  *ngIf="profile?.imageUrl ; else placeholder_avatar;" alt="Resume_image">
+        <ng-template class="avatar" #placeholder_avatar>
+          <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+      </ng-template>
         <!-- <ng-template class="avatar" #placeholder_avatar>
             <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
         </ng-template> -->
        
-      </div> 
+      </div>
         
      </ion-row>
      <ion-row class="ion-justify-content-center" style="margin-top:20px;font-weight: bold;">
-      {{ 'SETTING' | translate| uppercase}}
+      {{username}}
      </ion-row>
      
      <ion-list style="margin-top: 20px;">

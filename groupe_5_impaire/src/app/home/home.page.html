@@ -15,15 +15,18 @@
   
   <!-- WALLPAPER -->
   <ion-row class="ion-justify-content-center">
-       
-    <div class="avatar" style="margin-top: 25px;">
+    <div style="width:30%;" class="avatar bg-info rounded-circle"  style="margin-top: 25px;">
       <!-- Avatar image -->
-      <img class="avatar__image" *ngIf="profile?.imageUrl ; else placeholder_avatar;" [src]="profile.imageUrl" />
+      <img [src]="profile.imageUrl" class="avatar__image"  *ngIf="profile?.imageUrl ; else placeholder_avatar;" alt="Resume_image">
       <ng-template class="avatar" #placeholder_avatar>
+        <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+    </ng-template>
+      <!-- <ng-template class="avatar" #placeholder_avatar>
           <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
-      </ng-template>
+      </ng-template> -->
      
-    </div> 
+    </div>
+   
  </ion-row>
  <!-- PERSONAL INFORMATION -->
  <!-- {{"2022-06-22T09:47:00-04:00" | date:'dd/MM/yyyy'}} -->
@@ -33,13 +36,13 @@
  <ion-row>
   <ion-card style="width: 100%;">
     <ion-card-header>
-      <ion-card-subtitle>Profession : </ion-card-subtitle><ion-card-title>{{profession }}</ion-card-title>
-      <ion-card-subtitle>Name : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
-      <ion-card-subtitle>Surname : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
+      <ion-card-subtitle>{{ 'profession' | translate}} : </ion-card-subtitle><ion-card-title>{{profession }}</ion-card-title>
+      <ion-card-subtitle>{{'name' | translate}} : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
+      <ion-card-subtitle>{{'surname' | translate}} : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
-      <ion-card-subtitle>About : </ion-card-subtitle><ion-card-title>{{about}}</ion-card-title>
+      <ion-card-subtitle>{{'about' | translate}} : </ion-card-subtitle><ion-card-title>{{about}}</ion-card-title>
     </ion-card-content>
   </ion-card>
  </ion-row>
@@ -50,8 +53,8 @@
 <ion-row>
 <ion-card style="width: 100%;" class="ion-margin-top" *ngFor="let account of accountGet">
   <ion-card-header>
-    <ion-card-subtitle>Name : </ion-card-subtitle><ion-card-title>{{account.accountName}}</ion-card-title>
-    <ion-card-subtitle>Link</ion-card-subtitle><ion-card-title>{{account.accountLink}}</ion-card-title>
+    <ion-card-subtitle>{{'name' | translate}} : </ion-card-subtitle><ion-card-title>{{account.accountName}}</ion-card-title>
+    <ion-card-subtitle>{{'link' | translate}} :</ion-card-subtitle><ion-card-title>{{account.accountLink}}</ion-card-title>
   </ion-card-header>
 </ion-card>
 </ion-row>
@@ -123,7 +126,7 @@
 <ion-row>
   <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet">
     <ion-card-header>
-      <ion-card-title>{{hobbie.nameHobbie}}</ion-card-title>
+      <ion-card-title>{{ hobbie.nameHobbie | translate}}</ion-card-title>
     </ion-card-header>
   </ion-card>
 </ion-row>

@@ -61,12 +61,17 @@ constructor(
   private auth:Auth, private avatarService : AvatarService, private data:DataService,private app:AppComponent
 )
  {
-  this.Events.subscribe('lang',(data:string)=>{
-    this.translate.setDefaultLang(data)
-  })
+  this.translate.setDefaultLang (this.translate.getBrowserLang())
+  this.avatarService.getUserProfile().subscribe((data)=>{
+    this.profile = data;
+    this.Events.publish('profil',data);
+   })
  }
 async ngOnInit(){
   
+  this.Events.subscribe('lang',(data:string)=>{
+    this.translate.setDefaultLang(data)
+  })
   // this.translate.setDefaultLang (this.TranslateService.getLang());
   
   // console.log(`User connecte id , ${this.auth.currentUser.email} ${this.auth.currentUser.uid}`)
@@ -102,6 +107,8 @@ this.accountGet = account.data
   // console.log(`Current User ID : ${this.auth.currentUser.uid}=== current User Email : ${this.auth.currentUser.email}`)
  const dataPersonnel = this.data.get_personalInfo();
  dataPersonnel.then((dat)=>{
+
+  this.Events.publish('nom',`${dat.name} `+`${dat.surname}`);
    this.name = String(dat.name);
    this.surname = String(dat.surname);
    this.age = Number(dat.age);

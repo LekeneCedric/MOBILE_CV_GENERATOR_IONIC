@@ -1,9 +1,142 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>template2</ion-title>
+      <ion-title></ion-title>
+      <ion-row>
+        <ion-list style="margin-left:5%">
+            <ion-item>
+              <ion-select interface="popover" placeholder="Font style" [(ngModel)]="font_style" (ionChange)="fontChanged()">
+                <ion-select-option value="sans-serif">sans-serif</ion-select-option>
+                <ion-select-option value="system-ui">system-ui</ion-select-option>
+                <ion-select-option value="emoji">emoji</ion-select-option>
+                <ion-select-option value="inherit">inherit</ion-select-option>
+                <ion-select-option value="unset">unset</ion-select-option>
+                <ion-select-option value="serif">serif</ion-select-option>
+                <ion-select-option value="Arial">Arial</ion-select-option>
+                <ion-select-option value="monospace">monospace</ion-select-option>
+                <ion-select-option value="Trebuchet MS">Trebuchet_MS</ion-select-option>
+                <ion-select-option value="sans-serif">sans-serif</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list style="margin-left:5%">
+            <ion-item>
+              <ion-select interface="popover" placeholder="Theme">
+                <ion-select-option value="apples">Apples</ion-select-option>
+                <ion-select-option value="oranges">Oranges</ion-select-option>
+                <ion-select-option value="bananas">Bananas</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+      </ion-row>
+      
+      <ion-buttons slot="start">
+         <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-buttons>
+      <ion-icon slot="end" (click)="DownloadPDF()" id="download" name="download" size="large"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content   scrollX="true" >
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="resume_wrapper" style="font-family: {{font_style}};" #template1>
+    <div class="resume_left">
+      <div class="resume_image">
+        <img [src]="profile.imageUrl" *ngIf="profile?.imageUrl ; else placeholder_avatar;" alt="Resume_image">
+        <ng-template class="avatar" #placeholder_avatar>
+          <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+      </ng-template>
+      </div>
+      <div class="resume_bottom">
+        <div class="resume_item resume_namerole">
+          <div class="role">UI Designer</div>
+        </div>
+        <div class="resume_item resume_profile">
+          <div class="resume_title">Profile</div>
+          <div class="resume_info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        </div>
+        <div class="resume_item resume_address">
+          <div class="resume_title">Address</div>
+          <div class="resume_info">
+            18th home,<br/>
+            woods street,<br/>
+            New York City, United States
+          </div>
+        </div>
+        <div class="resume_item resume_contact">
+          <div class="resume_title">Contact</div>
+          <div class="resume_info">
+            <div class="resume_subtitle">Phone</div>
+            <div class="resume_subinfo">+{{contact}}</div>
+          </div>
+          <div class="resume_info">
+            <div class="resume_subtitle">Email</div>
+            <div class="resume_subinfo">{{email}}</div>
+          </div>
+        </div>
+        <div class="resume_item resume_skills">
+          <div class="resume_title">Skills</div>
+          <div class="resume_info" *ngFor="let comp of competenceGet">
+            <div class="skills_list">
+              <div class="skills_left">{{comp.nameCompetence}}</div>
+              <div class="skills_bar">
+                <p>
+                  <span style="width: {{comp.levelCompetence}}%"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resume_right">
+      <div class="resume_item resume_namerole">
+        <div class="name">{{name | uppercase}} {{surname}}</div>
+        <div class="role">{{profession | uppercase}}</div>
+      </div>
+      <div class="resume_item resume_education" >
+        <div class="resume_title">Education</div>
+        <div class="resume_info">
+          <div class="resume_data" *ngFor="let formation of formationGet">
+            <div class="year">{{formation.startDayFormation | date:'yyyy'}} - {{formation.endDayFormation | date:'yyyy'}}</div>
+            <div class="content">
+              <h3>{{formation.titleFormation}}</h3>
+              <p style="color:grey">{{formation.detailFormation}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="resume_item resume_experience">
+        <div class="resume_title">Experience</div>
+        <div class="resume_info">
+          <div class="resume_data" *ngFor="let experience of experienceGet">
+            <div class="year">{{experience.startDayExperience | date:'yyyy'}} - {{experience.endDayExperience | date:'yyyy'}}</div>
+            <div class="content">
+              <h3>{{experience.titleExperience}}</h3>
+              <p style="color:grey">{{experience.detailsExperience}}</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="resume_item resmue_interests">
+        <div class="resume_title">Interests</div>
+        <div class="resume_info" *ngFor="let hobbie of hobbieGet">
+          <div class="interests">
+            <div class="int_icon">
+              <i class="fas fa-volleyball-ball"></i>
+            </div>
+            <div class="int_data">{{hobbie.nameHobbie}}</div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

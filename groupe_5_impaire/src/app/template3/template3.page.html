@@ -1,9 +1,114 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>template3</ion-title>
+      <ion-title></ion-title>
+      <ion-row>
+        <ion-list style="margin-left:5%">
+            <ion-item>
+              <ion-select interface="popover" placeholder="Font style" [(ngModel)]="font_style" (ionChange)="fontChanged()">
+                <ion-select-option value="sans-serif">sans-serif</ion-select-option>
+                <ion-select-option value="system-ui">system-ui</ion-select-option>
+                <ion-select-option value="emoji">emoji</ion-select-option>
+                <ion-select-option value="inherit">inherit</ion-select-option>
+                <ion-select-option value="unset">unset</ion-select-option>
+                <ion-select-option value="serif">serif</ion-select-option>
+                <ion-select-option value="Arial">Arial</ion-select-option>
+                <ion-select-option value="monospace">monospace</ion-select-option>
+                <ion-select-option value="Trebuchet MS">Trebuchet_MS</ion-select-option>
+                <ion-select-option value="sans-serif">sans-serif</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list style="margin-left:5%">
+            <ion-item>
+              <ion-select interface="popover" placeholder="Theme">
+                <ion-select-option value="apples">Apples</ion-select-option>
+                <ion-select-option value="oranges">Oranges</ion-select-option>
+                <ion-select-option value="bananas">Bananas</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+      </ion-row>
+      
+      <ion-buttons slot="start">
+         <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-buttons>
+      <ion-icon slot="end" (click)="DownloadPDF()" id="download" name="download" size="large"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content   scrollX="true" >
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="main" #template1 [style.font-family]="font_style">
+		<div class="top-section">
+			<img class="profile" [src]="profile.imageUrl" *ngIf="profile?.imageUrl ; else placeholder_avatar;" alt="Resume_image">
+        <ng-template class="avatar" #placeholder_avatar>
+          <img class="profile" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+      </ng-template>
+			<p class="p1">{{name | uppercase}} <span>{{surname | uppercase}}</span></p>
+			<p class="p2">{{profession}}</p>
+		</div>
+		<div class="clearfix"></div>
 
+		<div class="col-div-4">
+			<div class="content-box" style="padding-left: 40px;">
+
+				
+			<p class="head">Contact</p>
+			<p class="p3"><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;&nbsp;{{contact}}</p>
+			<p class="p3"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;&nbsp;{{email}}</p>
+			<p class="p3"><i class="fa fa-home" aria-hidden="true"></i> &nbsp;&nbsp;United Kingdom</p>
+			
+
+			<br/>
+			<p class="head">my skills</p>
+			<ul class="skills" *ngFor="let competence of competenceGet">
+				<li><span>{{competence.nameCompetence}}</span></li>
+			</ul>
+
+			<br/>
+			<p class="head">awards</p>
+				<p class="p3">CSS Design Awards</p>
+				<p class="p3">D&AD Awards</p>
+				<p class="p3">CSS Winner Awards</p>
+				<p class="p3">The Shorty Awards</p>
+				<p class="p3">Awwwards</p>
+
+				
+
+			<br/>
+			<p class="head" >Languages</p>
+      <div *ngFor="let lang of languageGet">
+        <p class="p3">{{lang.nameLanguage}}</p>
+      </div>
+			
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="col-div-8">
+			<div class="content-box">
+			<p class="head">profile</p>
+			<p class="p3" style="font-size: 14px;">{{about}}</p>
+			<br/>
+			<p class="head" >EXPERIENCE</p>
+      <div *ngFor="let experience of experienceGet">
+			<p>{{experience.titleExperience}} IN {{experience.structureExperience}} ({{experience.startDayExperience | date:'yyyy'}} - {{experience.endDayExperience | date:'yyyy'}})</p>
+			<p class="p-4">
+			{{experience.detailsExperience}}
+      </p>
+    </div>
+			<br/>
+
+			<p class="head">Education</p>
+      <div *ngFor="let formation of formationGet">
+        <p class="p-4" >{{formation.titleFormation}} OF {{formation.structureFormation}} ({{formation.startDayFormation | date:'yyyy'}} - {{formation.endDayFormation | date:'yyyy'}})</p>
+      </div>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+	</div>
+		<br/>
 </ion-content>

@@ -7,6 +7,7 @@ import { AlertController, LoadingController, ToastController } from '@ionic/angu
 import { TranslateService } from '@ngx-translate/core';
 import { AvatarService } from '../avatar.service';
 import { DataService } from '../data.service';
+import { EventsService } from '../events.service';
 import { TranslateConfigService } from '../translate-config.service';
 @Component({
   selector: 'app-edit-info',
@@ -55,7 +56,6 @@ export class EditInfoPage implements OnInit {
     this.formPersonalInfo = !this.formPersonalInfo;
   }
 
-  
   constructor(
     private toast:ToastController,
     private TranslateService:TranslateConfigService,
@@ -64,12 +64,19 @@ export class EditInfoPage implements OnInit {
     private avatarService : AvatarService,
     private data:DataService,
     private fb:FormBuilder,
-    public alertController :AlertController
+    public alertController :AlertController,
+    private Events:EventsService,
   ){
+    this.translate.setDefaultLang(this.translate.getBrowserLang());
+    this.avatarService.getUserProfile().subscribe((data)=>{
+      this.profile = data;
+     })
     
-   this.avatarService.getUserProfile().subscribe((data)=>{
-    this.profile = data;
-   })
+    // Await language modification to change 
+  this.Events.subscribe('lang',(data:string)=>{
+    this.translate.setDefaultLang(data)
+  });
+   
   }
   async changeImage(){
     const image = await Camera.getPhoto({
@@ -105,8 +112,6 @@ export class EditInfoPage implements OnInit {
     }, 1000);
   }
   async ngOnInit() { 
-   
-    this.translate.setDefaultLang (this.TranslateService.getLang());
   // console.log(`Current User ID : ${this.auth.currentUser.uid}=== current User Email : ${this.auth.currentUser.email}`)
   /* Get Personnal Information from databases */
   const dataPersonnel = this.data.get_personalInfo();
