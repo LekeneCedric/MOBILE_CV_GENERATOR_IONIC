@@ -20,10 +20,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateConfigService } from './translate-config.service';
-import { HomePage } from './home/home.page';
-
-
-
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
+import { DataqrcodeService } from './dataqrcode.service';
 const firebaseConfig = {
   apiKey: "AIzaSyCdDp2GVBrhVqzNL9xzWDt0zAf85GBs2IY",
   authDomain: "cvgeneratorprojectionicangular.firebaseapp.com",
@@ -42,7 +41,7 @@ export function LanguageLoader(http: HttpClient) {
   ],  
   declarations: [AppComponent, RegisterPipe],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,HttpClientModule,FormsModule,
+  imports: [ NgxQRCodeModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,HttpClientModule,FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -55,7 +54,11 @@ export function LanguageLoader(http: HttpClient) {
     provideFirestore(()=>getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [PDFGenerator,{ provide: RouteReuseStrategy,useClass: IonicRouteStrategy },TranslateConfigService],
+  providers: [
+    PDFGenerator,
+    { provide: RouteReuseStrategy,useClass: IonicRouteStrategy },
+    TranslateConfigService,BarcodeScanner,DataqrcodeService
+  ],
   bootstrap: [AppComponent],
   
 })

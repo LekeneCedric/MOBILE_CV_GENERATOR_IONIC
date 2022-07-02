@@ -82,6 +82,14 @@
       <div *ngFor="let lang of languageGet">
         <p class="p3">{{lang.nameLanguage}}</p>
       </div>
+      <div style="margin-top:25px">
+        <ngx-qrcode 
+            [elementType]="elementType" 
+            [value]="value"
+            cssClass="aclass"
+            >
+          </ngx-qrcode>
+      </div>
 			
 			</div>
 		</div>
@@ -107,7 +115,9 @@
 			</div>
 		</div>
 
-		<div class="clearfix"></div>
+		<div class="clearfix">
+      
+    </div>
 
 	</div>
 		<br/>

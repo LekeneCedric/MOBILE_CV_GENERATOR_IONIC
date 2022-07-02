@@ -59,6 +59,14 @@
            </ion-label>
          </ion-item>
       </ion-menu-toggle>
+      <ion-menu-toggle style="margin-top: 20px;">
+        <ion-item routerLink="/scanprofile">
+          <ion-icon name="qr-code-outline" style="color:grey;"></ion-icon>
+           <ion-label style="margin-left:15px ; font-weight:bold; color:grey;">
+            {{"scanner" | translate}} QR-CV
+           </ion-label>
+         </ion-item>
+      </ion-menu-toggle>
       <ion-menu-toggle style="margin-top: 50px;">
         <ion-item (click)="logout()">
           <ion-icon name="exit-outline" style="color:red ;"></ion-icon>

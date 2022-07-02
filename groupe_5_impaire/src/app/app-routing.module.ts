@@ -48,6 +48,10 @@ const routes: Routes = [
     path: 'template5',
     loadChildren: () => import('./template5/template5.module').then( m => m.Template5PageModule)
   },
+  {
+    path: 'scanprofile',
+    loadChildren: () => import('./scanprofile/scanprofile.module').then( m => m.ScanprofilePageModule)
+  },
 ];
 
 @NgModule({

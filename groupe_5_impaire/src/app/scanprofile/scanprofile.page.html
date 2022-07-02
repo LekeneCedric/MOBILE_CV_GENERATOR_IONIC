@@ -1,0 +1,161 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row style="display: flex;justify-content:flex-start">
+     <ion-col><ion-title>{{"scanner" | translate}} QR-CV</ion-title></ion-col> 
+    <ion-col><ion-icon name="qr-code-outline" size="large" style="color:grey;"></ion-icon></ion-col> 
+    </ion-row>
+      <ion-buttons slot="start">
+         <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-grid *ngIf="!isScanned">
+    <ion-row class="ion-justify-content-center" >
+          <ngx-qrcode 
+          [elementType]="elementType" 
+          [value]="value"
+          cssClass="aclass"
+          >
+        </ngx-qrcode>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <h3>MY QRCODE </h3>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <h3>Profils scannees : {{result}} </h3>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <!-- <ion-fab-button color="primary">Primary</ion-fab-button> -->
+      <ion-button type="submit" color="success" (click)="scanCode()">
+        {{"scanner" | translate}} CV </ion-button>
+    </ion-row>
+  </ion-grid >
+  <ion-grid *ngIf="isScanned" class='ion-justify-content-center'>
+    <ion-row class="ion-justify-content-center" style="margin-top: 15px;">
+      <ion-row class="ion-justify-content-center">
+        <div style="width:30%;" class="avatar bg-info rounded-circle"  style="margin-top: 25px;">
+          <!-- Avatar image -->
+          <img [src]="profile.imageUrl" class="avatar__image"  *ngIf="profile?.imageUrl ; else placeholder_avatar;" alt="Resume_image">
+          <ng-template class="avatar" #placeholder_avatar>
+            <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+        </ng-template>
+          <!-- <ng-template class="avatar" #placeholder_avatar>
+              <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+          </ng-template> -->
+         
+        </div>
+       
+     </ion-row>
+     <!-- PERSONAL INFORMATION -->
+     <!-- {{"2022-06-22T09:47:00-04:00" | date:'dd/MM/yyyy'}} -->
+     <ion-row class="ion-justify-content-center ion-align-items-center">
+       <h2>{{"INFORMATIONS" | translate}}</h2>
+    </ion-row>
+     <ion-row>
+      <ion-card style="width: 100%;">
+        <ion-card-header>
+          <ion-card-subtitle>{{ 'profession' | translate}} : </ion-card-subtitle><ion-card-title>{{profession }}</ion-card-title>
+          <ion-card-subtitle>{{'name' | translate}} : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
+          <ion-card-subtitle>{{'surname' | translate}} : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <ion-card-subtitle>{{'about' | translate}} : </ion-card-subtitle><ion-card-title>{{about}}</ion-card-title>
+        </ion-card-content>
+      </ion-card>
+     </ion-row>
+     <!-- ACCOUNTS -->
+     <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h2>{{"ACCOUNTS" | translate}}</h2>
+    </ion-row>
+    <ion-row>
+    <ion-card style="width: 100%;" class="ion-margin-top" *ngFor="let account of accountGet">
+      <ion-card-header>
+        <ion-card-subtitle>{{'name' | translate}} : </ion-card-subtitle><ion-card-title>{{account.accountName}}</ion-card-title>
+        <ion-card-subtitle>{{'link' | translate}} :</ion-card-subtitle><ion-card-title><a href="{{account.accountLink}}">{{account.accountLink}}</a> </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+    </ion-row>
+     <!-- EXPERIENCE  -->
+     <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h2>{{"EXPERIENCE" | translate}}</h2>
+     </ion-row>
+     <ion-row>
+      <ion-card style="width: 100%;"  *ngFor="let experience of experienceGet">
+        <ion-card-header>
+          <ion-card-title>{{experience.titleExperience}}</ion-card-title>
+          <ion-card-subtitle>{{experience.schoolExperience}}</ion-card-subtitle>
+          <ion-card-subtitle>{{experience.startDayExperience  | date:'dd/MM/yyyy'}} - {{experience.endDayExperience  | date:'dd/MM/yyyy'}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{experience.detailsExperience}}
+        </ion-card-content>
+      </ion-card>
+      
+     </ion-row>
+     
+    <!-- Formation & Diplome -->
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h2>Formations</h2>
+    </ion-row>
+     <ion-row>
+      <ion-card style="width: 100%;"  *ngFor="let formation of formationGet">
+        <ion-card-header>
+          <ion-card-title>{{formation.titleFormation}}</ion-card-title>
+          <ion-card-subtitle>{{formation.schoolFormation}}</ion-card-subtitle>
+          <ion-card-subtitle>{{formation.startDayFormation  | date:'dd/MM/yyyy'}} - {{formation.endDayFormation  | date:'dd/MM/yyyy'}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{formation.detailFormation}}
+        </ion-card-content>
+      </ion-card>
+      
+     </ion-row>
+     <!-- PROJETS -->
+     <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h2>{{"COMPETENCE" | translate}}</h2>
+    </ion-row>
+     <ion-row>
+      <ion-card style="width: 100%;" *ngFor="let competence of competenceGet">
+        <ion-card-header>
+          <ion-card-subtitle>{{competence.nameCompetence}}</ion-card-subtitle>
+          <ion-progress-bar value="{{(competence.levelCompetence)/100 | number}}" class="ion-margin-top"></ion-progress-bar>
+    
+        </ion-card-header>
+      </ion-card>
+     </ion-row>
+     <!-- LANGUE -->
+     <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h2  style="font-weight: bold;">{{"LANGUE" | translate}}</h2>
+    </ion-row>
+      <ion-row>
+        <ion-card style="width: 100%;" *ngFor="let language of languageGet">
+          <ion-card-header>
+            <ion-card-title color="success" style="font-weight: bold;">{{language.nameLanguage}}</ion-card-title>
+            <ion-card-subtitle>{{language.levelLanguage}}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+        
+       </ion-row>
+     <!-- CENTRE D'INTERET -->
+     <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h2>{{"DIVERTISSEMENT" | translate}}</h2>
+    </ion-row>
+    <ion-row>
+      <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet">
+        <ion-card-header>
+          <ion-card-title>{{ hobbie.nameHobbie | translate}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-row>  
+    </ion-row>
+  </ion-grid>
+    
+
+</ion-content>

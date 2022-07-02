@@ -14,6 +14,11 @@ export class DataService implements OnInit {
   async ngOnInit(){
       
   }
+  getUserId():string
+  {
+   return this.auth.currentUser.uid.toString(); 
+  }
+ 
   async get_personalInfo()
   {
     const docRef = doc(this.db,"users",`${this.auth.currentUser.uid}`);
@@ -211,5 +216,10 @@ await addDoc(collection(this.db,'usersCV',`${this.auth.currentUser.uid}`,'langua
 async set_Hobbies({nameHobbie}){
   const newHobbies = {nameHobbie:nameHobbie};
   await addDoc(collection(this.db,'usersCV',`${this.auth.currentUser.uid}`,'hobbies'),newHobbies);
+}
+
+// FUNCTION TO GET ALL USERS INFORMATIONS 
+async getAllFormation(){
+  
 }
 }

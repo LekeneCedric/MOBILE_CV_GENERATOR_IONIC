@@ -11,6 +11,8 @@ import { DataService } from '../data.service';
 })
 export class Template2Page implements OnInit {
   @ViewChild('template1') template1: ElementRef;
+  elementType = 'url';
+  value :string;
   htmlSample:any;
   DownloadPDF(){
     let options = {
@@ -295,6 +297,7 @@ languageGet:any[];
 hobbieGet:any[];
 
  async  ngOnInit() {
+  this.value= this.data.getUserId();
     const formations = await this.data.get_Formation();
   this.formationGet = formations.data
   console.log(`Formations : ${this.formationGet}`)

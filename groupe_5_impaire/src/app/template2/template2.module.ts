@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { Template2PageRoutingModule } from './template2-routing.module';
 
 import { Template2Page } from './template2.page';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   imports: [
+    NgxQRCodeModule,
     CommonModule,
     FormsModule,
     IonicModule,

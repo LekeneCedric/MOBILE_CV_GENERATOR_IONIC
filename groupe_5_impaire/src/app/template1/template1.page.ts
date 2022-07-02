@@ -18,7 +18,11 @@ export class Template1Page implements OnInit {
   fontChanged(){
     window.console.log(this.font_style)
   }
-
+  elementType = 'url';
+  value :string;
+  color1:string;
+  color2:string;
+  color3:string;
   name :String ; 
   surname : String ; 
   age:number;
@@ -51,6 +55,7 @@ hobbieGet:any[];
     }, 1000);
   }
   async ngOnInit() {
+    this.value = this.data.getUserId();
     // console.log(`User connecte id , ${this.auth.currentUser.email} ${this.auth.currentUser.uid}`)
   /*Get Formations From databases */
   const formations = await this.data.get_Formation();

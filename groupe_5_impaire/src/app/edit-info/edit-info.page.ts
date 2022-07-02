@@ -306,7 +306,6 @@ export class EditInfoPage implements OnInit {
   async addFormation(){
     // console.log(this.formationCredential.value)
     this.data.set_Formation(this.formationCredential.value)
-    
     this.formFormation = !this.formFormation;
     const toast = this.toast.create({
       message:"Change Successful",

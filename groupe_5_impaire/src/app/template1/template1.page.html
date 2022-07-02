@@ -2,7 +2,7 @@
   <ion-toolbar>
       <ion-title></ion-title>
       <ion-row>
-        <ion-list style="margin-left:5%">
+        <ion-list style="margin-left:5%" class="ion-justify-content-center">
             <ion-item>
               <ion-select interface="popover" placeholder="Font style" [(ngModel)]="font_style" (ionChange)="fontChanged()">
                 <ion-select-option value="sans-serif">sans-serif</ion-select-option>
@@ -18,14 +18,37 @@
               </ion-select>
             </ion-item>
           </ion-list>
-          <ion-list style="margin-left:5%">
-            <ion-item>
-              <ion-select interface="popover" placeholder="Theme">
-                <ion-select-option value="apples">Apples</ion-select-option>
-                <ion-select-option value="oranges">Oranges</ion-select-option>
-                <ion-select-option value="bananas">Bananas</ion-select-option>
-              </ion-select>
-            </ion-item>
+          <ion-list style="margin-left:5%" class="ion-justify-content-center">
+            <ion-button color="primary" id="open-modal" expand="block">Theme</ion-button>
+            <ion-modal #modal trigger="open-modal" [swipeToClose]="true" [canDismiss]="canDismiss">
+                <ng-template>
+                  <ion-header>
+                    <ion-toolbar>
+                      <ion-title>Creez</ion-title>
+                      <ion-buttons slot="end">
+                        <ion-button (click)="modal.dismiss()">Close</ion-button>
+                      </ion-buttons>
+                    </ion-toolbar>
+                  </ion-header>
+                  <ion-content class="ion-padding">
+                    <div style="align-items: center;display: flex;">
+                        <input type="color" style="margin:.4rem" id="head" name="head" [(ngModel)]="color1"
+                               value="{{color1}}">
+                        <label  for="head">Primary color</label>
+                    </div>
+                    <div style="align-items: center;display: flex;">
+                        <input type="color" style="margin:.4rem" id="head" name="head" [(ngModel)]="color2"
+                               value="{{color2}}">
+                        <label for="head">Secondary color</label>
+                    </div>
+                    <div style="align-items: center;display: flex;">
+                        <input type="color" style="margin:.4rem" id="head" name="head" [(ngModel)]="color3"
+                               value="{{color3}}">
+                        <label for="head">Text color</label>
+                    </div>
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
           </ion-list>
       </ion-row>
       
@@ -40,10 +63,10 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
-  <div [style.font-family]=font_style  class="wrapper mt-lg-5" style="width: 100%;" #template1>
+  <div [style.font-family]=font_style  class="wrapper mt-lg-5" style="width: 100%;background: {{color1}};" #template1>
     
-    <div class="sidebar-wrapper">
-        <div class="profile-container">
+    <div class="sidebar-wrapper" style=" color: {{color3}}; background:{{color1}};">
+        <div class="profile-container" style="color:{{color3}}">
             <img class="profile" src="assets/images/profile.png" alt="" />
             <h1 class="name">{{name}} {{surname}}</h1>
             <h3 class="tagline">{{profession}}</h3>
@@ -80,14 +103,23 @@
             <ul class="list-unstyled interests-list" *ngFor="let hobbie of hobbieGet">
                 <li style="margin-top: 15px;">{{hobbie.nameHobbie}}</li>
             </ul>
-        </div><!--//interests-->
+        </div>
+        <div class="interests-container container-block">
+            <ngx-qrcode 
+            [elementType]="elementType" 
+            [value]="value"
+            cssClass="aclass"
+            >
+          </ngx-qrcode>
+        </div>
+        <!--//interests-->
         
     </div><!--//sidebar-wrapper-->
     
     <div class="main-wrapper">
         
         <section class="section summary-section">
-            <h2 class="section-title"><span class="icon-holder"><i class="fas fa-user"></i></span>Career Profile</h2>
+            <h2 class="section-title" style="color: {{color1}};"><span class="icon-holder" style="background:{{color1}};color:{{color3}};"><i class="fas fa-user"></i></span>Career Profile</h2>
             <div class="summary">
                 <p>{{about}}</p>
             </div><!--//summary-->
@@ -143,8 +175,8 @@
                      
                 <div class="item" >
                     <h3 class="level-title">{{competence.nameCompetence}}</h3>
-                    <div class="progress level-bar">
-                      <div class="progress-bar theme-progress-bar" role="progressbar" style="width: {{competence.levelCompetence}}%"  aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress level-bar" style="background:{{color3}};">
+                      <div class="progress-bar theme-progress-bar" role="progressbar" style="width: {{competence.levelCompetence}}%;background:{{color1}}"  aria-valuemin="0" aria-valuemax="100"></div>
                   </div>                              
                 </div><!--//item-->           
             </div>  

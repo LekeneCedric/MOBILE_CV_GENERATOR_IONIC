@@ -9,6 +9,8 @@ import { DataService } from '../data.service';
   styleUrls: ['./template3.page.scss'],
 })
 export class Template3Page implements OnInit {
+  elementType = 'url';
+  value :string;
   @ViewChild('template1') template1: ElementRef;
   htmlSample:any;
   DownloadPDF(){
@@ -67,6 +69,7 @@ languageGet:any[];
 hobbieGet:any[];
 font_style:string="monospace";
  async  ngOnInit() {
+  this.value = this.data.getUserId();
     const formations = await this.data.get_Formation();
   this.formationGet = formations.data
   console.log(`Formations : ${this.formationGet}`)

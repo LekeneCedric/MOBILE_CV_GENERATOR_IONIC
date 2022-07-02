@@ -13,7 +13,6 @@ export class AuthService{
   constructor(private auth:Auth) {}
 
 
-
   async register ({name,surname,sex,age,contact,email,password,profession,about}){
     try {
       const user = createUserWithEmailAndPassword(this.auth,
