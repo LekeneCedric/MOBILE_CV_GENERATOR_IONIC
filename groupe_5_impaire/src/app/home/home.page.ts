@@ -62,12 +62,13 @@ constructor(
 )
  {
   this.translate.setDefaultLang (this.translate.getBrowserLang())
+ 
+ }
+async ngOnInit(){
   this.avatarService.getUserProfile().subscribe((data)=>{
     this.profile = data;
     this.Events.publish('profil',data);
    })
- }
-async ngOnInit(){
   
   this.Events.subscribe('lang',(data:string)=>{
     this.translate.setDefaultLang(data)

@@ -75,7 +75,7 @@ constructor( private data:DataqrcodeService,
     this.translate.setDefaultLang(data)
   })
   this.Events.subscribe('scan',async (data)=>{
-    this.avatarService.getUserProfile().subscribe((data)=>{
+    this.avatarService.getUserProfileWithId(data).subscribe((data)=>{
       this.profile = data;
       this.Events.publish('profil',data);
      })

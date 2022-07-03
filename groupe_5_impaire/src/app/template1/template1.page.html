@@ -65,43 +65,41 @@
   
   <div [style.font-family]=font_style  class="wrapper mt-lg-5" style="width: 100%;background: {{color1}};" #template1>
     
-    <div class="sidebar-wrapper" style=" color: {{color3}}; background:{{color1}};">
+    <div class="sidebar-wrapper" style=" color: {{color2}}; background:{{color1}};">
         <div class="profile-container" style="color:{{color3}}">
-            <img class="profile" src="assets/images/profile.png" alt="" />
+            
             <h1 class="name">{{name}} {{surname}}</h1>
             <h3 class="tagline">{{profession}}</h3>
         </div><!--//profile-container-->
         
         <div class="contact-container container-block">
             <ul class="list-unstyled contact-list">
-                <li class="email"><i class="fas fa-envelope"></i><a href="mailto: yourname@email.com">{{email}}</a></li>
-                <li class="phone"><i class="fas fa-phone"></i><a href="tel:0123 456 789">{{contact}}</a></li>
-                <div *ngFor="let account of accountGet">
-                  <li class="website"><i class="fas fa-globe"></i><a href="https://themes.3rdwavemedia.com/boo" target="_blank">{{account.accountLink}}</a></li>
-                </div>
+                <li class="email" style="color:{{color2}}"><i class="fas fa-envelope"></i><h2 class="container-block-title" style="color: {{color2}};">E-MAIL : </h2><a  style="color:{{color3}}" href="mailto: yourname@email.com">{{email}}</a></li>
+                <li class="phone" style="color:{{color2}}"><i class="fas fa-phone"></i><h2 class="container-block-title" style="color: {{color2}};">CONTACT : </h2><a style="color:{{color3}}" href="tel:0123 456 789">{{contact}}</a></li>
+               
                 
             </ul>
         </div><!--//contact-container-->
         <div class="education-container container-block">
-            <h2 class="container-block-title">Education</h2>
+            <h2 class="container-block-title" style="color: {{color2}};">Education</h2>
             <div class="item" *ngFor="let formation of formationGet">
-                <h4 class="degree">{{formation.titleFormation}}</h4>
-                <h5 class="meta">{{formation.schoolFormation}}</h5>
-                  <div class="time">{{formation.startDayFormation | date:'dd/MM/yyyy'}} - {{formation.endDayFormation | date:'dd/MM/yyyy'}}</div>
+                <h4 class="degree" style="color: {{color2}};">{{formation.titleFormation}}</h4>
+                <h5 class="meta" style="color:{{color3}}">{{formation.schoolFormation}}</h5>
+                  <div class="time" style="color:{{color3}}">{{formation.startDayFormation | date:'dd/MM/yyyy'}} - {{formation.endDayFormation | date:'dd/MM/yyyy'}}</div>
             </div><!--//item-->
         </div><!--//education-container-->
         
         <div class="languages-container container-block">
-            <h2 class="container-block-title">Languages</h2>
+            <h2 class="container-block-title" style="color: {{color2}};">Languages</h2>
             <ul class="list-unstyled interests-list" *ngFor="let language of languageGet">
-                <li style="margin-top: 15px;">{{language.nameLanguage}}<span class="lang-desc">({{language.levelLanguage}})</span></li>
+                <li style="margin-top: 15px;color: {{color2}};">{{language.nameLanguage}}<span class="lang-desc" style="color:{{color3}}">({{language.levelLanguage}})</span></li>
             </ul>
         </div><!--//interests-->
         
         <div class="interests-container container-block">
-            <h2 class="container-block-title">Interests</h2>
+            <h2 class="container-block-title" style="color: {{color2}};">Interests</h2>
             <ul class="list-unstyled interests-list" *ngFor="let hobbie of hobbieGet">
-                <li style="margin-top: 15px;">{{hobbie.nameHobbie}}</li>
+                <li style="margin-top: 15px;color: {{color2}};">{{hobbie.nameHobbie}}</li>
             </ul>
         </div>
         <div class="interests-container container-block">
@@ -117,7 +115,16 @@
     </div><!--//sidebar-wrapper-->
     
     <div class="main-wrapper">
-        
+        <section class="section summary-section">
+            <h2 class="section-title" style="color: {{color1}};"><span class="icon-holder" style="background:{{color1}};color:{{color3}};"><i class="fas fa-user"></i></span>ACCOUNTS</h2>
+            <div class="summary">
+                <div *ngFor="let account of accountGet">
+                    <li class="website"><i class="fas fa-globe"></i><h3 class="container-block-title" style="color: {{color2}};"> {{account.accountName}}</h3><a style="color:{{color3}}" href="https://themes.3rdwavemedia.com/boo" target="_blank">{{account.accountLink}}</a></li>
+                  <br/>
+                  </div>
+            </div><!--//summary-->
+        </section>
+
         <section class="section summary-section">
             <h2 class="section-title" style="color: {{color1}};"><span class="icon-holder" style="background:{{color1}};color:{{color3}};"><i class="fas fa-user"></i></span>Career Profile</h2>
             <div class="summary">
@@ -126,17 +133,17 @@
         </section><!--//section-->
         
         <section class="section experiences-section">
-            <h2 class="section-title"><span class="icon-holder"><i class="fas fa-briefcase"></i></span>Experiences</h2>
+            <h2 class="section-title" style="color: {{color1}};"><span class="icon-holder" style="background:{{color1}};color:{{color3}};"><i class="fas fa-user"></i></span>Experiences</h2>
             
             <div class="item" *ngFor="let experience of experienceGet">
                 <div class="meta">
                     <div class="upper-row">
-                        <h3 class="job-title">{{experience.titleExperience}}</h3>
-                        <div class="time">{{experience.startDayExperience  | date:'dd/MM/yyyy'}} - {{experience.endDayExperience  | date:'dd/MM/yyyy'}}</div>
+                        <h3 class="job-title" style="color: {{color1}};">{{experience.titleExperience}}</h3>
+                        <div class="time" style="color: {{color3}};">{{experience.startDayExperience  | date:'dd/MM/yyyy'}} - {{experience.endDayExperience  | date:'dd/MM/yyyy'}}</div>
                     </div><!--//upper-row-->
-                    <div class="company">{{experience.structureExperience}}</div>
+                    <div class="company" style="color: {{color1}};">{{experience.structureExperience}}</div>
                 </div><!--//meta-->
-                <div class="details">
+                <div class="details" style="color: {{color3}};">
                     <p>{{experience.detailsExperience}}</p>  
                 </div><!--//details-->
             </div><!--//item-->
@@ -145,30 +152,7 @@
             
         </section><!--//section-->
         
-        <section class="section projects-section">
-            <h2 class="section-title"><span class="icon-holder"><i class="fas fa-archive"></i></span>Projects</h2>
-            <div class="intro">
-                <p>You can list your side projects or open source libraries in this section. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ligula in nunc bibendum fringilla a eu lectus.</p>
-            </div><!--//intro-->
-            <div class="item">
-                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderpro-bootstrap-5-startup-template-for-software-projects/" target="_blank">CoderPro</a></span> - <span class="project-tagline">A responsive website template designed to help developers launch their software projects. </span>
-                
-            </div><!--//item-->
-            <div class="item">
-                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/launch-bootstrap-5-template-for-saas-businesses/" target="_blank">Launch</a></span> - <span class="project-tagline">A responsive website template designed to help startups promote their products or services.</span>
-            </div><!--//item-->
-            <div class="item">
-                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/resume/devcard-bootstrap-5-vcard-portfolio-template-for-software-developers/" target="_blank">DevCard</a></span> - <span class="project-tagline">A portfolio website template designed for software developers.</span>
-            </div><!--//item-->
-            <div class="item">
-                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/bootstrap-template-for-mobile-apps-nova-pro/" target="_blank">Nova Pro</a></span> - <span class="project-tagline">A responsive Bootstrap theme designed to help app developers promote their mobile apps</span>
-            </div><!--//item-->
-            <div class="item">
-                <span class="project-title"><a href="http://themes.3rdwavemedia.com/website-templates/responsive-bootstrap-theme-web-development-agencies-devstudio/" target="_blank">DevStudio</a></span> - 
-                <span class="project-tagline">A responsive website template designed to help web developers/designers market their services. </span>
-            </div><!--//item-->
-        </section><!--//section-->
-        
+       
         <section class="skills-section section">
             <h2 class="section-title"><span class="icon-holder"><i class="fas fa-rocket"></i></span>Skills &amp; Proficiency</h2>
             <div class="skillset" *ngFor="let competence of competenceGet"> 

@@ -43,7 +43,11 @@ competenceGet:any[];
 languageGet:any[];
 hobbieGet:any[];
 
-  constructor(private pdfGenerator: PDFGenerator,private data:DataService) { }
+  constructor(private pdfGenerator: PDFGenerator,private data:DataService) { 
+
+
+   this.value = this.data.getUserId();
+  }
 
   
   doRefresh(event) {
@@ -55,7 +59,6 @@ hobbieGet:any[];
     }, 1000);
   }
   async ngOnInit() {
-    this.value = this.data.getUserId();
     // console.log(`User connecte id , ${this.auth.currentUser.email} ${this.auth.currentUser.uid}`)
   /*Get Formations From databases */
   const formations = await this.data.get_Formation();
@@ -97,7 +100,7 @@ this.accountGet = account.data
    this.about = String (dat.about);
    this.contact = String(dat.contact);
    this.profession = String(dat.profession);
-   this.email = String(dat.email)
+   this.email = String(dat.email);
   })
  
 }
@@ -178,8 +181,7 @@ body {
     position: absolute;
     right: 0;
     width: 240px;
-    height: 100%;
-    min-height: 800px;
+    height: auto;
     color: #fff;
   }
   .sidebar-wrapper a {
@@ -280,6 +282,7 @@ body {
     background: #fff;
     padding: 60px;
     padding-right: 300px;
+    height: auto;
   }
   .main-wrapper .section-title {
     text-transform: uppercase;

@@ -68,9 +68,7 @@ export class EditInfoPage implements OnInit {
     private Events:EventsService,
   ){
     this.translate.setDefaultLang(this.translate.getBrowserLang());
-    this.avatarService.getUserProfile().subscribe((data)=>{
-      this.profile = data;
-     })
+    
     
     // Await language modification to change 
   this.Events.subscribe('lang',(data:string)=>{
@@ -112,6 +110,9 @@ export class EditInfoPage implements OnInit {
     }, 1000);
   }
   async ngOnInit() { 
+    this.avatarService.getUserProfile().subscribe((data)=>{
+      this.profile = data;
+     })
   // console.log(`Current User ID : ${this.auth.currentUser.uid}=== current User Email : ${this.auth.currentUser.email}`)
   /* Get Personnal Information from databases */
   const dataPersonnel = this.data.get_personalInfo();
@@ -176,7 +177,7 @@ export class EditInfoPage implements OnInit {
   // accountCredentialValidator
   this.accountCredential = this.fb.group({
     accountName:['',[Validators.required,Validators.maxLength(15)]],
-    accountLink:['',[Validators.required,Validators.maxLength(35)]]
+    accountLink:['',[Validators.required,Validators.maxLength(100)]]
   })
   // FormationCredentialValidator
   this.formationCredential = this.fb.group({

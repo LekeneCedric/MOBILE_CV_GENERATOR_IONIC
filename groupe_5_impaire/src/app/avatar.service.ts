@@ -21,6 +21,11 @@ export class AvatarService {
     const userDocRef = doc(this.firestore,`profileImg/${user.uid}`);
     return docData(userDocRef);
   }
+  getUserProfileWithId(id) {
+    const user = this.auth.currentUser;
+    const userDocRef = doc(this.firestore,`profileImg/${id}`);
+    return docData(userDocRef);
+  }
 
   async uploadImage(cameraFile:Photo){
     const user = this.auth.currentUser;
