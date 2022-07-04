@@ -3,7 +3,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="title">
+  <!-- <div class="title">
     <h4>Login</h4>
     <p>Get started</p>
   </div>
@@ -29,5 +29,53 @@
       <a routerLink="/register">Create New Accout ? </a>
     </div> 
   </form>
-  
+   -->
+   <div class="container">
+    <input type="checkbox" id="flip">
+    <div class="cover">
+      <div class="front">
+        <!--<img src="images/frontImg.jpg" alt="">-->
+        <div class="text">
+          <span class="text-1">Every new friend is a <br> new adventure</span>
+          <span class="text-2">Let's get connected</span>
+        </div>
+      </div>
+      <div class="back">
+        <!--<img class="backImg" src="images/backImg.jpg" alt="">-->
+        <div class="text">
+          <span class="text-1">Complete miles of journey <br> with one step</span>
+          <span class="text-2">Let's get started</span>
+        </div>
+      </div>
+    </div>
+    <div class="forms">
+        <div class="form-content">
+          <div class="login-form">
+            <div class="title">Login</div>
+            <form [formGroup]="credential" (ngSubmit)="login()" >
+              <ion-item>
+               <ion-input placeholder="Email" type="email" class="primary-input" formControlName="email" ></ion-input>
+               <ion-note slot="error" *ngIf="(email.dirty||email.touched)&& email.errors">Email is invalid</ion-note>
+              </ion-item>
+              <ion-item class="ion-margin-top">
+               <ion-input placeholder="password" type="password" class="primary-input" formControlName="password"></ion-input>
+               <ion-note slot="error" *ngIf="(password.dirty||password.touched)&& password.errors">password need to be 6 characters min</ion-note>
+              </ion-item>
+             
+             <div class="ion-margin-top ion-text-right forget">
+               <a>Forgot Password?</a>
+             </div>
+           
+             <div class="button input-box">
+              <input type="submit" value="Sumbit" [disabled]="!credential.valid" (click)="login()">
+            </div>
+             <div class="ion-margin-top ion-text-center">
+               <a routerLink="/register">Create New Accout ? </a>
+             </div> 
+           </form>
+      </div>
+        
+    </div>
+    </div>
+   </div>
 </ion-content>

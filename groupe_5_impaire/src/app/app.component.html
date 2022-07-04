@@ -29,34 +29,127 @@
       </div>
         
      </ion-row>
-     <ion-row class="ion-justify-content-center" style="margin-top:20px;font-weight: bold;">
+     <ion-row class="ion-justify-content-center" style="margin-top:20px;font-weight: bold;color:darkgreen">
       {{username}}
      </ion-row>
      
      <ion-list style="margin-top: 20px;">
+      <ion-item-divider>
+        <ion-label>
+          <h2 style="font-weight: bold;color: rgb(157, 157, 157);">{{"LANGUE" | translate}}s</h2>
+          
+        </ion-label>
+      </ion-item-divider>
+      <ion-list>
+        <ion-item>
+          <ion-select interface="action-sheet" placeholder="Language" [(ngModel)]="selectedLanguage" (ionChange)="languageChanged()">
+            <ion-select-option value="en">{{"english" | translate}}</ion-select-option>
+            <ion-select-option value="fr">{{"french" | translate}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
       <ion-menu-toggle>
         <ion-item routerLink="/home">
           <ion-icon name="home-outline"  style="color:grey;"></ion-icon>
            <ion-label style="margin-left:15px ;font-weight:bold;color:grey;">
               {{"HOME" | translate}}
            </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
          </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle style="margin-top: 20px;">
         <ion-item routerLink="/edit-info">
           <ion-icon name="hammer"  style="color:grey;"></ion-icon>
            <ion-label style="margin-left:15px ;font-weight:bold; color:grey;">
-            {{"EDIT" | translate}}  
+            {{"EDIT" | translate}}  <ion-badge  color="success">44</ion-badge>
            </ion-label>
          </ion-item>
       </ion-menu-toggle>
-      
+      <ion-item-divider>
+        <ion-label>
+          <h2 style="font-weight: bold;color: rgb(157, 157, 157);">{{"profil" | translate}}</h2>
+          
+        </ion-label>
+      </ion-item-divider>
+      <ion-menu-toggle style="margin-top: 20px;">
+        <ion-item routerLink="/edit-info">
+          <ion-icon name="help-outline"  style="color:grey;"></ion-icon>
+           <ion-label style="margin-left:15px ;font-weight:bold; color:grey;">
+            {{"INFORMATION" | translate}}s  <ion-badge color="success">44</ion-badge>
+           </ion-label>
+           <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
+         </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle style="margin-top: 20px;">
+        <ion-item routerLink="/edit-info">
+          <ion-icon name="accessibility-outline"  style="color:grey;"></ion-icon>
+           <ion-label style="margin-left:15px ;font-weight:bold; color:grey;">
+            {{"ACCOUNTS" | translate}}  <ion-badge  color="success">44</ion-badge>
+           </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
+         </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle style="margin-top: 20px;">
+        <ion-item routerLink="/edit-info">
+          <ion-icon name="analytics-outline"  style="color:grey;"></ion-icon>
+           <ion-label style="margin-left:15px ;font-weight:bold; color:grey;">
+            {{"EXPERIENCE" | translate}}  <ion-badge  color="success">44</ion-badge>
+           </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
+         </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle style="margin-top: 20px;">
+        <ion-item routerLink="/edit-info">
+          <ion-icon name="laptop-outline"  style="color:grey;"></ion-icon>
+           <ion-label style="margin-left:15px ;font-weight:bold; color:grey;">
+            Formations <ion-badge  color="success">44</ion-badge>
+           </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
+
+         </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle style="margin-top: 20px;">
+        <ion-item routerLink="/edit-info">
+          <ion-icon name="construct-outline"  style="color:grey;"></ion-icon>
+           <ion-label style="margin-left:15px ;font-weight:bold; color:grey;">
+            {{"COMPETENCE" | translate}}  <ion-badge  color="success">44</ion-badge>
+           </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
+         </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle style="margin-top: 20px;">
+        <ion-item routerLink="/edit-info">
+          <ion-icon name="language-outline"  style="color:grey;"></ion-icon>
+           <ion-label style="margin-left:15px ;font-weight:bold; color:grey;">
+            {{"LANGUE" | translate}}s  <ion-badge  color="success">44</ion-badge>
+           </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
+         </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle style="margin-top: 20px;">
+        <ion-item routerLink="/edit-info">
+          <ion-icon name="game-controller-outline"  style="color:grey;"></ion-icon>
+           <ion-label style="margin-left:15px ;font-weight:bold; color:grey;">
+            {{"DIVERTISSEMENT" | translate}}s  <ion-badge  color="success">44</ion-badge>
+           </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
+         </ion-item>
+      </ion-menu-toggle>
+      <ion-item-divider>
+        <ion-label>
+          <h2 style="font-weight: bold;color: rgb(157, 157, 157);">{{"mon cv" | translate}}</h2>
+          
+        </ion-label>
+      </ion-item-divider>
       <ion-menu-toggle style="margin-top: 20px;">
         <ion-item routerLink="/template">
-          <ion-icon name="logo-steam" style="color:grey;"></ion-icon>
+          <ion-icon name="newspaper-outline" style="color:grey;"></ion-icon>
            <ion-label style="margin-left:15px ; font-weight:bold; color:grey;">
               Templates
            </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
+
          </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle style="margin-top: 20px;">
@@ -65,26 +158,30 @@
            <ion-label style="margin-left:15px ; font-weight:bold; color:grey;">
             {{"scanner" | translate}} QR-CV
            </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color: darkgreen;"></ion-icon>
+
          </ion-item>
       </ion-menu-toggle>
+      
+      <ion-item-divider>
+        <ion-label>
+          <h2 style="font-weight: bold;color:grey;">{{"User" | translate}}s</h2>
+          
+        </ion-label>
+      </ion-item-divider>
       <ion-menu-toggle style="margin-top: 50px;">
         <ion-item (click)="logout()">
           <ion-icon name="exit-outline" style="color:red ;"></ion-icon>
            <ion-label style="margin-left:15px ; font-weight:bold; color:red;">
             {{"LOGOUT" | translate}}
            </ion-label>
+         <ion-icon name="chevron-forward-outline" slot="end" style="color:red;"></ion-icon>
+
          </ion-item>
       </ion-menu-toggle>
        
      </ion-list>
-    <ion-list>
-      <ion-item>
-        <ion-select interface="action-sheet" placeholder="Language" [(ngModel)]="selectedLanguage" (ionChange)="languageChanged()">
-          <ion-select-option value="en">English</ion-select-option>
-          <ion-select-option value="fr">French</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
+    
    </ion-content>
   </ion-menu>
   <ion-router-outlet id="menu" [lang]="selectedLanguage"></ion-router-outlet>

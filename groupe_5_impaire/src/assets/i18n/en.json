@@ -39,5 +39,10 @@
     "lecture":"reading",
     "jeux_video":"video games",
     "redaction":"writing",
-    "scanner":"Scan"
+    "scanner":"Scan",
+    "french":"french",
+    "english":"english",
+    "mon cv" : "My CV",
+    "profil":"Profile",
+    "user":"User"
 }

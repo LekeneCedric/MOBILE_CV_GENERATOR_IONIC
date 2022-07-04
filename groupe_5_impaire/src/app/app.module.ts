@@ -40,7 +40,6 @@ export function LanguageLoader(http: HttpClient) {
     CUSTOM_ELEMENTS_SCHEMA
   ],  
   declarations: [AppComponent, RegisterPipe],
-  entryComponents: [],
   imports: [ NgxQRCodeModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,HttpClientModule,FormsModule,
     TranslateModule.forRoot({
       loader: {

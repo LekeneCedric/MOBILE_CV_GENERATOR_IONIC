@@ -39,5 +39,10 @@
     "lecture":"lecture",
     "jeux_video":"Jeux video",
     "redaction":"Redaction",
-    "scanner":"Scanner"
+    "scanner":"Scanner",
+    "french":"francais",
+    "english":"anglais",
+    "mon cv": "Mon CV",
+    "profil":"Profil",
+    "user":"Utilisateur"
 }

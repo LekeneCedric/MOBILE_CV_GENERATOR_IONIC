@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>{{"BIENVENUE" | translate}} {{name}} {{surname}}</ion-title>
+        <ion-title >{{"BIENVENUE" | translate}} {{name}} {{surname}}</ion-title>
         <ion-buttons slot="start">
            <ion-menu-button menu="main-menu"></ion-menu-button>
         </ion-buttons>
@@ -30,15 +30,20 @@
  </ion-row>
  <!-- PERSONAL INFORMATION -->
  <!-- {{"2022-06-22T09:47:00-04:00" | date:'dd/MM/yyyy'}} -->
+ <ion-item-divider>
+  <ion-label>
+    <h2 style="font-weight: bold;color: darkgreen;">{{"INFORMATIONS" | translate}}</h2>
+  </ion-label>
+</ion-item-divider>
  <ion-row class="ion-justify-content-center ion-align-items-center">
-   <h2>{{"INFORMATIONS" | translate}}</h2>
+   
 </ion-row>
  <ion-row>
   <ion-card style="width: 100%;">
     <ion-card-header>
       <ion-card-subtitle>{{ 'profession' | translate}} : </ion-card-subtitle><ion-card-title>{{profession }}</ion-card-title>
-      <ion-card-subtitle>{{'name' | translate}} : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
-      <ion-card-subtitle>{{'surname' | translate}} : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
+      <ion-card-subtitle>{{'name' | translate}} : </ion-card-subtitle><ion-card-title style="color: darkgreen;">{{name}}</ion-card-title>
+      <ion-card-subtitle >{{'surname' | translate}} : </ion-card-subtitle><ion-card-title style="color: darkgreen;">{{surname}}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
@@ -48,7 +53,11 @@
  </ion-row>
  <!-- ACCOUNTS -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>{{"ACCOUNTS" | translate}}</h2>
+  <ion-item-divider>
+    <ion-label>
+      <h2 style="font-weight: bold;color: darkgreen;">{{"ACCOUNTS" | translate}}</h2>
+    </ion-label>
+  </ion-item-divider>
 </ion-row>
 <ion-row>
 <ion-card style="width: 100%;" class="ion-margin-top" *ngFor="let account of accountGet">
@@ -60,7 +69,11 @@
 </ion-row>
  <!-- EXPERIENCE  -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>{{"EXPERIENCE" | translate}}</h2>
+  <ion-item-divider>
+    <ion-label>
+      <h2 style="font-weight: bold;color: darkgreen;">{{"EXPERIENCE" | translate}}</h2>
+    </ion-label>
+  </ion-item-divider>
  </ion-row>
  <ion-row>
   <ion-card style="width: 100%;"  *ngFor="let experience of experienceGet">
@@ -78,7 +91,11 @@
  
 <!-- Formation & Diplome -->
 <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>Formations</h2>
+  <ion-item-divider>
+    <ion-label>
+      <h2 style="font-weight: bold;color: darkgreen;">Formations</h2>
+    </ion-label>
+  </ion-item-divider>
 </ion-row>
  <ion-row>
   <ion-card style="width: 100%;"  *ngFor="let formation of formationGet">
@@ -95,38 +112,50 @@
  </ion-row>
  <!-- PROJETS -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>{{"COMPETENCE" | translate}}</h2>
+  <ion-item-divider>
+    <ion-label>
+      <h2 style="font-weight: bold;color: darkgreen;">{{"COMPETENCE" | translate}}</h2>
+    </ion-label>
+  </ion-item-divider>
 </ion-row>
  <ion-row>
   <ion-card style="width: 100%;" *ngFor="let competence of competenceGet">
     <ion-card-header>
       <ion-card-subtitle>{{competence.nameCompetence}}</ion-card-subtitle>
-      <ion-progress-bar value="{{(competence.levelCompetence)/100 | number}}" class="ion-margin-top"></ion-progress-bar>
-
+      <ion-progress-bar color="secondary" value="{{(competence.levelCompetence)/100 | number}}" class="ion-margin-top"></ion-progress-bar>
     </ion-card-header>
   </ion-card>
  </ion-row>
  <!-- LANGUE -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2  style="font-weight: bold;">{{"LANGUE" | translate}}</h2>
+  <ion-item-divider>
+    <ion-label>
+      <h2 style="font-weight: bold;color: darkgreen;">{{"LANGUE" | translate}}s</h2>
+      
+    </ion-label>
+  </ion-item-divider>
 </ion-row>
   <ion-row>
     <ion-card style="width: 100%;" *ngFor="let language of languageGet">
       <ion-card-header>
-        <ion-card-title color="success" style="font-weight: bold;">{{language.nameLanguage}}</ion-card-title>
-        <ion-card-subtitle>{{language.levelLanguage}}</ion-card-subtitle>
+        <ion-card-title color="success" style="font-weight: bold;color:black">{{language.nameLanguage}}</ion-card-title>
+        <ion-card-subtitle style="font-weight: bold;color:rgb(121, 170, 121) " >{{language.levelLanguage}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
     
    </ion-row>
  <!-- CENTRE D'INTERET -->
  <ion-row class="ion-justify-content-center ion-align-items-center">
-  <h2>{{"DIVERTISSEMENT" | translate}}</h2>
+  <ion-item-divider>
+    <ion-label>
+      <h2 style="font-weight: bold;color: darkgreen;">{{"DIVERTISSEMENT" | translate}}</h2> 
+    </ion-label>
+  </ion-item-divider>
 </ion-row>
 <ion-row>
   <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet">
     <ion-card-header>
-      <ion-card-title>{{ hobbie.nameHobbie | translate}}</ion-card-title>
+      <ion-card-title style="font-weight: bold;color:rgb(0, 0, 0) " >{{ hobbie.nameHobbie | translate}}</ion-card-title>
     </ion-card-header>
   </ion-card>
 </ion-row>

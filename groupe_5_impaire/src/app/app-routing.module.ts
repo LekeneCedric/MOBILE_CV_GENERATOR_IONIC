@@ -52,6 +52,18 @@ const routes: Routes = [
     path: 'scanprofile',
     loadChildren: () => import('./scanprofile/scanprofile.module').then( m => m.ScanprofilePageModule)
   },
+  {
+    path: 'informations',
+    loadChildren: () => import('./informations/informations.module').then( m => m.InformationsPageModule)
+  },
+  {
+    path: 'comptes',
+    loadChildren: () => import('./comptes/comptes.module').then( m => m.ComptesPageModule)
+  },
+  {
+    path: 'experiences',
+    loadChildren: () => import('./experiences/experiences.module').then( m => m.ExperiencesPageModule)
+  },
 ];
 
 @NgModule({
