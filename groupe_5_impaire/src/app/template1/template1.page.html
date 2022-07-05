@@ -19,7 +19,7 @@
             </ion-item>
           </ion-list>
           <ion-list style="margin-left:5%" class="ion-justify-content-center">
-            <ion-button color="primary" id="open-modal" expand="block">Theme</ion-button>
+            <ion-button color="primary" id="open-modal" expand="block">Custom Theme</ion-button>
             <ion-modal #modal trigger="open-modal" [swipeToClose]="true" [canDismiss]="canDismiss">
                 <ng-template>
                   <ion-header>
@@ -62,15 +62,15 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-row style="height: 30px;">
-    <ion-select interface="popover" placeholder="Structure" [(ngModel)]="font_style" (ionChange)="fontChanged()">
+  <ion-row style="height: 70px;padding: 10px;">
+    <ion-select interface="popover" placeholder="Structure" [(ngModel)]="structure" (ionChange)="fontChanged()">
       <ion-select-option value="camtel">CAMTEL</ion-select-option>
       <ion-select-option value="mtn">MTN</ion-select-option>
       <ion-select-option value="crtv">CRTV</ion-select-option>
-      <ion-select-option value="inherit">Boite de Developpement</ion-select-option>
-      <ion-select-option value="unset">Restaurant</ion-select-option>
+      <ion-select-option value="developpement">Boite de Developpement</ion-select-option>
+      <ion-select-option value="restaurant">Restaurant</ion-select-option>
     </ion-select>
-    <ion-button></ion-button>
+    <ion-button (click)="GenerateCustomPDF()">CHOISIR</ion-button>
   </ion-row>
   
   <div [style.font-family]=font_style  class="wrapper mt-lg-5" style="width: 100%;background: {{color1}};" #template1>

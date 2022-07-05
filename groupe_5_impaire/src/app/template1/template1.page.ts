@@ -105,6 +105,27 @@ this.accountGet = account.data
  
 }
 @ViewChild('template1') template1: ElementRef;
+structure:string;
+GenerateCustomPDF(){
+  switch (this.structure) {
+    case "camtel":
+      this.color1="#0dcaf0";
+      this.color2 ="white";
+      this.color3="white";
+      break;
+    case "mtn":
+      this.color1="yellow";
+      this.color2="black";
+      this.color3="black";
+      break;
+      case "crtv":
+        this.color1="#2DF357";
+        this.color2="#F3CF2D";
+        this.color3="#EC7C55"
+    default:
+      break;
+  }
+}
 htmlSample:any;
 DownloadPDF(){
   
@@ -426,4 +447,5 @@ body {
 
 
 }
+
 }
