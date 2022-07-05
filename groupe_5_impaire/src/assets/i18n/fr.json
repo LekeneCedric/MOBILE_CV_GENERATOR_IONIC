@@ -44,5 +44,13 @@
     "english":"anglais",
     "mon cv": "Mon CV",
     "profil":"Profil",
-    "user":"Utilisateur"
+    "user":"Utilisateur",
+    "general":"generale",
+    "categorie":"category",
+    "biologie":"biologie",
+    "demographie":"geographie",
+    "informatique":"informatique",
+    "linguistique":"linguistique",
+    "mathematique":"mathematique",
+    "sociologie":"sociologie"
 }

@@ -1,9 +1,53 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>comptes</ion-title>
+    <ion-title>{{"ACCOUNTS" | translate}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+   </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col size="6"><h2>{{"ACCOUNTS" | translate}}</h2></ion-col>
+    <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddAccount()">
+     <ion-icon name="add"></ion-icon>
+   </ion-fab-button></ion-col>
+  </ion-row>
+  <form  *ngIf="formAccount"  [formGroup]="accountCredential" class="ion-padding-top">
+    <ion-item lines="full">
+      <ion-label position="floating">Account Name</ion-label>
+      <ion-input type="text" formControlName="accountName" required></ion-input>
+      <ion-note slot="error" *ngIf="(accountName.dirty||accountName.touched)&& accountName.errors">Maximum 15 characters</ion-note>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Account Link</ion-label>
+      <ion-input type="text" formControlName="accountLink" required></ion-input>
+      <ion-note slot="error" *ngIf="(accountLink.dirty||accountLink.touched)&& accountLink.errors">Maximum 35 characters</ion-note>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="success" expand="block" [disabled]="!accountCredential.valid" (click)="addAccount()">
+          {{'addnew' | translate}} {{'ACCOUNTS' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+    </form>
+    <ion-row>
+      <ion-card style="width: 100%;"  *ngFor="let account of accountGet;let i = index">
+        <ion-card-header>
+          <ion-row style="width: 100%;" class="ion-justify-content-around">
+      <ion-col size="10"> <ion-card-title class="ion-float-left">{{account.accountName}}</ion-card-title>  </ion-col> 
+      <ion-col size="1"> <ion-icon  class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium" (click)="deleteAccount(accountId[i])"></ion-icon> </ion-col> 
+          </ion-row>
+          
+        </ion-card-header>
+        <ion-card-content>
+         <a [href]="account.accountLink">{{account.accountLink}}</a> 
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+    
 </ion-content>

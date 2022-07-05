@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>formations</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+   </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col size="6" ><h2>Formations</h2></ion-col>
+    <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddFormation()" >
+     <ion-icon name="add"></ion-icon>
+   </ion-fab-button></ion-col>
+  </ion-row>
+  <form [formGroup]="formationCredential" *ngIf="formFormation" class="ion-padding-top">
+    <ion-item lines="full">
+      <ion-label position="floating">{{"title" | translate}}</ion-label>
+      <ion-input type="text" formControlName="titleFormation" required></ion-input>
+      <ion-note slot="error" *ngIf="(titleFormation.dirty||titleFormation.touched)&& titleFormation.errors">Min 8 and Max 35 characters</ion-note>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">{{"school" | translate}}</ion-label>
+      <ion-input type="email"  formControlName="schoolFormation" required></ion-input>
+      <ion-note slot="error" *ngIf="(schoolFormation.dirty||schoolFormation.touched)&& schoolFormation.errors">Min 2 characters</ion-note>
+  
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">{{"startDate" | translate}}</ion-label>
+      <ion-datetime hour-cycle="h12" formControlName="startDayFormation" locale="en-GB"></ion-datetime>
+      <!-- <ion-input type="text" required></ion-input> -->
+      
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">{{"endDate" | translate}}</ion-label>
+      <ion-datetime hour-cycle="h12" formControlName="endDayFormation" locale="en-GB"></ion-datetime>
+      <!-- <ion-input type="text" required></ion-input> -->
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">{{"details" | translate}}</ion-label>
+      <ion-textarea type="text" formControlName="detailFormation" required></ion-textarea>
+      <ion-note slot="error" *ngIf="(detailFormation.dirty||detailFormation.touched)&& detailFormation.errors">Min 25 characters</ion-note>
+  
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">{{"categorie" | translate}} {{"list" | translate}}</ion-label>
+      <ion-select multiple="false" formControlName="categorieFormation" cancelText="No" okText="Valid">
+        <ion-select-option value="biologie">{{"biologie" | translate}}</ion-select-option>
+        <ion-select-option value="demographie">{{"demographie" | translate}}</ion-select-option>
+        <ion-select-option value="informatique">{{"informatique" | translate}}</ion-select-option>
+        <ion-select-option value="linguistique">{{"linguistique" | translate}}</ion-select-option>
+        <ion-select-option value="mathematique">{{"mathematique" | translate}}</ion-select-option>
+        <ion-select-option value="sociologie">{{"sociologie" | translate}}</ion-select-option>
+        <ion-select-option value="culinaire">{{"culinaire" | translate}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit"  color="success" expand="block" [disabled]="!formationCredential.valid" (click)="addFormation()">
+          {{'addnew' | translate}} Formation</ion-button>
+      </ion-col>
+    </ion-row>
+    </form>
+   <ion-row>
+    <ion-card style="width: 100%;"  *ngFor="let formation of formationGet;let i=index">
+      <ion-card-header>
+        <ion-row style="width: 100%;" class="ion-justify-content-around">
+          <ion-col size="10"> <ion-card-title class="ion-float-left">{{formation.titleFormation}}</ion-card-title></ion-col> 
+          <ion-col size="1"> <ion-icon (click)="deleteFormation(formationId[i])" class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium"></ion-icon> </ion-col> 
+              </ion-row>
+        
+        <ion-card-subtitle>{{formation.schoolFormation}}</ion-card-subtitle>
+        <ion-card-subtitle>{{formation.startDayFormation  | date:'dd/MM/yyyy'}} - {{formation.endDayFormation  | date:'dd/MM/yyyy'}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{formation.detailFormation}}
+      </ion-card-content>
+    </ion-card>
+    
+   </ion-row>
+</ion-content>

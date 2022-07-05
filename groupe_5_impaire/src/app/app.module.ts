@@ -23,6 +23,8 @@ import { TranslateConfigService } from './translate-config.service';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
 import { DataqrcodeService } from './dataqrcode.service';
+import { DataStatisticService } from './data-statistic.service';
+import { StatisticDataService } from './statistic-data.service';
 const firebaseConfig = {
   apiKey: "AIzaSyCdDp2GVBrhVqzNL9xzWDt0zAf85GBs2IY",
   authDomain: "cvgeneratorprojectionicangular.firebaseapp.com",
@@ -40,7 +42,11 @@ export function LanguageLoader(http: HttpClient) {
     CUSTOM_ELEMENTS_SCHEMA
   ],  
   declarations: [AppComponent, RegisterPipe],
-  imports: [ NgxQRCodeModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,HttpClientModule,FormsModule,
+  imports: [ NgxQRCodeModule, BrowserModule, IonicModule.forRoot(), 
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

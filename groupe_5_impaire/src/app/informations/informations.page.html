@@ -1,9 +1,103 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>informations</ion-title>
+    <ion-title>{{"INFORMATION" | translate}}s</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+   </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+  
+  <!-- WALLPAPER -->
+  <ion-row class="ion-justify-content-center">
+    <!-- AVATAR ITEM  -->
+    <div style="width:30%;" class="avatar bg-info rounded-circle" (click)="changeImage()" style="margin-top: 25px;">
+      <!-- Avatar image -->
+      <img [src]="profile.imageUrl" class="avatar__image"  *ngIf="profile?.imageUrl ; else placeholder_avatar;" alt="Resume_image">
+      <ng-template class="avatar" #placeholder_avatar>
+        <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+    </ng-template>
+      <!-- <ng-template class="avatar" #placeholder_avatar>
+          <img class="avatar__image" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+      </ng-template> -->
+     
+    </div>
+    
+    
+ </ion-row>
+ <!-- PERSONAL INFORMATION -->
+ <!-- {{"2022-06-22T09:47:00-04:00" | date:'dd/MM/yyyy'}} -->
+ <ion-row class="ion-justify-content-center ion-align-items-center">
+   <ion-col size="6"><h2>{{"INFORMATION" | translate}}</h2></ion-col>
+   <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" >
+    <ion-icon name="create" (click)="showEditPersonalInfo()"></ion-icon>
+  </ion-fab-button></ion-col>
+</ion-row>
+<!-- FORM FOR PERSONAL INFORMATION  -->
+<form  *ngIf="formPersonalInfo"  [formGroup]="personalCredential" class="ion-padding-top">
+  <ion-item lines="full">
+    <ion-label position="floating">Name</ion-label>
+    <ion-input type="text" formControlName="name" required></ion-input>
+    <ion-note slot="error" *ngIf="(nameC.dirty||nameC.touched)&& nameC.errors">Maximum 25 characters</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Surname</ion-label>
+    <ion-input type="text" formControlName="surname" required></ion-input>
+    <ion-note slot="error" *ngIf="(surnameC.dirty||surnameC.touched)&& surnameC.errors">Maximum 25 characters</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Age</ion-label>
+    <ion-input type="text" formControlName="age" required></ion-input>
+    <ion-note slot="error" *ngIf="(ageC.dirty||ageC.touched)&& ageC.errors">Maximum 25 characters</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="text" formControlName="email" required></ion-input>
+    <ion-note slot="error" *ngIf="(emailC.dirty||emailC.touched)&& emailC.errors">exemple@gmail.com</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Contact</ion-label>
+    <ion-input type="text" formControlName="contact" required></ion-input>
+    <ion-note slot="error" *ngIf="(contactC.dirty||contactC.touched)&& contactC.errors">not empty</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Profession</ion-label>
+    <ion-input type="text" formControlName="profession" required></ion-input>
+    <ion-note slot="error" *ngIf="(professionC.dirty||professionC.touched)&& professionC.errors">not empty</ion-note>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">About</ion-label>
+    <ion-input type="text" formControlName="about" required></ion-input>
+    <ion-note slot="error" *ngIf="(aboutC.dirty||aboutC.touched)&& aboutC.errors">Minimum 15 characters</ion-note>
+  </ion-item>
 
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="success" expand="block" [disabled]="!personalCredential.valid" (click)="updateAccount()">
+        {{'modifier' | translate}} {{'INFORMATION' | translate}} </ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
+ <ion-row>
+  <ion-card style="width: 100%;">
+    <ion-card-header>
+      <ion-card-subtitle>{{'name' | translate}} : </ion-card-subtitle><ion-card-title>{{name}}</ion-card-title>
+      <ion-card-subtitle>{{'surname' | translate}} : </ion-card-subtitle><ion-card-title>{{surname}}</ion-card-title>
+      <ion-card-subtitle>Age : </ion-card-subtitle><ion-card-title>{{age}}</ion-card-title>
+      <ion-card-subtitle>{{'contact' | translate}} : </ion-card-subtitle><ion-card-title>{{contact}}</ion-card-title>
+      <ion-card-subtitle>{{'email' | translate}} : </ion-card-subtitle><ion-card-title>{{email}}</ion-card-title>
+      <ion-card-subtitle>{{'profession' | translate}} : </ion-card-subtitle><ion-card-title>{{profession}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-card-subtitle>{{'about' | translate}} : </ion-card-subtitle><ion-card-title>{{about}}</ion-card-title>
+    </ion-card-content>
+  </ion-card>
+ </ion-row>
+  </ion-grid>
 </ion-content>

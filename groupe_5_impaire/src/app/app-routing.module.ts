@@ -64,6 +64,22 @@ const routes: Routes = [
     path: 'experiences',
     loadChildren: () => import('./experiences/experiences.module').then( m => m.ExperiencesPageModule)
   },
+  {
+    path: 'formations',
+    loadChildren: () => import('./formations/formations.module').then( m => m.FormationsPageModule)
+  },
+  {
+    path: 'competences',
+    loadChildren: () => import('./competences/competences.module').then( m => m.CompetencesPageModule)
+  },
+  {
+    path: 'langues',
+    loadChildren: () => import('./langues/langues.module').then( m => m.LanguesPageModule)
+  },
+  {
+    path: 'divertissements',
+    loadChildren: () => import('./divertissements/divertissements.module').then( m => m.DivertissementsPageModule)
+  },
 ];
 
 @NgModule({

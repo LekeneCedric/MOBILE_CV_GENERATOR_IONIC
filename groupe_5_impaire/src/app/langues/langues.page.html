@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"LANGUE" | translate}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+   </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col size="6" ><h2>{{"LANGUE" | translate}}</h2></ion-col>
+    <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddLanguage()" >
+     <ion-icon name="add"></ion-icon>
+   </ion-fab-button></ion-col>
+  </ion-row>
+  <form *ngIf="formLanguage" [formGroup]="languageCredential" class="ion-padding-top">
+    <ion-item lines="full">
+      <ion-label position="floating">{{'name' | translate}} </ion-label>
+      <ion-input type="text" formControlName="nameLanguage" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Level</ion-label>
+      <ion-select multiple="false" formControlName="levelLanguage" cancelText="No" okText="Valid">
+        <ion-select-option value="Debutant">Debutant</ion-select-option>
+        <ion-select-option value="Elementaire">Elementaire</ion-select-option>
+        <ion-select-option value="Pre-Intermediaire">Pre-Intermediaire</ion-select-option>
+        <ion-select-option value="Intermediaire">Intermediaire</ion-select-option>
+        <ion-select-option value="Intermediaire Superieur">Intermediaire Superieur</ion-select-option>
+        <ion-select-option value="Avance">Avance</ion-select-option>
+        <ion-select-option value="Courant">Courant</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="success" expand="block" [disabled]="!languageCredential.valid" (click)="addLanguage()">
+          {{'addnew' | translate}} {{'LANGUE' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+    </form>
+    <ion-row>
+      <ion-card style="width: 100%;" *ngFor="let language of languageGet;let i = index">
+        <ion-card-header>
+          <ion-row style="width: 100%;" class="ion-justify-content-around">
+            <ion-col size="10"> <ion-card-title color="primary">{{language.nameLanguage}}</ion-card-title></ion-col> 
+            <ion-col size="1"> <ion-icon (click)="deleteLanguage(languageId[i])"  class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium"></ion-icon> </ion-col> 
+                </ion-row>
+          
+          <ion-card-subtitle>{{language.levelLanguage}}</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      
+     </ion-row>
+</ion-content>

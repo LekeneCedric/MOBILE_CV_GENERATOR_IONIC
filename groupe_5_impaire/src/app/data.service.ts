@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { addDoc, collection, doc, Firestore, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { deleteDoc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { EventsService } from './events.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService implements OnInit {
 
-  constructor(private db:Firestore,private auth:Auth) { }
+  constructor(private db:Firestore,private auth:Auth,private Events:EventsService) { }
   
   async ngOnInit(){
       
@@ -52,6 +53,7 @@ if (docSnap.exists()) {
     await onSnapshot(collection(this.db, 'usersCV', `${this.auth.currentUser.uid}`, 'formations'),(querySnapshot)=>{
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
+        this.Events.publish('countFormation',querySnapshot.size.valueOf())
         data.push(doc.data());
         ids.push(doc.id);
       });
@@ -61,6 +63,7 @@ if (docSnap.exists()) {
    data:data
   }
   // console.log(`Formations : ${formations}`)
+
   return Formations;
   }
   async del_Formation(id:string){
@@ -71,18 +74,21 @@ if (docSnap.exists()) {
 async get_Accounts(){
   let data :any []=[];
   let ids : any []=[];
-  
+  var count :number  ;
   await onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'accounts'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
+      this.Events.publish('countCompte',querySnapshot.size.valueOf())
       // doc.data() is never undefined for query doc snapshots
       ids.push(doc.id)
       data.push(doc.data())
     });
   });
+  
 const Accounts = {
   id:ids,
   data:data
 }
+console.log(count);
 return Accounts;
 }
 
@@ -98,6 +104,7 @@ async get_Experience(){
   let ids : any []=[];
   await onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'experiences'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
+      this.Events.publish('countExperience',querySnapshot.size.valueOf())
       // doc.data() is never undefined for query doc snapshots
       data.push(doc.data());
       ids.push(doc.id);
@@ -119,6 +126,7 @@ async get_Competences(){
   let ids : any [] =[];
   onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'competences'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
+      this.Events.publish('countCompetence',querySnapshot.size.valueOf())
       // doc.data() is never undefined for query doc snapshots
       data.push(doc.data());
       ids.push(doc.id);
@@ -140,6 +148,7 @@ async get_Languages(){
   let ids : any [] =[];
   onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'languages'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
+      this.Events.publish('countLanguage',querySnapshot.size.valueOf())
       // doc.data() is never undefined for query doc snapshots
       ids.push(doc.id);
       data.push(doc.data())
@@ -164,6 +173,7 @@ async get_Hobbies(){
   let ids : any [] =[];
   onSnapshot(collection(this.db, 'usersCV',`${this.auth.currentUser.uid}`,'hobbies'),(querySnapshot)=>{
     querySnapshot.forEach((doc) => {
+      this.Events.publish('countHobbies',querySnapshot.size.valueOf())
       // doc.data() is never undefined for query doc snapshots
       data.push(doc.data());
       ids.push(doc.id)
@@ -180,9 +190,11 @@ async del_Hobbies(id:string){
   console.log("Experience remove succesfully");
 }
 // Set user formation
-async set_Formation({titleFormation, schoolFormation, startDayFormation,endDayFormation,detailFormation}){
+async set_Formation({titleFormation, schoolFormation, startDayFormation,endDayFormation,detailFormation,categorieFormation:categorieFormation}){
 const newFormation = {
-  titleFormation:titleFormation,schoolFormation:schoolFormation,startDayFormation:startDayFormation,endDayFormation:endDayFormation,detailFormation:detailFormation
+  titleFormation:titleFormation,schoolFormation:schoolFormation,
+  startDayFormation:startDayFormation,endDayFormation:endDayFormation,
+  detailFormation:detailFormation,categorieFormation:categorieFormation
 }
 await addDoc(collection(this.db,'usersCV',`${this.auth.currentUser.uid}`,'formations'),newFormation);
 }
@@ -195,14 +207,19 @@ async set_Account({accountName,accountLink}){
   
 }    
 //  Set user experience
-async set_Experience({titleExperience, structureExperience, startDayExperience,endDayExperience,detailExperience}){
-  const newExperience = {titleExperience:titleExperience,structureExperience:structureExperience,startDayExperience:startDayExperience,endDayExperience:endDayExperience,detailsExperience:detailExperience};
+async set_Experience({titleExperience, structureExperience, startDayExperience,endDayExperience,detailExperience,categorieExperience}){
+  const newExperience = {titleExperience:titleExperience,
+    structureExperience:structureExperience,
+    startDayExperience:startDayExperience,
+    endDayExperience:endDayExperience,
+    detailsExperience:detailExperience,
+  categorieExperience:categorieExperience};
   await addDoc(collection(this.db,'usersCV',`${this.auth.currentUser.uid}`,'experiences'),newExperience);
 }
 
 // Set user competence
-async set_Competence({nameCompetence,levelCompetence}){
-const newCompetence = {nameCompetence:nameCompetence,levelCompetence:levelCompetence};
+async set_Competence({nameCompetence,levelCompetence,categorieCompetence}){
+const newCompetence = {nameCompetence:nameCompetence,levelCompetence:levelCompetence,categorieCompetence:categorieCompetence};
 await addDoc(collection(this.db,'usersCV',`${this.auth.currentUser.uid}`,'competences'),newCompetence);
 }
 

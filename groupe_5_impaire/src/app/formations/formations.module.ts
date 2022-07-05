@@ -4,17 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InformationsPageRoutingModule } from './informations-routing.module';
+import { FormationsPageRoutingModule } from './formations-routing.module';
 
+import { FormationsPage } from './formations.page';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
-import { InformationsPage } from './informations.page';
 import { LanguageLoader } from '../app.module';
 import { HttpClient } from '@angular/common/http';
-
 @NgModule({
   imports: [
-
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -25,8 +22,8 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     FormsModule,
     IonicModule,
-    InformationsPageRoutingModule,ReactiveFormsModule
+    FormationsPageRoutingModule,ReactiveFormsModule
   ],
-  declarations: [InformationsPage]
+  declarations: [FormationsPage]
 })
-export class InformationsPageModule {}
+export class FormationsPageModule {}

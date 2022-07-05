@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"DIVERTISSEMENT" | translate}}s</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+   </ion-buttons>
+  </ion-toolbar>
+  
+  
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col size="6"><h2>{{"DIVERTISSEMENT" | translate}}s</h2></ion-col>
+    <ion-col size="1"><ion-fab-button color="white" style="margin-left:25px" (click)="showAddHobbie()">
+     <ion-icon name="add"></ion-icon>
+   </ion-fab-button></ion-col>
+  </ion-row>
+  <form *ngIf="formHobbie" [formGroup]="hobbieCredential" class="ion-padding-top">
+    <ion-item lines="full">
+      <ion-label position="floating">{{"hobbie" | translate}} {{"list" | translate}}</ion-label>
+      <ion-select multiple="false" formControlName="nameHobbie" cancelText="No" okText="Valid">
+        <ion-select-option value="cinema">{{"cinema" | translate}}</ion-select-option>
+        <ion-select-option value="decoration">{{"decoration" | translate}}</ion-select-option>
+        <ion-select-option value="dessin">{{"dessin" | translate}}</ion-select-option>
+        <ion-select-option value="sport">{{"sport" | translate}}</ion-select-option>
+        <ion-select-option value="jeux_strategie">{{"jeux_strategie" | translate}}</ion-select-option>
+        <ion-select-option value="danse">{{"danse" | translate}}</ion-select-option>
+        <ion-select-option value="Jardiner">{{"jardiner" | translate}}</ion-select-option>
+        <ion-select-option value="Jeux_Video">{{"jeux_video" | translate}}</ion-select-option>
+        <ion-select-option value="lecture">{{"lecture" | translate}}</ion-select-option>
+        <ion-select-option value="redaction">{{"redaction" | translate}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="success" [disabled]="!hobbieCredential.valid" expand="block" (click)="addHobbie()">
+          {{'addnew' | translate}} {{'hobbie' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+    </form>
+    <ion-row>
+      <ion-card style="width: 100%;" *ngFor="let hobbie of hobbieGet;let i = index">
+        <ion-card-header>
+          <ion-row style="width: 100%;" class="ion-justify-content-around">
+            <ion-col size="10"> <ion-card-title color="primary"> {{ hobbie.nameHobbie | translate}}</ion-card-title></ion-col> 
+            <ion-col size="1"> <ion-icon  (click)="deleteHobbie(hobbieId[i])" class="ion-float-end" name="close"  style="color:rgb(191, 23, 4);" size="medium"></ion-icon> </ion-col> 
+                </ion-row>
+        </ion-card-header>
+      </ion-card>
+      
+     </ion-row>
+</ion-content>
