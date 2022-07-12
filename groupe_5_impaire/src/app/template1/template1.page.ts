@@ -4,6 +4,7 @@ import { Firestore } from '@angular/fire/firestore';
 import jsPDF from 'jspdf';
 import { PDFGenerator } from '@ionic-native/pdf-generator/ngx';
 import { DataService } from '../data.service';
+import { StatisticDataService } from '../statistic-data.service';
 
 @Component({
   selector: 'app-template1',
@@ -43,7 +44,10 @@ competenceGet:any[];
 languageGet:any[];
 hobbieGet:any[];
 
-  constructor(private pdfGenerator: PDFGenerator,private data:DataService) { 
+  constructor(private pdfGenerator: PDFGenerator,
+    private data:DataService,
+    private stat:StatisticDataService) {
+
 
 
    this.value = this.data.getUserId();
@@ -112,6 +116,9 @@ GenerateCustomPDF(){
       this.color1="#0dcaf0";
       this.color2 ="white";
       this.color3="white";
+      this.competenceGet = this.stat.getCompetenceInfo("informatique").data;
+      this.experienceGet = this.stat.getExperienceInfo("informatique").data;
+      this.formationGet = this.stat.getFormationInfo("informatique").data;
       break;
     case "mtn":
       this.color1="yellow";
@@ -120,8 +127,8 @@ GenerateCustomPDF(){
       break;
       case "crtv":
         this.color1="#2DF357";
-        this.color2="#F3CF2D";
-        this.color3="#EC7C55"
+        this.color2="#ECC206";
+        this.color3="#EF0E0E";
     default:
       break;
   }

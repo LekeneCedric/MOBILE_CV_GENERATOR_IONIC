@@ -190,7 +190,12 @@ async del_Hobbies(id:string){
   console.log("Experience remove succesfully");
 }
 // Set user formation
-async set_Formation({titleFormation, schoolFormation, startDayFormation,endDayFormation,detailFormation,categorieFormation:categorieFormation}){
+async set_Formation({titleFormation, 
+  schoolFormation, 
+  startDayFormation,
+  endDayFormation,
+  detailFormation,
+  categorieFormation}){
 const newFormation = {
   titleFormation:titleFormation,schoolFormation:schoolFormation,
   startDayFormation:startDayFormation,endDayFormation:endDayFormation,
@@ -207,7 +212,12 @@ async set_Account({accountName,accountLink}){
   
 }    
 //  Set user experience
-async set_Experience({titleExperience, structureExperience, startDayExperience,endDayExperience,detailExperience,categorieExperience}){
+async set_Experience({titleExperience,
+   structureExperience,
+    startDayExperience,
+    endDayExperience,
+    detailExperience,
+    categorieExperience}){
   const newExperience = {titleExperience:titleExperience,
     structureExperience:structureExperience,
     startDayExperience:startDayExperience,

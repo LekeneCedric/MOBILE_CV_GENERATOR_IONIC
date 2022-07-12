@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { TranslateService } from '@ngx-translate/core';
+import { getAuth } from 'firebase/auth';
 import { AvatarService } from '../avatar.service';
 import { DataqrcodeService } from '../dataqrcode.service';
 import { EventsService } from '../events.service';
@@ -14,7 +15,7 @@ export class ScanprofilePage implements OnInit {
   
   // QrCode variable
   elementType = 'url';
-  value = '7u2KpBxAichTM4X3wheNyTIkNny1';
+  value = getAuth().currentUser.uid;
   result : number = 0;
   isScanned:boolean = false;
   // 
@@ -77,7 +78,7 @@ constructor( private data:DataqrcodeService,
   this.Events.subscribe('scan',async (data)=>{
     this.avatarService.getUserProfileWithId(data).subscribe((data)=>{
       this.profile = data;
-      this.Events.publish('profil',data);
+     // this.Events.publish('profil',data);
      })
     const id :string = data;
     const formations = await this.data.get_Formation(id);

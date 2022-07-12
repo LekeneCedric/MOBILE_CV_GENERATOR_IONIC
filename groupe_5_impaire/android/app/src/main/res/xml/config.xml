@@ -6,6 +6,10 @@
     <param name="android-package" value="com.pdf.generator.PDFGenerator"/>
   </feature>
 
+  <feature name="SitewaertsDocumentViewer">
+    <param name="android-package" value="de.sitewaerts.cordova.documentviewer.DocumentViewerPlugin"/>
+  </feature>
+
   <feature name="BarcodeScanner">
     <param name="android-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner"/>
   </feature>
